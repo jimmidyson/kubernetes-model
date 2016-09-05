@@ -152,7 +152,7 @@ func (g *schemaGenerator) javaType(t reflect.Type) string {
 		case reflect.Map:
 			return "java.util.Map<String," + g.javaTypeWrapPrimitive(t.Elem()) + ">"
 		default:
-			if len(t.Name()) == 0 && t.NumField() == 0 {
+			if (t.Kind() == reflect.Struct && len(t.Name()) == 0 && t.NumField() == 0) || t.Kind() == reflect.Interface {
 				return "Object"
 			}
 			return t.Name()
@@ -374,7 +374,7 @@ func (g *schemaGenerator) getStructProperties(t reflect.Type) map[string]JSONPro
 }
 
 func (g *schemaGenerator) generateObjectDescriptor(t reflect.Type) *JSONObjectDescriptor {
-	desc := JSONObjectDescriptor{AdditionalProperties: true}
+	desc := JSONObjectDescriptor{}
 	desc.Properties = g.getStructProperties(t)
 	return &desc
 }

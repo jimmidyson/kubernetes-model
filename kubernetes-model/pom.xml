@@ -94,6 +94,7 @@
           <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
           <customAnnotator>io.fabric8.kubernetes.annotator.KubernetesTypeAnnotator</customAnnotator>
           <annotationStyle>none</annotationStyle>
+          <initializeCollections>false</initializeCollections>
         </configuration>
         <executions>
           <execution>
@@ -119,9 +120,9 @@
             <configuration>
               <target>
                 <echo>removing the duplicate generated calss</echo>
-                <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/IntOrString.java" verbose="true" />
-                <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/Quantity.java" verbose="true" />
-                <delete file="${basedir}/target/generated-sources/io/fabric8/openshift/api/model/Template.java" verbose="true" />
+                <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/util/intstr/IntOrString.java" verbose="true" />
+                <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/resource/Quantity.java" verbose="true" />
+                <delete file="${basedir}/target/generated-sources/io/fabric8/openshift/api/model/template/v1/Template.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/HasMetadata.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/WatchEvent.java" verbose="true" />
               </target>

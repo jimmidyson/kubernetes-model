@@ -4,7 +4,7 @@ import:
   version: v1.3.0
 - package: k8s.io/kubernetes
   version: 52492b4bff99ef3b8ca617d385a3ff0612f9402d
-  repo: git@github.com:openshift/kubernetes.git
+  repo: git://github.com/openshift/kubernetes.git
   vcs: git
 - package: github.com/dgrijalva/jwt-go
   version: 5ca80149b9d3f8b863af0e2bb6742e608603bd99

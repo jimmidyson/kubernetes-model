@@ -1,5 +1,5 @@
-hash: 58480c01950834fe65c423672444fb2c865edc65c4836a096e3f3a2615fdaa07
-updated: 2016-09-16T21:48:23.32232329+01:00
+hash: 60dc031ea637a80d22e3c6185e3f3210d6119c1d1d06b5bf324a6515502a6e7d
+updated: 2016-09-23T10:08:00.447645584+01:00
 imports:
 - name: cloud.google.com/go
   version: b38c00ee7a6ce8cb087244dfb398ef576833ef8c
@@ -118,7 +118,7 @@ imports:
   - libcontainer/system
   - libcontainer/user
 - name: github.com/openshift/origin
-  version: e9081aee47f71af8faeced24e991a6afcab2f12d
+  version: d45151824821195c9d3db7e5d2da0a1c982a614c
   subpackages:
   - pkg/api
   - pkg/api/extension
@@ -141,11 +141,14 @@ imports:
   - pkg/project/api
   - pkg/project/api/v1
   - pkg/quota/api
+  - pkg/quota/api/v1
   - pkg/quota/util
   - pkg/route/api
   - pkg/route/api/v1
   - pkg/sdn/api
+  - pkg/sdn/api/v1
   - pkg/security/api
+  - pkg/security/api/v1
   - pkg/template/api
   - pkg/template/api/v1
   - pkg/user/api
@@ -199,6 +202,12 @@ imports:
   version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
+- name: golang.org/x/tools
+  version: 3f4088edb48e8a4e3c66a5f8e7b2a78615fcb83f
+  subpackages:
+  - go/ast/astutil
+  - go/buildutil
+  - go/loader
 - name: google.golang.org/appengine
   version: 78199dcb0669fc381c22e919e1e97eba879e8f60
   subpackages:
@@ -215,7 +224,7 @@ imports:
   version: 3887ee99ecf07df5b447e9b00d9c0b2adaa9f3e4
 - name: k8s.io/kubernetes
   version: 52492b4bff99ef3b8ca617d385a3ff0612f9402d
-  repo: git@github.com:openshift/kubernetes.git
+  repo: git://github.com/openshift/kubernetes.git
   vcs: git
   subpackages:
   - pkg/api
@@ -274,7 +283,6 @@ imports:
   - pkg/client/typed/discovery
   - pkg/client/unversioned
   - pkg/client/unversioned/clientcmd/api
-  - pkg/client/unversioned/clientcmd/api/v1
   - pkg/conversion
   - pkg/conversion/queryparams
   - pkg/fields
@@ -316,7 +324,6 @@ imports:
   - pkg/util/yaml
   - pkg/version
   - pkg/watch
-  - pkg/watch/json
   - pkg/watch/versioned
   - plugin/pkg/client/auth
   - plugin/pkg/client/auth/gcp

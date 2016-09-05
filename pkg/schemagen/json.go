@@ -40,8 +40,7 @@ type JSONDescriptor struct {
 }
 
 type JSONObjectDescriptor struct {
-	Properties           map[string]JSONPropertyDescriptor `json:"properties,omitempty"`
-	AdditionalProperties bool                              `json:"additionalProperties"`
+	Properties map[string]JSONPropertyDescriptor `json:"properties,omitempty"`
 }
 
 type JSONArrayDescriptor struct {

@@ -17,7 +17,18 @@
 SHELL := /bin/bash
 tag := $(shell cat .openshift-version)
 
-build:
-	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -a ./cmd/generate/generate.go
+.PHONY: build
+build: kubernetes-model/src/main/resources/schema/kube-schema.json
+	mvn -e clean install
+
+kubernetes-model/src/main/resources/schema/kube-schema.json: generate
 	./generate > kubernetes-model/src/main/resources/schema/kube-schema.json
-	mvn clean install
+
+.tmp/generate-schema-struct: ./tools/generate-schema-struct/*
+	go build -o .tmp/generate-schema-struct ./tools/generate-schema-struct
+
+generate: .tmp/generate-schema-struct cmd/generate/generated_schema.go $(find -name *.go)
+	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build ./cmd/generate
+
+cmd/generate/generated_schema.go: ./tools/generate-schema-struct/* $(shell find vendor -name *.go)
+	PATH=$(shell pwd)/.tmp/:$${PATH} go generate ./cmd/generate
