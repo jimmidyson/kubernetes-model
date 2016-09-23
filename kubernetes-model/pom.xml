@@ -119,12 +119,14 @@
             <phase>generate-sources</phase>
             <configuration>
               <target>
-                <echo>removing the duplicate generated calss</echo>
+                <echo>removing the duplicate generated class</echo>
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/util/intstr/IntOrString.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/resource/Quantity.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/openshift/api/model/template/v1/Template.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/HasMetadata.java" verbose="true" />
                 <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/WatchEvent.java" verbose="true" />
+                <echo>removing the unused KubeSchema class</echo>
+                <delete file="${basedir}/target/generated-sources/io/fabric8/kubernetes/api/model/KubeSchema.java" verbose="true" />
               </target>
             </configuration>
             <goals>
