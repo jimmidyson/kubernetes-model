@@ -1,5 +1,5 @@
-hash: 60dc031ea637a80d22e3c6185e3f3210d6119c1d1d06b5bf324a6515502a6e7d
-updated: 2016-09-23T10:08:00.447645584+01:00
+hash: 834ff4baf8f0cb1b1e4d4b4f225a619078b8fc94b1b04aeb4bca9ccc6284de27
+updated: 2016-09-23T11:36:02.008124737+01:00
 imports:
 - name: cloud.google.com/go
   version: b38c00ee7a6ce8cb087244dfb398ef576833ef8c
@@ -112,11 +112,21 @@ imports:
 - name: github.com/opencontainers/runc
   version: 7ca2aa4873aea7cb4265b1726acb24b90d8726c6
   subpackages:
+  - libcontainer
+  - libcontainer/apparmor
   - libcontainer/cgroups
   - libcontainer/cgroups/fs
+  - libcontainer/cgroups/systemd
   - libcontainer/configs
+  - libcontainer/configs/validate
+  - libcontainer/criurpc
+  - libcontainer/label
+  - libcontainer/seccomp
+  - libcontainer/selinux
+  - libcontainer/stacktrace
   - libcontainer/system
   - libcontainer/user
+  - libcontainer/utils
 - name: github.com/openshift/origin
   version: d45151824821195c9d3db7e5d2da0a1c982a614c
   subpackages:
@@ -283,6 +293,7 @@ imports:
   - pkg/client/typed/discovery
   - pkg/client/unversioned
   - pkg/client/unversioned/clientcmd/api
+  - pkg/client/unversioned/clientcmd/api/v1
   - pkg/conversion
   - pkg/conversion/queryparams
   - pkg/fields
@@ -324,6 +335,7 @@ imports:
   - pkg/util/yaml
   - pkg/version
   - pkg/watch
+  - pkg/watch/json
   - pkg/watch/versioned
   - plugin/pkg/client/auth
   - plugin/pkg/client/auth/gcp

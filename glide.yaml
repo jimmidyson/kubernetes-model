@@ -2,9 +2,58 @@ package: github.com/fabric8io/kubernetes-model
 import:
 - package: github.com/openshift/origin
   version: v1.3.0
+  subpackages:
+  - pkg/authorization/api/v1
+  - pkg/build/api/v1
+  - pkg/deploy/api/v1
+  - pkg/image/api/v1
+  - pkg/oauth/api/v1
+  - pkg/project/api/v1
+  - pkg/quota/api/v1
+  - pkg/route/api/v1
+  - pkg/sdn/api/v1
+  - pkg/security/api/v1
+  - pkg/template/api/v1
+  - pkg/user/api/v1
 - package: k8s.io/kubernetes
   version: 52492b4bff99ef3b8ca617d385a3ff0612f9402d
   repo: git://github.com/openshift/kubernetes.git
   vcs: git
+  version: 52492b4bff99ef3b8ca617d385a3ff0612f9402d
+  subpackages:
+  - pkg/api/resource
+  - pkg/api/unversioned
+  - pkg/api/v1
+  - pkg/apis/apps/v1alpha1
+  - pkg/apis/authentication/v1beta1
+  - pkg/apis/authorization/v1beta1
+  - pkg/apis/autoscaling/v1
+  - pkg/apis/batch/v1
+  - pkg/apis/batch/v2alpha1
+  - pkg/apis/extensions/v1beta1
+  - pkg/apis/policy/v1alpha1
+  - pkg/apis/rbac/v1alpha1
+  - pkg/client/unversioned/clientcmd/api/v1
+  - pkg/runtime
+  - pkg/util/intstr
+  - pkg/watch/json
+- package: github.com/opencontainers/runc
+  version: v0.0.7
+  subpackages:
+  - libcontainer
+  - libcontainer/apparmor
+  - libcontainer/cgroups
+  - libcontainer/cgroups/fs
+  - libcontainer/cgroups/systemd
+  - libcontainer/configs
+  - libcontainer/configs/validate
+  - libcontainer/criurpc
+  - libcontainer/label
+  - libcontainer/seccomp
+  - libcontainer/selinux
+  - libcontainer/stacktrace
+  - libcontainer/system
+  - libcontainer/user
+  - libcontainer/utils
 - package: github.com/dgrijalva/jwt-go
   version: 5ca80149b9d3f8b863af0e2bb6742e608603bd99

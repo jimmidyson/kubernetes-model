@@ -16,6 +16,16 @@
 
 SHELL := /bin/bash
 tag := $(shell cat .openshift-version)
+GOPATH := $(shell pwd)/_gopath
+ORG := github.com/fabric8io
+REPOPATH ?= $(ORG)/kubernetes-model
+
+MKGOPATH := if [ ! -e $(GOPATH)/src/$(ORG) ]; then \
+	mkdir -p $(GOPATH)/src/$(ORG); \
+	ln -s -f $(shell pwd) $(GOPATH)/src/$(ORG); \
+	ln -s -f $(shell pwd)/vendor/{k8s.io,cloud.google.com,golang.org,google.golang.org,gopkg.in} $(GOPATH)/src/; \
+	ln -s -f $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com/; \
+fi
 
 .PHONY: build
 build: kubernetes-model/src/main/resources/schema/kube-schema.json
@@ -25,10 +35,17 @@ kubernetes-model/src/main/resources/schema/kube-schema.json: generate
 	./generate > kubernetes-model/src/main/resources/schema/kube-schema.json
 
 .tmp/generate-schema-struct: ./tools/generate-schema-struct/*
+	$(MKGOPATH)
 	go build -o .tmp/generate-schema-struct ./tools/generate-schema-struct
 
 generate: .tmp/generate-schema-struct cmd/generate/generated_schema.go $(find -name *.go)
+	$(MKGOPATH)
 	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build ./cmd/generate
 
 cmd/generate/generated_schema.go: ./tools/generate-schema-struct/* $(shell find vendor -name *.go)
+	$(MKGOPATH)
 	PATH=$(shell pwd)/.tmp/:$${PATH} go generate ./cmd/generate
+
+.PHONY: clean
+clean:
+	rm -rf $(GOPATH)
