@@ -15583,1821 +15583,997 @@
   },
   "type": "object",
   "properties": {
-    "F0_10": {
-      "$ref": "#/definitions/kubernetes_watch_versioned_InternalEvent",
-      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.InternalEvent"
-    },
-    "F0_5": {
-      "$ref": "#/definitions/kubernetes_watch_versioned_Decoder",
-      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Decoder"
-    },
-    "F0_6": {
-      "$ref": "#/definitions/kubernetes_watch_versioned_Encoder",
-      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Encoder"
-    },
-    "F0_9": {
-      "$ref": "#/definitions/kubernetes_watch_versioned_Event",
-      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Event"
-    },
-    "F10_1": {
-      "$ref": "#/definitions/os_sdn_v1_ClusterNetwork",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.ClusterNetwork"
-    },
-    "F10_3": {
-      "$ref": "#/definitions/os_sdn_v1_ClusterNetworkList",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.ClusterNetworkList"
-    },
-    "F10_37": {
-      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicy",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicy"
-    },
-    "F10_38": {
-      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyList",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyList"
-    },
-    "F10_39": {
-      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyPeer",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyPeer"
-    },
-    "F10_40": {
-      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyRule",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyRule"
-    },
-    "F10_44": {
-      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicySpec",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicySpec"
-    },
-    "F10_48": {
-      "$ref": "#/definitions/os_sdn_v1_HostSubnet",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.HostSubnet"
-    },
-    "F10_49": {
-      "$ref": "#/definitions/os_sdn_v1_HostSubnetList",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.HostSubnetList"
-    },
-    "F10_50": {
-      "$ref": "#/definitions/os_sdn_v1_NetNamespace",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.NetNamespace"
-    },
-    "F10_51": {
-      "$ref": "#/definitions/os_sdn_v1_NetNamespaceList",
-      "javaType": "io.fabric8.openshift.api.model.sdn.v1.NetNamespaceList"
-    },
-    "F11_0": {
-      "$ref": "#/definitions/os_authorization_v1_Action",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Action"
-    },
-    "F11_109": {
-      "$ref": "#/definitions/os_authorization_v1_IsPersonalSubjectAccessReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.IsPersonalSubjectAccessReview"
-    },
-    "F11_110": {
-      "$ref": "#/definitions/os_authorization_v1_LocalResourceAccessReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.LocalResourceAccessReview"
-    },
-    "F11_111": {
-      "$ref": "#/definitions/os_authorization_v1_LocalSubjectAccessReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.LocalSubjectAccessReview"
-    },
-    "F11_112": {
-      "$ref": "#/definitions/os_authorization_v1_NamedClusterRole",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedClusterRole"
-    },
-    "F11_113": {
-      "$ref": "#/definitions/os_authorization_v1_NamedClusterRoleBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedClusterRoleBinding"
-    },
-    "F11_116": {
-      "$ref": "#/definitions/os_authorization_v1_NamedRole",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedRole"
-    },
-    "F11_117": {
-      "$ref": "#/definitions/os_authorization_v1_NamedRoleBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedRoleBinding"
-    },
-    "F11_122": {
-      "$ref": "#/definitions/os_authorization_v1_Policy",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Policy"
-    },
-    "F11_123": {
-      "$ref": "#/definitions/os_authorization_v1_PolicyBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyBinding"
-    },
-    "F11_124": {
-      "$ref": "#/definitions/os_authorization_v1_PolicyBindingList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyBindingList"
-    },
-    "F11_125": {
-      "$ref": "#/definitions/os_authorization_v1_PolicyList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyList"
-    },
-    "F11_126": {
-      "$ref": "#/definitions/os_authorization_v1_PolicyRule",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyRule"
-    },
-    "F11_127": {
-      "$ref": "#/definitions/os_authorization_v1_ResourceAccessReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ResourceAccessReview"
-    },
-    "F11_128": {
-      "$ref": "#/definitions/os_authorization_v1_ResourceAccessReviewResponse",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ResourceAccessReviewResponse"
-    },
-    "F11_129": {
-      "$ref": "#/definitions/os_authorization_v1_Role",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Role"
-    },
-    "F11_130": {
-      "$ref": "#/definitions/os_authorization_v1_RoleBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleBinding"
-    },
-    "F11_131": {
-      "$ref": "#/definitions/os_authorization_v1_RoleBindingList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleBindingList"
-    },
-    "F11_132": {
-      "$ref": "#/definitions/os_authorization_v1_RoleList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleList"
-    },
-    "F11_134": {
-      "$ref": "#/definitions/os_authorization_v1_SelfSubjectRulesReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SelfSubjectRulesReview"
-    },
-    "F11_135": {
-      "$ref": "#/definitions/os_authorization_v1_SelfSubjectRulesReviewSpec",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SelfSubjectRulesReviewSpec"
-    },
-    "F11_137": {
-      "$ref": "#/definitions/os_authorization_v1_SubjectAccessReview",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectAccessReview"
-    },
-    "F11_138": {
-      "$ref": "#/definitions/os_authorization_v1_SubjectAccessReviewResponse",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectAccessReviewResponse"
-    },
-    "F11_139": {
-      "$ref": "#/definitions/os_authorization_v1_SubjectRulesReviewStatus",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectRulesReviewStatus"
-    },
-    "F11_2": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterPolicy",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicy"
-    },
-    "F11_3": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyBinding"
-    },
-    "F11_4": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyBindingList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyBindingList"
-    },
-    "F11_5": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyList"
-    },
-    "F11_6": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterRole",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRole"
-    },
-    "F11_7": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterRoleBinding",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleBinding"
-    },
-    "F11_8": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterRoleBindingList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleBindingList"
-    },
-    "F11_9": {
-      "$ref": "#/definitions/os_authorization_v1_ClusterRoleList",
-      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleList"
-    },
-    "F12_0": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_APIVersion",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.APIVersion"
-    },
-    "F12_141": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricCurrentStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricCurrentStatus"
-    },
-    "F12_142": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricCurrentStatusList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricCurrentStatusList"
-    },
-    "F12_143": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricTarget",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricTarget"
-    },
-    "F12_144": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricTargetList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricTargetList"
-    },
-    "F12_145": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSet",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSet"
-    },
-    "F12_146": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetList"
-    },
-    "F12_147": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetSpec"
-    },
-    "F12_148": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetStatus"
-    },
-    "F12_220": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Deployment",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Deployment"
-    },
-    "F12_221": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentList"
-    },
-    "F12_222": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentRollback",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentRollback"
-    },
-    "F12_223": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentSpec"
-    },
-    "F12_224": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentStatus"
-    },
-    "F12_225": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentStrategy",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentStrategy"
-    },
-    "F12_231": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ExportOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ExportOptions"
-    },
-    "F12_234": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_FSGroupStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.FSGroupStrategyOptions"
-    },
-    "F12_244": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HTTPIngressPath",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HTTPIngressPath"
-    },
-    "F12_245": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HTTPIngressRuleValue",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HTTPIngressRuleValue"
-    },
-    "F12_246": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscaler",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscaler"
-    },
-    "F12_247": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerList"
-    },
-    "F12_248": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerSpec"
-    },
-    "F12_249": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerStatus"
-    },
-    "F12_251": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HostPortRange",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HostPortRange"
-    },
-    "F12_252": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IDRange",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IDRange"
-    },
-    "F12_254": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Ingress",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Ingress"
-    },
-    "F12_255": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressBackend",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressBackend"
-    },
-    "F12_256": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressList"
-    },
-    "F12_257": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressRule",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressRule"
-    },
-    "F12_258": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressRuleValue",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressRuleValue"
-    },
-    "F12_259": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressSpec"
-    },
-    "F12_260": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressStatus"
-    },
-    "F12_261": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressTLS",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressTLS"
-    },
-    "F12_262": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Job",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Job"
-    },
-    "F12_264": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobCondition",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobCondition"
-    },
-    "F12_267": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobList"
-    },
-    "F12_268": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobSpec"
-    },
-    "F12_269": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobStatus"
-    },
-    "F12_270": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_LabelSelector",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.LabelSelector"
-    },
-    "F12_276": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_LabelSelectorRequirement",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.LabelSelectorRequirement"
-    },
-    "F12_277": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ListOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ListOptions"
-    },
-    "F12_279": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicy",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicy"
-    },
-    "F12_280": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyIngressRule",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyIngressRule"
-    },
-    "F12_281": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyList"
-    },
-    "F12_282": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyPeer",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyPeer"
-    },
-    "F12_283": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyPort",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyPort"
-    },
-    "F12_284": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicySpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicySpec"
-    },
-    "F12_286": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicy",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicy"
-    },
-    "F12_287": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicyList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicyList"
-    },
-    "F12_288": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicySpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicySpec"
-    },
-    "F12_291": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSet",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSet"
-    },
-    "F12_292": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetList"
-    },
-    "F12_293": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetSpec"
-    },
-    "F12_294": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetStatus"
-    },
-    "F12_295": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicationControllerDummy",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicationControllerDummy"
-    },
-    "F12_296": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RollbackConfig",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RollbackConfig"
-    },
-    "F12_297": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RollingUpdateDeployment",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RollingUpdateDeployment"
-    },
-    "F12_302": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RunAsUserStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RunAsUserStrategyOptions"
-    },
-    "F12_306": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SELinuxStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SELinuxStrategyOptions"
-    },
-    "F12_308": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Scale",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Scale"
-    },
-    "F12_309": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ScaleSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ScaleSpec"
-    },
-    "F12_310": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ScaleStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ScaleStatus"
-    },
-    "F12_319": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SubresourceReference",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SubresourceReference"
-    },
-    "F12_321": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SupplementalGroupsStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SupplementalGroupsStrategyOptions"
-    },
-    "F12_324": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResource",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResource"
-    },
-    "F12_325": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceData",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceData"
-    },
-    "F12_326": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceDataList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceDataList"
-    },
-    "F12_327": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceList",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceList"
-    },
-    "F12_5": {
-      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CPUTargetUtilization",
-      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CPUTargetUtilization"
-    },
-    "F13_53": {
-      "$ref": "#/definitions/kubernetes_runtime_NoopDecoder",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.NoopDecoder"
-    },
-    "F13_54": {
-      "$ref": "#/definitions/kubernetes_runtime_NoopEncoder",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.NoopEncoder"
-    },
-    "F13_61": {
-      "$ref": "#/definitions/kubernetes_runtime_Pair",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.Pair"
-    },
-    "F13_66": {
-      "$ref": "#/definitions/kubernetes_runtime_RawExtension",
-      "javaType": "io.fabric8.kubernetes.api.model.HasMetadata"
-    },
-    "F13_68": {
-      "$ref": "#/definitions/kubernetes_runtime_Scheme",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.Scheme"
-    },
-    "F13_71": {
-      "$ref": "#/definitions/kubernetes_runtime_SerializerInfo",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.SerializerInfo"
-    },
-    "F13_75": {
-      "$ref": "#/definitions/kubernetes_runtime_StreamSerializerInfo",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.StreamSerializerInfo"
-    },
-    "F13_76": {
-      "$ref": "#/definitions/kubernetes_runtime_TypeMeta",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.TypeMeta"
-    },
-    "F13_77": {
-      "$ref": "#/definitions/kubernetes_runtime_Unknown",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.Unknown"
-    },
-    "F13_79": {
-      "$ref": "#/definitions/kubernetes_runtime_Unstructured",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.Unstructured"
-    },
-    "F13_81": {
-      "$ref": "#/definitions/kubernetes_runtime_UnstructuredList",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.UnstructuredList"
-    },
-    "F13_85": {
-      "$ref": "#/definitions/kubernetes_runtime_VersionedObjects",
-      "javaType": "io.fabric8.kubernetes.api.model.runtime.VersionedObjects"
-    },
-    "F14_0": {
+    "F0_0": {
       "$ref": "#/definitions/kubernetes_api_unversioned_APIGroup",
       "javaType": "io.fabric8.kubernetes.api.model.APIGroup"
     },
-    "F14_1": {
+    "F0_1": {
       "$ref": "#/definitions/kubernetes_api_unversioned_APIGroupList",
       "javaType": "io.fabric8.kubernetes.api.model.APIGroupList"
     },
-    "F14_106": {
+    "F0_106": {
       "type": "string",
       "description": ""
     },
-    "F14_107": {
+    "F0_107": {
       "$ref": "#/definitions/kubernetes_api_unversioned_Timestamp",
       "javaType": "io.fabric8.kubernetes.api.model.Timestamp"
     },
-    "F14_109": {
+    "F0_109": {
       "$ref": "#/definitions/kubernetes_api_unversioned_TypeMeta",
       "javaType": "io.fabric8.kubernetes.api.model.TypeMeta"
     },
-    "F14_2": {
+    "F0_2": {
       "$ref": "#/definitions/kubernetes_api_unversioned_APIResource",
       "javaType": "io.fabric8.kubernetes.api.model.APIResource"
     },
-    "F14_3": {
+    "F0_3": {
       "$ref": "#/definitions/kubernetes_api_unversioned_APIResourceList",
       "javaType": "io.fabric8.kubernetes.api.model.APIResourceList"
     },
-    "F14_38": {
+    "F0_38": {
       "$ref": "#/definitions/kubernetes_api_unversioned_Duration",
       "javaType": "io.fabric8.kubernetes.api.model.Duration"
     },
-    "F14_4": {
+    "F0_4": {
       "$ref": "#/definitions/kubernetes_api_unversioned_APIVersions",
       "javaType": "io.fabric8.kubernetes.api.model.APIVersions"
     },
-    "F14_42": {
+    "F0_42": {
       "$ref": "#/definitions/kubernetes_api_unversioned_ExportOptions",
       "javaType": "io.fabric8.kubernetes.api.model.ExportOptions"
     },
-    "F14_47": {
+    "F0_47": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupKind",
       "javaType": "io.fabric8.kubernetes.api.model.GroupKind"
     },
-    "F14_48": {
+    "F0_48": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupResource",
       "javaType": "io.fabric8.kubernetes.api.model.GroupResource"
     },
-    "F14_49": {
+    "F0_49": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupVersion",
       "javaType": "io.fabric8.kubernetes.api.model.GroupVersion"
     },
-    "F14_50": {
+    "F0_50": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupVersionForDiscovery",
       "javaType": "io.fabric8.kubernetes.api.model.GroupVersionForDiscovery"
     },
-    "F14_51": {
+    "F0_51": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupVersionKind",
       "javaType": "io.fabric8.kubernetes.api.model.GroupVersionKind"
     },
-    "F14_52": {
+    "F0_52": {
       "$ref": "#/definitions/kubernetes_api_unversioned_GroupVersionResource",
       "javaType": "io.fabric8.kubernetes.api.model.GroupVersionResource"
     },
-    "F14_59": {
+    "F0_59": {
       "$ref": "#/definitions/kubernetes_api_unversioned_LabelSelector",
       "javaType": "io.fabric8.kubernetes.api.model.LabelSelector"
     },
-    "F14_67": {
+    "F0_67": {
       "$ref": "#/definitions/kubernetes_api_unversioned_LabelSelectorRequirement",
       "javaType": "io.fabric8.kubernetes.api.model.LabelSelectorRequirement"
     },
-    "F14_71": {
+    "F0_71": {
       "$ref": "#/definitions/kubernetes_api_unversioned_ListMeta",
       "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
     },
-    "F14_81": {
+    "F0_81": {
       "$ref": "#/definitions/kubernetes_api_unversioned_RootPaths",
       "javaType": "io.fabric8.kubernetes.api.model.RootPaths"
     },
-    "F14_83": {
+    "F0_83": {
       "$ref": "#/definitions/kubernetes_api_unversioned_ServerAddressByClientCIDR",
       "javaType": "io.fabric8.kubernetes.api.model.ServerAddressByClientCIDR"
     },
-    "F14_85": {
+    "F0_85": {
       "$ref": "#/definitions/kubernetes_api_unversioned_Status",
       "javaType": "io.fabric8.kubernetes.api.model.Status"
     },
-    "F14_86": {
+    "F0_86": {
       "$ref": "#/definitions/kubernetes_api_unversioned_StatusCause",
       "javaType": "io.fabric8.kubernetes.api.model.StatusCause"
     },
-    "F14_87": {
+    "F0_87": {
       "$ref": "#/definitions/kubernetes_api_unversioned_StatusDetails",
       "javaType": "io.fabric8.kubernetes.api.model.StatusDetails"
     },
-    "F15_32": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReview",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReview"
+    "F10_0": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_APIVersion",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.APIVersion"
     },
-    "F15_33": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReviewSpec",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReviewSpec"
+    "F10_141": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricCurrentStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricCurrentStatus"
     },
-    "F15_34": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReviewStatus",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReviewStatus"
+    "F10_142": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricCurrentStatusList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricCurrentStatusList"
     },
-    "F15_35": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySelfSubjectReview",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySelfSubjectReview"
+    "F10_143": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricTarget",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricTarget"
     },
-    "F15_36": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySelfSubjectReviewSpec",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySelfSubjectReviewSpec"
+    "F10_144": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CustomMetricTargetList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CustomMetricTargetList"
     },
-    "F15_37": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReview",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReview"
+    "F10_145": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSet",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSet"
     },
-    "F15_38": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReviewSpec",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReviewSpec"
+    "F10_146": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetList"
     },
-    "F15_39": {
-      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReviewStatus",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReviewStatus"
+    "F10_147": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetSpec"
     },
-    "F15_42": {
-      "$ref": "#/definitions/os_security_v1_ServiceAccountPodSecurityPolicyReviewStatus",
-      "javaType": "io.fabric8.openshift.api.model.security.v1.ServiceAccountPodSecurityPolicyReviewStatus"
+    "F10_148": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DaemonSetStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DaemonSetStatus"
     },
-    "F16_35": {
-      "$ref": "#/definitions/os_route_v1_Route",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.Route"
+    "F10_220": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Deployment",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Deployment"
     },
-    "F16_37": {
-      "$ref": "#/definitions/os_route_v1_RouteIngress",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteIngress"
+    "F10_221": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentList"
     },
-    "F16_38": {
-      "$ref": "#/definitions/os_route_v1_RouteIngressCondition",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteIngressCondition"
+    "F10_222": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentRollback",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentRollback"
     },
-    "F16_40": {
-      "$ref": "#/definitions/os_route_v1_RouteList",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteList"
+    "F10_223": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentSpec"
     },
-    "F16_41": {
-      "$ref": "#/definitions/os_route_v1_RoutePort",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RoutePort"
+    "F10_224": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentStatus"
     },
-    "F16_42": {
-      "$ref": "#/definitions/os_route_v1_RouteSpec",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteSpec"
+    "F10_225": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_DeploymentStrategy",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.DeploymentStrategy"
     },
-    "F16_43": {
-      "$ref": "#/definitions/os_route_v1_RouteStatus",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteStatus"
+    "F10_231": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ExportOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ExportOptions"
     },
-    "F16_44": {
-      "$ref": "#/definitions/os_route_v1_RouteTargetReference",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteTargetReference"
+    "F10_234": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_FSGroupStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.FSGroupStrategyOptions"
     },
-    "F16_45": {
-      "$ref": "#/definitions/os_route_v1_RouterShard",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.RouterShard"
+    "F10_244": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HTTPIngressPath",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HTTPIngressPath"
     },
-    "F16_49": {
-      "$ref": "#/definitions/os_route_v1_TLSConfig",
-      "javaType": "io.fabric8.openshift.api.model.route.v1.TLSConfig"
+    "F10_245": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HTTPIngressRuleValue",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HTTPIngressRuleValue"
     },
-    "F17_18": {
+    "F10_246": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscaler",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscaler"
+    },
+    "F10_247": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerList"
+    },
+    "F10_248": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerSpec"
+    },
+    "F10_249": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HorizontalPodAutoscalerStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HorizontalPodAutoscalerStatus"
+    },
+    "F10_251": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_HostPortRange",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.HostPortRange"
+    },
+    "F10_252": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IDRange",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IDRange"
+    },
+    "F10_254": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Ingress",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Ingress"
+    },
+    "F10_255": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressBackend",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressBackend"
+    },
+    "F10_256": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressList"
+    },
+    "F10_257": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressRule",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressRule"
+    },
+    "F10_258": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressRuleValue",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressRuleValue"
+    },
+    "F10_259": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressSpec"
+    },
+    "F10_260": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressStatus"
+    },
+    "F10_261": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_IngressTLS",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.IngressTLS"
+    },
+    "F10_262": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Job",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Job"
+    },
+    "F10_264": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobCondition",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobCondition"
+    },
+    "F10_267": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobList"
+    },
+    "F10_268": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobSpec"
+    },
+    "F10_269": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_JobStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.JobStatus"
+    },
+    "F10_270": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_LabelSelector",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.LabelSelector"
+    },
+    "F10_276": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_LabelSelectorRequirement",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.LabelSelectorRequirement"
+    },
+    "F10_277": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ListOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ListOptions"
+    },
+    "F10_279": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicy",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicy"
+    },
+    "F10_280": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyIngressRule",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyIngressRule"
+    },
+    "F10_281": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyList"
+    },
+    "F10_282": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyPeer",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyPeer"
+    },
+    "F10_283": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicyPort",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicyPort"
+    },
+    "F10_284": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_NetworkPolicySpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.NetworkPolicySpec"
+    },
+    "F10_286": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicy",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicy"
+    },
+    "F10_287": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicyList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicyList"
+    },
+    "F10_288": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_PodSecurityPolicySpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.PodSecurityPolicySpec"
+    },
+    "F10_291": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSet",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSet"
+    },
+    "F10_292": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetList"
+    },
+    "F10_293": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetSpec"
+    },
+    "F10_294": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicaSetStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicaSetStatus"
+    },
+    "F10_295": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ReplicationControllerDummy",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ReplicationControllerDummy"
+    },
+    "F10_296": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RollbackConfig",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RollbackConfig"
+    },
+    "F10_297": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RollingUpdateDeployment",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RollingUpdateDeployment"
+    },
+    "F10_302": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_RunAsUserStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.RunAsUserStrategyOptions"
+    },
+    "F10_306": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SELinuxStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SELinuxStrategyOptions"
+    },
+    "F10_308": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_Scale",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.Scale"
+    },
+    "F10_309": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ScaleSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ScaleSpec"
+    },
+    "F10_310": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ScaleStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ScaleStatus"
+    },
+    "F10_319": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SubresourceReference",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SubresourceReference"
+    },
+    "F10_321": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_SupplementalGroupsStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.SupplementalGroupsStrategyOptions"
+    },
+    "F10_324": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResource",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResource"
+    },
+    "F10_325": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceData",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceData"
+    },
+    "F10_326": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceDataList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceDataList"
+    },
+    "F10_327": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_ThirdPartyResourceList",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.ThirdPartyResourceList"
+    },
+    "F10_5": {
+      "$ref": "#/definitions/kubernetes_extensions_v1beta1_CPUTargetUtilization",
+      "javaType": "io.fabric8.kubernetes.api.model.extensions.v1beta1.CPUTargetUtilization"
+    },
+    "F11_18": {
       "$ref": "#/definitions/kubernetes_authentication_v1beta1_TokenReview",
       "javaType": "io.fabric8.kubernetes.api.model.authentication.v1beta1.TokenReview"
     },
-    "F17_19": {
+    "F11_19": {
       "$ref": "#/definitions/kubernetes_authentication_v1beta1_TokenReviewSpec",
       "javaType": "io.fabric8.kubernetes.api.model.authentication.v1beta1.TokenReviewSpec"
     },
-    "F17_20": {
+    "F11_20": {
       "$ref": "#/definitions/kubernetes_authentication_v1beta1_TokenReviewStatus",
       "javaType": "io.fabric8.kubernetes.api.model.authentication.v1beta1.TokenReviewStatus"
     },
-    "F17_21": {
+    "F11_21": {
       "$ref": "#/definitions/kubernetes_authentication_v1beta1_UserInfo",
       "javaType": "io.fabric8.kubernetes.api.model.authentication.v1beta1.UserInfo"
     },
-    "F18_100": {
-      "$ref": "#/definitions/os_image_v1_ImageStream",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStream"
-    },
-    "F18_101": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamImage",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImage"
-    },
-    "F18_102": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamImport",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImport"
-    },
-    "F18_103": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamImportSpec",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImportSpec"
-    },
-    "F18_104": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamImportStatus",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImportStatus"
-    },
-    "F18_105": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamList",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamList"
-    },
-    "F18_106": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamMapping",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamMapping"
-    },
-    "F18_107": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamSpec",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamSpec"
-    },
-    "F18_108": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamStatus",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamStatus"
-    },
-    "F18_109": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamTag",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamTag"
-    },
-    "F18_110": {
-      "$ref": "#/definitions/os_image_v1_ImageStreamTagList",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamTagList"
-    },
-    "F18_112": {
-      "$ref": "#/definitions/os_image_v1_NamedTagEventList",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.NamedTagEventList"
-    },
-    "F18_113": {
-      "$ref": "#/definitions/os_image_v1_RepositoryImportSpec",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.RepositoryImportSpec"
-    },
-    "F18_114": {
-      "$ref": "#/definitions/os_image_v1_RepositoryImportStatus",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.RepositoryImportStatus"
-    },
-    "F18_117": {
-      "$ref": "#/definitions/os_image_v1_SignatureCondition",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureCondition"
-    },
-    "F18_119": {
-      "$ref": "#/definitions/os_image_v1_SignatureGenericEntity",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureGenericEntity"
-    },
-    "F18_120": {
-      "$ref": "#/definitions/os_image_v1_SignatureIssuer",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureIssuer"
-    },
-    "F18_121": {
-      "$ref": "#/definitions/os_image_v1_SignatureSubject",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureSubject"
-    },
-    "F18_122": {
-      "$ref": "#/definitions/os_image_v1_TagEvent",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.TagEvent"
-    },
-    "F18_123": {
-      "$ref": "#/definitions/os_image_v1_TagEventCondition",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.TagEventCondition"
-    },
-    "F18_125": {
-      "$ref": "#/definitions/os_image_v1_TagImportPolicy",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.TagImportPolicy"
-    },
-    "F18_126": {
-      "$ref": "#/definitions/os_image_v1_TagReference",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.TagReference"
-    },
-    "F18_90": {
-      "$ref": "#/definitions/os_image_v1_DockerImageReference",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.DockerImageReference"
-    },
-    "F18_94": {
-      "$ref": "#/definitions/os_image_v1_Image",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.Image"
-    },
-    "F18_95": {
-      "$ref": "#/definitions/os_image_v1_ImageImportSpec",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageImportSpec"
-    },
-    "F18_96": {
-      "$ref": "#/definitions/os_image_v1_ImageImportStatus",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageImportStatus"
-    },
-    "F18_97": {
-      "$ref": "#/definitions/os_image_v1_ImageLayer",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageLayer"
-    },
-    "F18_98": {
-      "$ref": "#/definitions/os_image_v1_ImageList",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageList"
-    },
-    "F18_99": {
-      "$ref": "#/definitions/os_image_v1_ImageSignature",
-      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageSignature"
-    },
-    "F19_0": {
-      "$ref": "#/definitions/kubernetes_api_v1_AWSElasticBlockStoreVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.AWSElasticBlockStoreVolumeSource"
-    },
-    "F19_14": {
-      "$ref": "#/definitions/kubernetes_api_v1_ComponentCondition",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentCondition"
-    },
-    "F19_17": {
-      "$ref": "#/definitions/kubernetes_api_v1_ComponentStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentStatus"
-    },
-    "F19_18": {
-      "$ref": "#/definitions/kubernetes_api_v1_ComponentStatusList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentStatusList"
-    },
-    "F19_2": {
-      "$ref": "#/definitions/kubernetes_api_v1_Affinity",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Affinity"
-    },
-    "F19_23": {
-      "$ref": "#/definitions/kubernetes_api_v1_ConfigMap",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMap"
-    },
-    "F19_24": {
-      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapKeySelector",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapKeySelector"
-    },
-    "F19_25": {
-      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapList"
-    },
-    "F19_26": {
-      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapVolumeSource"
-    },
-    "F19_27": {
-      "$ref": "#/definitions/kubernetes_api_v1_Container",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Container"
-    },
-    "F19_28": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerImage",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerImage"
-    },
-    "F19_29": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerPort",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerPort"
-    },
-    "F19_3": {
-      "$ref": "#/definitions/kubernetes_api_v1_AttachedVolume",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.AttachedVolume"
-    },
-    "F19_30": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerState",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerState"
-    },
-    "F19_31": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateRunning",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateRunning"
-    },
-    "F19_32": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateTerminated",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateTerminated"
-    },
-    "F19_33": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateWaiting",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateWaiting"
-    },
-    "F19_34": {
-      "$ref": "#/definitions/kubernetes_api_v1_ContainerStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStatus"
-    },
-    "F19_351": {
-      "$ref": "#/definitions/kubernetes_api_v1_DaemonEndpoint",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DaemonEndpoint"
-    },
-    "F19_4": {
-      "$ref": "#/definitions/kubernetes_api_v1_AzureFileVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.AzureFileVolumeSource"
-    },
-    "F19_5": {
-      "$ref": "#/definitions/kubernetes_api_v1_Binding",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Binding"
-    },
-    "F19_512": {
-      "$ref": "#/definitions/kubernetes_api_v1_DeleteOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DeleteOptions"
-    },
-    "F19_513": {
-      "$ref": "#/definitions/kubernetes_api_v1_DeprecatedDownwardAPIVolumeFile",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DeprecatedDownwardAPIVolumeFile"
-    },
-    "F19_514": {
-      "$ref": "#/definitions/kubernetes_api_v1_DeprecatedDownwardAPIVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DeprecatedDownwardAPIVolumeSource"
-    },
-    "F19_516": {
-      "$ref": "#/definitions/kubernetes_api_v1_DownwardAPIVolumeFile",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DownwardAPIVolumeFile"
-    },
-    "F19_517": {
-      "$ref": "#/definitions/kubernetes_api_v1_DownwardAPIVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.DownwardAPIVolumeSource"
-    },
-    "F19_518": {
-      "$ref": "#/definitions/kubernetes_api_v1_EmptyDirVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EmptyDirVolumeSource"
-    },
-    "F19_519": {
-      "$ref": "#/definitions/kubernetes_api_v1_EndpointAddress",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointAddress"
-    },
-    "F19_520": {
-      "$ref": "#/definitions/kubernetes_api_v1_EndpointPort",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointPort"
-    },
-    "F19_521": {
-      "$ref": "#/definitions/kubernetes_api_v1_EndpointSubset",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointSubset"
-    },
-    "F19_522": {
-      "$ref": "#/definitions/kubernetes_api_v1_Endpoints",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Endpoints"
-    },
-    "F19_523": {
-      "$ref": "#/definitions/kubernetes_api_v1_EndpointsList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointsList"
-    },
-    "F19_524": {
-      "$ref": "#/definitions/kubernetes_api_v1_EnvVar",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EnvVar"
-    },
-    "F19_525": {
-      "$ref": "#/definitions/kubernetes_api_v1_EnvVarSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EnvVarSource"
-    },
-    "F19_528": {
-      "$ref": "#/definitions/kubernetes_api_v1_Event",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Event"
-    },
-    "F19_529": {
-      "$ref": "#/definitions/kubernetes_api_v1_EventList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EventList"
-    },
-    "F19_530": {
-      "$ref": "#/definitions/kubernetes_api_v1_EventSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.EventSource"
-    },
-    "F19_533": {
-      "$ref": "#/definitions/kubernetes_api_v1_ExecAction",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ExecAction"
-    },
-    "F19_534": {
-      "$ref": "#/definitions/kubernetes_api_v1_ExportOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ExportOptions"
-    },
-    "F19_535": {
-      "$ref": "#/definitions/kubernetes_api_v1_FCVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.FCVolumeSource"
-    },
-    "F19_537": {
-      "$ref": "#/definitions/kubernetes_api_v1_FSGroupStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.FSGroupStrategyOptions"
-    },
-    "F19_563": {
-      "$ref": "#/definitions/kubernetes_api_v1_FlexVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.FlexVolumeSource"
-    },
-    "F19_564": {
-      "$ref": "#/definitions/kubernetes_api_v1_FlockerVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.FlockerVolumeSource"
-    },
-    "F19_565": {
-      "$ref": "#/definitions/kubernetes_api_v1_GCEPersistentDiskVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.GCEPersistentDiskVolumeSource"
-    },
-    "F19_566": {
-      "$ref": "#/definitions/kubernetes_api_v1_GitRepoVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.GitRepoVolumeSource"
-    },
-    "F19_567": {
-      "$ref": "#/definitions/kubernetes_api_v1_GlusterfsVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.GlusterfsVolumeSource"
-    },
-    "F19_569": {
-      "$ref": "#/definitions/kubernetes_api_v1_HTTPGetAction",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.HTTPGetAction"
-    },
-    "F19_570": {
-      "$ref": "#/definitions/kubernetes_api_v1_HTTPHeader",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.HTTPHeader"
-    },
-    "F19_571": {
-      "$ref": "#/definitions/kubernetes_api_v1_Handler",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Handler"
-    },
-    "F19_572": {
-      "$ref": "#/definitions/kubernetes_api_v1_HostPathVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.HostPathVolumeSource"
-    },
-    "F19_573": {
-      "$ref": "#/definitions/kubernetes_api_v1_IDRange",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.IDRange"
-    },
-    "F19_574": {
-      "$ref": "#/definitions/kubernetes_api_v1_ISCSIVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ISCSIVolumeSource"
-    },
-    "F19_575": {
-      "$ref": "#/definitions/kubernetes_api_v1_KeyToPath",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.KeyToPath"
-    },
-    "F19_576": {
-      "$ref": "#/definitions/kubernetes_api_v1_Lifecycle",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Lifecycle"
-    },
-    "F19_577": {
-      "$ref": "#/definitions/kubernetes_api_v1_LimitRange",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRange"
-    },
-    "F19_578": {
-      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeItem",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeItem"
-    },
-    "F19_579": {
-      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeList"
-    },
-    "F19_580": {
-      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeSpec"
-    },
-    "F19_584": {
-      "$ref": "#/definitions/kubernetes_api_v1_List",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.BaseKubernetesList"
-    },
-    "F19_585": {
-      "$ref": "#/definitions/kubernetes_api_v1_ListOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ListOptions"
-    },
-    "F19_586": {
-      "$ref": "#/definitions/kubernetes_api_v1_LoadBalancerIngress",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LoadBalancerIngress"
-    },
-    "F19_587": {
-      "$ref": "#/definitions/kubernetes_api_v1_LoadBalancerStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LoadBalancerStatus"
-    },
-    "F19_588": {
-      "$ref": "#/definitions/kubernetes_api_v1_LocalObjectReference",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.LocalObjectReference"
-    },
-    "F19_590": {
-      "$ref": "#/definitions/kubernetes_api_v1_NFSVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NFSVolumeSource"
-    },
-    "F19_591": {
-      "$ref": "#/definitions/kubernetes_api_v1_Namespace",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Namespace"
-    },
-    "F19_595": {
-      "$ref": "#/definitions/kubernetes_api_v1_NamespaceList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceList"
-    },
-    "F19_597": {
-      "$ref": "#/definitions/kubernetes_api_v1_NamespaceSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceSpec"
-    },
-    "F19_598": {
-      "$ref": "#/definitions/kubernetes_api_v1_NamespaceStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceStatus"
-    },
-    "F19_6": {
-      "$ref": "#/definitions/kubernetes_api_v1_Capabilities",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Capabilities"
-    },
-    "F19_600": {
-      "$ref": "#/definitions/kubernetes_api_v1_Node",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Node"
-    },
-    "F19_601": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeAddress",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeAddress"
-    },
-    "F19_603": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeAffinity",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeAffinity"
-    },
-    "F19_604": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeCondition",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeCondition"
-    },
-    "F19_606": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeDaemonEndpoints",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeDaemonEndpoints"
-    },
-    "F19_610": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeList"
-    },
-    "F19_616": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeProxyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeProxyOptions"
-    },
-    "F19_619": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeSelector",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelector"
-    },
-    "F19_627": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeSelectorRequirement",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelectorRequirement"
-    },
-    "F19_628": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeSelectorTerm",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelectorTerm"
-    },
-    "F19_629": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSpec"
-    },
-    "F19_630": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeStatus"
-    },
-    "F19_631": {
-      "$ref": "#/definitions/kubernetes_api_v1_NodeSystemInfo",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSystemInfo"
-    },
-    "F19_633": {
-      "$ref": "#/definitions/kubernetes_api_v1_ObjectFieldSelector",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectFieldSelector"
-    },
-    "F19_634": {
-      "$ref": "#/definitions/kubernetes_api_v1_ObjectMeta",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectMeta"
-    },
-    "F19_635": {
-      "$ref": "#/definitions/kubernetes_api_v1_ObjectReference",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectReference"
-    },
-    "F19_636": {
-      "$ref": "#/definitions/kubernetes_api_v1_OwnerReference",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.OwnerReference"
-    },
-    "F19_637": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolume",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolume"
-    },
-    "F19_639": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaim",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaim"
-    },
-    "F19_640": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimList"
-    },
-    "F19_642": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimSpec"
-    },
-    "F19_643": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimStatus"
-    },
-    "F19_644": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimVolumeSource"
-    },
-    "F19_645": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeList"
-    },
-    "F19_651": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeSource"
-    },
-    "F19_652": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeSpec"
-    },
-    "F19_653": {
-      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeStatus"
-    },
-    "F19_654": {
-      "$ref": "#/definitions/kubernetes_api_v1_Pod",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Pod"
-    },
-    "F19_655": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodAffinity",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAffinity"
-    },
-    "F19_656": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodAffinityTerm",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAffinityTerm"
-    },
-    "F19_657": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodAntiAffinity",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAntiAffinity"
-    },
-    "F19_658": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodAttachOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAttachOptions"
-    },
-    "F19_659": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodCondition",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodCondition"
-    },
-    "F19_661": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodExecOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodExecOptions"
-    },
-    "F19_665": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodList"
-    },
-    "F19_666": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodLogOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodLogOptions"
-    },
-    "F19_669": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodProxyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodProxyOptions"
-    },
-    "F19_673": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodSecurityContext",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodSecurityContext"
-    },
-    "F19_674": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodSpec"
-    },
-    "F19_675": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodStatus"
-    },
-    "F19_676": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodStatusResult",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodStatusResult"
-    },
-    "F19_678": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodTemplate",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplate"
-    },
-    "F19_679": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodTemplateList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplateList"
-    },
-    "F19_680": {
-      "$ref": "#/definitions/kubernetes_api_v1_PodTemplateSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplateSpec"
-    },
-    "F19_682": {
-      "$ref": "#/definitions/kubernetes_api_v1_Preconditions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Preconditions"
-    },
-    "F19_683": {
-      "$ref": "#/definitions/kubernetes_api_v1_PreferredSchedulingTerm",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.PreferredSchedulingTerm"
-    },
-    "F19_684": {
-      "$ref": "#/definitions/kubernetes_api_v1_Probe",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Probe"
-    },
-    "F19_692": {
-      "$ref": "#/definitions/kubernetes_api_v1_RBDVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.RBDVolumeSource"
-    },
-    "F19_693": {
-      "$ref": "#/definitions/kubernetes_api_v1_RangeAllocation",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.RangeAllocation"
-    },
-    "F19_697": {
-      "$ref": "#/definitions/kubernetes_api_v1_ReplicationController",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationController"
-    },
-    "F19_698": {
-      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerList"
-    },
-    "F19_699": {
-      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerSpec"
-    },
-    "F19_700": {
-      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerStatus"
-    },
-    "F19_703": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceFieldSelector",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceFieldSelector"
-    },
-    "F19_712": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuota",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuota"
-    },
-    "F19_713": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaList"
-    },
-    "F19_719": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaSpec"
-    },
-    "F19_720": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaStatus"
-    },
-    "F19_725": {
-      "$ref": "#/definitions/kubernetes_api_v1_ResourceRequirements",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceRequirements"
-    },
-    "F19_738": {
-      "$ref": "#/definitions/kubernetes_api_v1_RunAsUserStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.RunAsUserStrategyOptions"
-    },
-    "F19_741": {
-      "$ref": "#/definitions/kubernetes_api_v1_SELinuxContextStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SELinuxContextStrategyOptions"
-    },
-    "F19_743": {
-      "$ref": "#/definitions/kubernetes_api_v1_SELinuxOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SELinuxOptions"
-    },
-    "F19_747": {
-      "$ref": "#/definitions/kubernetes_api_v1_Secret",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Secret"
-    },
-    "F19_748": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecretKeySelector",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretKeySelector"
-    },
-    "F19_749": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecretList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretList"
-    },
-    "F19_755": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecretVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretVolumeSource"
-    },
-    "F19_756": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecurityContext",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContext"
-    },
-    "F19_757": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecurityContextConstraints",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContextConstraints"
-    },
-    "F19_758": {
-      "$ref": "#/definitions/kubernetes_api_v1_SecurityContextConstraintsList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContextConstraintsList"
-    },
-    "F19_759": {
-      "$ref": "#/definitions/kubernetes_api_v1_SerializedReference",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SerializedReference"
-    },
-    "F19_760": {
-      "$ref": "#/definitions/kubernetes_api_v1_Service",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Service"
-    },
-    "F19_761": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceAccount",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceAccount"
-    },
-    "F19_763": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceAccountList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceAccountList"
-    },
-    "F19_772": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceList",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceList"
-    },
-    "F19_773": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServicePort",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServicePort"
-    },
-    "F19_774": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceProxyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceProxyOptions"
-    },
-    "F19_775": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceSpec"
-    },
-    "F19_776": {
-      "$ref": "#/definitions/kubernetes_api_v1_ServiceStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceStatus"
-    },
-    "F19_8": {
-      "$ref": "#/definitions/kubernetes_api_v1_CephFSVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.CephFSVolumeSource"
-    },
-    "F19_812": {
-      "$ref": "#/definitions/kubernetes_api_v1_SupplementalGroupsStrategyOptions",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.SupplementalGroupsStrategyOptions"
-    },
-    "F19_815": {
-      "$ref": "#/definitions/kubernetes_api_v1_TCPSocketAction",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.TCPSocketAction"
-    },
-    "F19_818": {
-      "$ref": "#/definitions/kubernetes_api_v1_Taint",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Taint"
-    },
-    "F19_823": {
-      "$ref": "#/definitions/kubernetes_api_v1_Toleration",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Toleration"
-    },
-    "F19_831": {
-      "$ref": "#/definitions/kubernetes_api_v1_Volume",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.Volume"
-    },
-    "F19_835": {
-      "$ref": "#/definitions/kubernetes_api_v1_VolumeMount",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.VolumeMount"
-    },
-    "F19_838": {
-      "$ref": "#/definitions/kubernetes_api_v1_VolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.VolumeSource"
-    },
-    "F19_839": {
-      "$ref": "#/definitions/kubernetes_api_v1_VsphereVirtualDiskVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.VsphereVirtualDiskVolumeSource"
-    },
-    "F19_840": {
-      "$ref": "#/definitions/kubernetes_api_v1_WeightedPodAffinityTerm",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.WeightedPodAffinityTerm"
-    },
-    "F19_9": {
-      "$ref": "#/definitions/kubernetes_api_v1_CinderVolumeSource",
-      "javaType": "io.fabric8.kubernetes.api.model.v1.CinderVolumeSource"
-    },
-    "F1_100": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentTriggerPolicy",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentTriggerPolicy"
-    },
-    "F1_105": {
-      "$ref": "#/definitions/os_deploy_v1_ExecNewPodHook",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.ExecNewPodHook"
-    },
-    "F1_107": {
-      "$ref": "#/definitions/os_deploy_v1_LifecycleHook",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.LifecycleHook"
-    },
-    "F1_112": {
-      "$ref": "#/definitions/os_deploy_v1_RecreateDeploymentStrategyParams",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.RecreateDeploymentStrategyParams"
-    },
-    "F1_113": {
-      "$ref": "#/definitions/os_deploy_v1_RollingDeploymentStrategyParams",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.RollingDeploymentStrategyParams"
-    },
-    "F1_120": {
-      "$ref": "#/definitions/os_deploy_v1_TagImageHook",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.TagImageHook"
-    },
-    "F1_41": {
-      "$ref": "#/definitions/os_deploy_v1_CustomDeploymentStrategyParams",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.CustomDeploymentStrategyParams"
-    },
-    "F1_65": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentCause",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentCause"
-    },
-    "F1_66": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentCauseImageTrigger",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentCauseImageTrigger"
-    },
-    "F1_67": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfig",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfig"
-    },
-    "F1_70": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigList",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigList"
-    },
-    "F1_71": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigRollback",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigRollback"
-    },
-    "F1_72": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigRollbackSpec",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigRollbackSpec"
-    },
-    "F1_73": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigSpec",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigSpec"
-    },
-    "F1_74": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigStatus",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigStatus"
-    },
-    "F1_75": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentDetails",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentDetails"
-    },
-    "F1_79": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentLog",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentLog"
-    },
-    "F1_80": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentLogOptions",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentLogOptions"
-    },
-    "F1_91": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentStrategy",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentStrategy"
-    },
-    "F1_96": {
-      "$ref": "#/definitions/os_deploy_v1_DeploymentTriggerImageChangeParams",
-      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentTriggerImageChangeParams"
-    },
-    "F20_25": {
+    "F12_25": {
       "$ref": "#/definitions/kubernetes_batch_v1_Job",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.Job"
     },
-    "F20_27": {
+    "F12_27": {
       "$ref": "#/definitions/kubernetes_batch_v1_JobCondition",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.JobCondition"
     },
-    "F20_30": {
+    "F12_30": {
       "$ref": "#/definitions/kubernetes_batch_v1_JobList",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.JobList"
     },
-    "F20_31": {
+    "F12_31": {
       "$ref": "#/definitions/kubernetes_batch_v1_JobSpec",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.JobSpec"
     },
-    "F20_32": {
+    "F12_32": {
       "$ref": "#/definitions/kubernetes_batch_v1_JobStatus",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.JobStatus"
     },
-    "F20_33": {
+    "F12_33": {
       "$ref": "#/definitions/kubernetes_batch_v1_LabelSelector",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.LabelSelector"
     },
-    "F20_39": {
+    "F12_39": {
       "$ref": "#/definitions/kubernetes_batch_v1_LabelSelectorRequirement",
       "javaType": "io.fabric8.kubernetes.api.model.batch.v1.LabelSelectorRequirement"
     },
-    "F21_1": {
-      "$ref": "#/definitions/os_quota_v1_AppliedClusterResourceQuota",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.AppliedClusterResourceQuota"
-    },
-    "F21_2": {
-      "$ref": "#/definitions/os_quota_v1_AppliedClusterResourceQuotaList",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.AppliedClusterResourceQuotaList"
-    },
-    "F21_3": {
-      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuota",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuota"
-    },
-    "F21_37": {
-      "$ref": "#/definitions/os_quota_v1_ResourceQuotaStatusByNamespace",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ResourceQuotaStatusByNamespace"
-    },
-    "F21_4": {
-      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaList",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaList"
-    },
-    "F21_5": {
-      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaSelector",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaSelector"
-    },
-    "F21_6": {
-      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaSpec",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaSpec"
-    },
-    "F21_7": {
-      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaStatus",
-      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaStatus"
-    },
-    "F22_1": {
-      "$ref": "#/definitions/os_oauth_v1_ClusterRoleScopeRestriction",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.ClusterRoleScopeRestriction"
-    },
-    "F22_39": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthAccessToken",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAccessToken"
-    },
-    "F22_40": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthAccessTokenList",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAccessTokenList"
-    },
-    "F22_41": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthAuthorizeToken",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAuthorizeToken"
-    },
-    "F22_42": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthAuthorizeTokenList",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAuthorizeTokenList"
-    },
-    "F22_43": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthClient",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClient"
-    },
-    "F22_44": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthClientAuthorization",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientAuthorization"
-    },
-    "F22_45": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthClientAuthorizationList",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientAuthorizationList"
-    },
-    "F22_46": {
-      "$ref": "#/definitions/os_oauth_v1_OAuthClientList",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientList"
-    },
-    "F22_48": {
-      "$ref": "#/definitions/os_oauth_v1_ScopeRestriction",
-      "javaType": "io.fabric8.openshift.api.model.oauth.v1.ScopeRestriction"
-    },
-    "F23_16": {
-      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSet",
-      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSet"
-    },
-    "F23_17": {
-      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetList",
-      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetList"
-    },
-    "F23_18": {
-      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetSpec"
-    },
-    "F23_19": {
-      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetStatus"
-    },
-    "F24_1": {
-      "$ref": "#/definitions/os_build_v1_BinaryBuildRequestOptions",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BinaryBuildRequestOptions"
-    },
-    "F24_10": {
-      "$ref": "#/definitions/os_build_v1_BuildLogOptions",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildLogOptions"
-    },
-    "F24_11": {
-      "$ref": "#/definitions/os_build_v1_BuildOutput",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildOutput"
-    },
-    "F24_118": {
-      "$ref": "#/definitions/os_build_v1_CustomBuildStrategy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.CustomBuildStrategy"
-    },
-    "F24_159": {
-      "$ref": "#/definitions/os_build_v1_DockerBuildStrategy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.DockerBuildStrategy"
-    },
-    "F24_165": {
-      "$ref": "#/definitions/os_build_v1_GenericWebHookCause",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GenericWebHookCause"
-    },
-    "F24_166": {
-      "$ref": "#/definitions/os_build_v1_GenericWebHookEvent",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GenericWebHookEvent"
-    },
-    "F24_167": {
-      "$ref": "#/definitions/os_build_v1_GitBuildSource",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GitBuildSource"
-    },
-    "F24_170": {
-      "$ref": "#/definitions/os_build_v1_GitHubWebHookCause",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GitHubWebHookCause"
-    },
-    "F24_171": {
-      "$ref": "#/definitions/os_build_v1_GitInfo",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GitInfo"
-    },
-    "F24_172": {
-      "$ref": "#/definitions/os_build_v1_GitSourceRevision",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.GitSourceRevision"
-    },
-    "F24_176": {
-      "$ref": "#/definitions/os_build_v1_ImageChangeCause",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageChangeCause"
-    },
-    "F24_177": {
-      "$ref": "#/definitions/os_build_v1_ImageChangeTrigger",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageChangeTrigger"
-    },
-    "F24_178": {
-      "$ref": "#/definitions/os_build_v1_ImageSource",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageSource"
-    },
-    "F24_179": {
-      "$ref": "#/definitions/os_build_v1_ImageSourcePath",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageSourcePath"
-    },
-    "F24_180": {
-      "$ref": "#/definitions/os_build_v1_JenkinsPipelineBuildStrategy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.JenkinsPipelineBuildStrategy"
-    },
-    "F24_183": {
-      "$ref": "#/definitions/os_build_v1_SecretBuildSource",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.SecretBuildSource"
-    },
-    "F24_184": {
-      "$ref": "#/definitions/os_build_v1_SecretSpec",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.SecretSpec"
-    },
-    "F24_192": {
-      "$ref": "#/definitions/os_build_v1_SourceBuildStrategy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceBuildStrategy"
-    },
-    "F24_194": {
-      "$ref": "#/definitions/os_build_v1_SourceControlUser",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceControlUser"
-    },
-    "F24_195": {
-      "$ref": "#/definitions/os_build_v1_SourceRevision",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceRevision"
-    },
-    "F24_197": {
-      "$ref": "#/definitions/os_build_v1_WebHookTrigger",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.WebHookTrigger"
-    },
-    "F24_2": {
-      "$ref": "#/definitions/os_build_v1_BinaryBuildSource",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BinaryBuildSource"
-    },
-    "F24_20": {
-      "$ref": "#/definitions/os_build_v1_BuildPostCommitSpec",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildPostCommitSpec"
-    },
-    "F24_21": {
-      "$ref": "#/definitions/os_build_v1_BuildRequest",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildRequest"
-    },
-    "F24_26": {
-      "$ref": "#/definitions/os_build_v1_BuildSource",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildSource"
-    },
-    "F24_3": {
-      "$ref": "#/definitions/os_build_v1_Build",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.Build"
-    },
-    "F24_33": {
-      "$ref": "#/definitions/os_build_v1_BuildSpec",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildSpec"
-    },
-    "F24_34": {
-      "$ref": "#/definitions/os_build_v1_BuildStatus",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildStatus"
-    },
-    "F24_35": {
-      "$ref": "#/definitions/os_build_v1_BuildStrategy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildStrategy"
-    },
-    "F24_37": {
-      "$ref": "#/definitions/os_build_v1_BuildTriggerCause",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildTriggerCause"
-    },
-    "F24_38": {
-      "$ref": "#/definitions/os_build_v1_BuildTriggerPolicy",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildTriggerPolicy"
-    },
-    "F24_4": {
-      "$ref": "#/definitions/os_build_v1_BuildConfig",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfig"
-    },
-    "F24_40": {
-      "$ref": "#/definitions/os_build_v1_CommonSpec",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.CommonSpec"
-    },
-    "F24_5": {
-      "$ref": "#/definitions/os_build_v1_BuildConfigList",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigList"
-    },
-    "F24_6": {
-      "$ref": "#/definitions/os_build_v1_BuildConfigSpec",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigSpec"
-    },
-    "F24_7": {
-      "$ref": "#/definitions/os_build_v1_BuildConfigStatus",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigStatus"
-    },
-    "F24_8": {
-      "$ref": "#/definitions/os_build_v1_BuildList",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildList"
-    },
-    "F24_9": {
-      "$ref": "#/definitions/os_build_v1_BuildLog",
-      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildLog"
-    },
-    "F25_7": {
-      "$ref": "#/definitions/kubernetes_util_intstr_IntOrString",
-      "javaType": "io.fabric8.kubernetes.api.model.util.intstr.IntOrString"
-    },
-    "F26_13": {
+    "F13_13": {
       "$ref": "#/definitions/os_template_v1_Parameter",
       "javaType": "io.fabric8.openshift.api.model.template.v1.Parameter"
     },
-    "F26_15": {
+    "F13_15": {
       "$ref": "#/definitions/os_template_v1_Template",
       "javaType": "io.fabric8.openshift.api.model.template.v1.Template"
     },
-    "F26_16": {
+    "F13_16": {
       "$ref": "#/definitions/os_template_v1_TemplateList",
       "javaType": "io.fabric8.openshift.api.model.template.v1.TemplateList"
+    },
+    "F14_35": {
+      "$ref": "#/definitions/os_route_v1_Route",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.Route"
+    },
+    "F14_37": {
+      "$ref": "#/definitions/os_route_v1_RouteIngress",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteIngress"
+    },
+    "F14_38": {
+      "$ref": "#/definitions/os_route_v1_RouteIngressCondition",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteIngressCondition"
+    },
+    "F14_40": {
+      "$ref": "#/definitions/os_route_v1_RouteList",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteList"
+    },
+    "F14_41": {
+      "$ref": "#/definitions/os_route_v1_RoutePort",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RoutePort"
+    },
+    "F14_42": {
+      "$ref": "#/definitions/os_route_v1_RouteSpec",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteSpec"
+    },
+    "F14_43": {
+      "$ref": "#/definitions/os_route_v1_RouteStatus",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteStatus"
+    },
+    "F14_44": {
+      "$ref": "#/definitions/os_route_v1_RouteTargetReference",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouteTargetReference"
+    },
+    "F14_45": {
+      "$ref": "#/definitions/os_route_v1_RouterShard",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.RouterShard"
+    },
+    "F14_49": {
+      "$ref": "#/definitions/os_route_v1_TLSConfig",
+      "javaType": "io.fabric8.openshift.api.model.route.v1.TLSConfig"
+    },
+    "F15_1": {
+      "$ref": "#/definitions/os_oauth_v1_ClusterRoleScopeRestriction",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.ClusterRoleScopeRestriction"
+    },
+    "F15_39": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthAccessToken",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAccessToken"
+    },
+    "F15_40": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthAccessTokenList",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAccessTokenList"
+    },
+    "F15_41": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthAuthorizeToken",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAuthorizeToken"
+    },
+    "F15_42": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthAuthorizeTokenList",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthAuthorizeTokenList"
+    },
+    "F15_43": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthClient",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClient"
+    },
+    "F15_44": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthClientAuthorization",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientAuthorization"
+    },
+    "F15_45": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthClientAuthorizationList",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientAuthorizationList"
+    },
+    "F15_46": {
+      "$ref": "#/definitions/os_oauth_v1_OAuthClientList",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.OAuthClientList"
+    },
+    "F15_48": {
+      "$ref": "#/definitions/os_oauth_v1_ScopeRestriction",
+      "javaType": "io.fabric8.openshift.api.model.oauth.v1.ScopeRestriction"
+    },
+    "F16_24": {
+      "$ref": "#/definitions/os_user_v1_Group",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.Group"
+    },
+    "F16_25": {
+      "$ref": "#/definitions/os_user_v1_GroupList",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.GroupList"
+    },
+    "F16_27": {
+      "$ref": "#/definitions/os_user_v1_Identity",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.Identity"
+    },
+    "F16_28": {
+      "$ref": "#/definitions/os_user_v1_IdentityList",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.IdentityList"
+    },
+    "F16_31": {
+      "$ref": "#/definitions/os_user_v1_User",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.User"
+    },
+    "F16_32": {
+      "$ref": "#/definitions/os_user_v1_UserIdentityMapping",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.UserIdentityMapping"
+    },
+    "F16_33": {
+      "$ref": "#/definitions/os_user_v1_UserList",
+      "javaType": "io.fabric8.openshift.api.model.user.v1.UserList"
+    },
+    "F17_1": {
+      "$ref": "#/definitions/os_quota_v1_AppliedClusterResourceQuota",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.AppliedClusterResourceQuota"
+    },
+    "F17_2": {
+      "$ref": "#/definitions/os_quota_v1_AppliedClusterResourceQuotaList",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.AppliedClusterResourceQuotaList"
+    },
+    "F17_3": {
+      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuota",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuota"
+    },
+    "F17_37": {
+      "$ref": "#/definitions/os_quota_v1_ResourceQuotaStatusByNamespace",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ResourceQuotaStatusByNamespace"
+    },
+    "F17_4": {
+      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaList",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaList"
+    },
+    "F17_5": {
+      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaSelector",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaSelector"
+    },
+    "F17_6": {
+      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaSpec",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaSpec"
+    },
+    "F17_7": {
+      "$ref": "#/definitions/os_quota_v1_ClusterResourceQuotaStatus",
+      "javaType": "io.fabric8.openshift.api.model.quota.v1.ClusterResourceQuotaStatus"
+    },
+    "F18_1": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRole",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRole"
+    },
+    "F18_2": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleBinding",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleBinding"
+    },
+    "F18_3": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleBindingList",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleBindingList"
+    },
+    "F18_37": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_PolicyRule",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.PolicyRule"
+    },
+    "F18_38": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_Role",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.Role"
+    },
+    "F18_39": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleBinding",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleBinding"
+    },
+    "F18_4": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleList",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleList"
+    },
+    "F18_40": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleBindingList",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleBindingList"
+    },
+    "F18_41": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleList",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleList"
+    },
+    "F18_43": {
+      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_Subject",
+      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.Subject"
+    },
+    "F19_26": {
+      "$ref": "#/definitions/kubernetes_api_resource_Quantity",
+      "javaType": "io.fabric8.kubernetes.api.model.resource.Quantity"
+    },
+    "F1_53": {
+      "$ref": "#/definitions/kubernetes_runtime_NoopDecoder",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.NoopDecoder"
+    },
+    "F1_54": {
+      "$ref": "#/definitions/kubernetes_runtime_NoopEncoder",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.NoopEncoder"
+    },
+    "F1_61": {
+      "$ref": "#/definitions/kubernetes_runtime_Pair",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.Pair"
+    },
+    "F1_66": {
+      "$ref": "#/definitions/kubernetes_runtime_RawExtension",
+      "javaType": "io.fabric8.kubernetes.api.model.HasMetadata"
+    },
+    "F1_68": {
+      "$ref": "#/definitions/kubernetes_runtime_Scheme",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.Scheme"
+    },
+    "F1_71": {
+      "$ref": "#/definitions/kubernetes_runtime_SerializerInfo",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.SerializerInfo"
+    },
+    "F1_75": {
+      "$ref": "#/definitions/kubernetes_runtime_StreamSerializerInfo",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.StreamSerializerInfo"
+    },
+    "F1_76": {
+      "$ref": "#/definitions/kubernetes_runtime_TypeMeta",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.TypeMeta"
+    },
+    "F1_77": {
+      "$ref": "#/definitions/kubernetes_runtime_Unknown",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.Unknown"
+    },
+    "F1_79": {
+      "$ref": "#/definitions/kubernetes_runtime_Unstructured",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.Unstructured"
+    },
+    "F1_81": {
+      "$ref": "#/definitions/kubernetes_runtime_UnstructuredList",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.UnstructuredList"
+    },
+    "F1_85": {
+      "$ref": "#/definitions/kubernetes_runtime_VersionedObjects",
+      "javaType": "io.fabric8.kubernetes.api.model.runtime.VersionedObjects"
+    },
+    "F20_10": {
+      "$ref": "#/definitions/kubernetes_watch_versioned_InternalEvent",
+      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.InternalEvent"
+    },
+    "F20_5": {
+      "$ref": "#/definitions/kubernetes_watch_versioned_Decoder",
+      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Decoder"
+    },
+    "F20_6": {
+      "$ref": "#/definitions/kubernetes_watch_versioned_Encoder",
+      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Encoder"
+    },
+    "F20_9": {
+      "$ref": "#/definitions/kubernetes_watch_versioned_Event",
+      "javaType": "io.fabric8.kubernetes.api.model.watch.versioned.Event"
+    },
+    "F21_1": {
+      "$ref": "#/definitions/os_build_v1_BinaryBuildRequestOptions",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BinaryBuildRequestOptions"
+    },
+    "F21_10": {
+      "$ref": "#/definitions/os_build_v1_BuildLogOptions",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildLogOptions"
+    },
+    "F21_11": {
+      "$ref": "#/definitions/os_build_v1_BuildOutput",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildOutput"
+    },
+    "F21_118": {
+      "$ref": "#/definitions/os_build_v1_CustomBuildStrategy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.CustomBuildStrategy"
+    },
+    "F21_159": {
+      "$ref": "#/definitions/os_build_v1_DockerBuildStrategy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.DockerBuildStrategy"
+    },
+    "F21_165": {
+      "$ref": "#/definitions/os_build_v1_GenericWebHookCause",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GenericWebHookCause"
+    },
+    "F21_166": {
+      "$ref": "#/definitions/os_build_v1_GenericWebHookEvent",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GenericWebHookEvent"
+    },
+    "F21_167": {
+      "$ref": "#/definitions/os_build_v1_GitBuildSource",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GitBuildSource"
+    },
+    "F21_170": {
+      "$ref": "#/definitions/os_build_v1_GitHubWebHookCause",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GitHubWebHookCause"
+    },
+    "F21_171": {
+      "$ref": "#/definitions/os_build_v1_GitInfo",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GitInfo"
+    },
+    "F21_172": {
+      "$ref": "#/definitions/os_build_v1_GitSourceRevision",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.GitSourceRevision"
+    },
+    "F21_176": {
+      "$ref": "#/definitions/os_build_v1_ImageChangeCause",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageChangeCause"
+    },
+    "F21_177": {
+      "$ref": "#/definitions/os_build_v1_ImageChangeTrigger",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageChangeTrigger"
+    },
+    "F21_178": {
+      "$ref": "#/definitions/os_build_v1_ImageSource",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageSource"
+    },
+    "F21_179": {
+      "$ref": "#/definitions/os_build_v1_ImageSourcePath",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.ImageSourcePath"
+    },
+    "F21_180": {
+      "$ref": "#/definitions/os_build_v1_JenkinsPipelineBuildStrategy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.JenkinsPipelineBuildStrategy"
+    },
+    "F21_183": {
+      "$ref": "#/definitions/os_build_v1_SecretBuildSource",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.SecretBuildSource"
+    },
+    "F21_184": {
+      "$ref": "#/definitions/os_build_v1_SecretSpec",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.SecretSpec"
+    },
+    "F21_192": {
+      "$ref": "#/definitions/os_build_v1_SourceBuildStrategy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceBuildStrategy"
+    },
+    "F21_194": {
+      "$ref": "#/definitions/os_build_v1_SourceControlUser",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceControlUser"
+    },
+    "F21_195": {
+      "$ref": "#/definitions/os_build_v1_SourceRevision",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.SourceRevision"
+    },
+    "F21_197": {
+      "$ref": "#/definitions/os_build_v1_WebHookTrigger",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.WebHookTrigger"
+    },
+    "F21_2": {
+      "$ref": "#/definitions/os_build_v1_BinaryBuildSource",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BinaryBuildSource"
+    },
+    "F21_20": {
+      "$ref": "#/definitions/os_build_v1_BuildPostCommitSpec",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildPostCommitSpec"
+    },
+    "F21_21": {
+      "$ref": "#/definitions/os_build_v1_BuildRequest",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildRequest"
+    },
+    "F21_26": {
+      "$ref": "#/definitions/os_build_v1_BuildSource",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildSource"
+    },
+    "F21_3": {
+      "$ref": "#/definitions/os_build_v1_Build",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.Build"
+    },
+    "F21_33": {
+      "$ref": "#/definitions/os_build_v1_BuildSpec",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildSpec"
+    },
+    "F21_34": {
+      "$ref": "#/definitions/os_build_v1_BuildStatus",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildStatus"
+    },
+    "F21_35": {
+      "$ref": "#/definitions/os_build_v1_BuildStrategy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildStrategy"
+    },
+    "F21_37": {
+      "$ref": "#/definitions/os_build_v1_BuildTriggerCause",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildTriggerCause"
+    },
+    "F21_38": {
+      "$ref": "#/definitions/os_build_v1_BuildTriggerPolicy",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildTriggerPolicy"
+    },
+    "F21_4": {
+      "$ref": "#/definitions/os_build_v1_BuildConfig",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfig"
+    },
+    "F21_40": {
+      "$ref": "#/definitions/os_build_v1_CommonSpec",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.CommonSpec"
+    },
+    "F21_5": {
+      "$ref": "#/definitions/os_build_v1_BuildConfigList",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigList"
+    },
+    "F21_6": {
+      "$ref": "#/definitions/os_build_v1_BuildConfigSpec",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigSpec"
+    },
+    "F21_7": {
+      "$ref": "#/definitions/os_build_v1_BuildConfigStatus",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildConfigStatus"
+    },
+    "F21_8": {
+      "$ref": "#/definitions/os_build_v1_BuildList",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildList"
+    },
+    "F21_9": {
+      "$ref": "#/definitions/os_build_v1_BuildLog",
+      "javaType": "io.fabric8.openshift.api.model.build.v1.BuildLog"
+    },
+    "F22_16": {
+      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudget",
+      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudget"
+    },
+    "F22_17": {
+      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetList",
+      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetList"
+    },
+    "F22_18": {
+      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetSpec"
+    },
+    "F22_19": {
+      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetStatus"
+    },
+    "F23_17": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_CrossVersionObjectReference",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.CrossVersionObjectReference"
+    },
+    "F23_29": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscaler",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscaler"
+    },
+    "F23_30": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerList",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerList"
+    },
+    "F23_31": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerSpec"
+    },
+    "F23_32": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerStatus"
+    },
+    "F23_33": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_Scale",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.Scale"
+    },
+    "F23_34": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_ScaleSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.ScaleSpec"
+    },
+    "F23_35": {
+      "$ref": "#/definitions/kubernetes_autoscaling_v1_ScaleStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.ScaleStatus"
+    },
+    "F24_46": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_Job",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.Job"
+    },
+    "F24_48": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobCondition",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobCondition"
+    },
+    "F24_51": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobList",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobList"
+    },
+    "F24_52": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobSpec"
+    },
+    "F24_53": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobStatus"
+    },
+    "F24_54": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobTemplate",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobTemplate"
+    },
+    "F24_55": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobTemplateSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobTemplateSpec"
+    },
+    "F24_56": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_LabelSelector",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.LabelSelector"
+    },
+    "F24_62": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_LabelSelectorRequirement",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.LabelSelectorRequirement"
+    },
+    "F24_64": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJob",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJob"
+    },
+    "F24_65": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobList",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobList"
+    },
+    "F24_66": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobSpec"
+    },
+    "F24_67": {
+      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobStatus"
+    },
+    "F25_1": {
+      "$ref": "#/definitions/os_sdn_v1_ClusterNetwork",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.ClusterNetwork"
+    },
+    "F25_3": {
+      "$ref": "#/definitions/os_sdn_v1_ClusterNetworkList",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.ClusterNetworkList"
+    },
+    "F25_37": {
+      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicy",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicy"
+    },
+    "F25_38": {
+      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyList",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyList"
+    },
+    "F25_39": {
+      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyPeer",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyPeer"
+    },
+    "F25_40": {
+      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicyRule",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicyRule"
+    },
+    "F25_44": {
+      "$ref": "#/definitions/os_sdn_v1_EgressNetworkPolicySpec",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.EgressNetworkPolicySpec"
+    },
+    "F25_48": {
+      "$ref": "#/definitions/os_sdn_v1_HostSubnet",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.HostSubnet"
+    },
+    "F25_49": {
+      "$ref": "#/definitions/os_sdn_v1_HostSubnetList",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.HostSubnetList"
+    },
+    "F25_50": {
+      "$ref": "#/definitions/os_sdn_v1_NetNamespace",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.NetNamespace"
+    },
+    "F25_51": {
+      "$ref": "#/definitions/os_sdn_v1_NetNamespaceList",
+      "javaType": "io.fabric8.openshift.api.model.sdn.v1.NetNamespaceList"
+    },
+    "F26_16": {
+      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSet",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSet"
+    },
+    "F26_17": {
+      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetList",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetList"
+    },
+    "F26_18": {
+      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetSpec"
+    },
+    "F26_19": {
+      "$ref": "#/definitions/kubernetes_apps_v1alpha1_PetSetStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.v1alpha1.PetSetStatus"
     },
     "F2_20": {
       "$ref": "#/definitions/os_project_v1_Project",
@@ -17419,209 +16595,1033 @@
       "$ref": "#/definitions/os_project_v1_ProjectStatus",
       "javaType": "io.fabric8.openshift.api.model.project.v1.ProjectStatus"
     },
-    "F3_26": {
-      "$ref": "#/definitions/kubernetes_api_resource_Quantity",
-      "javaType": "io.fabric8.kubernetes.api.model.resource.Quantity"
+    "F3_32": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReview",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReview"
     },
-    "F4_46": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_Job",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.Job"
+    "F3_33": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReviewSpec",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReviewSpec"
     },
-    "F4_48": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobCondition",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobCondition"
+    "F3_34": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicyReviewStatus",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicyReviewStatus"
     },
-    "F4_51": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobList",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobList"
+    "F3_35": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySelfSubjectReview",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySelfSubjectReview"
     },
-    "F4_52": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobSpec"
+    "F3_36": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySelfSubjectReviewSpec",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySelfSubjectReviewSpec"
     },
-    "F4_53": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobStatus"
+    "F3_37": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReview",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReview"
     },
-    "F4_54": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobTemplate",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobTemplate"
+    "F3_38": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReviewSpec",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReviewSpec"
     },
-    "F4_55": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_JobTemplateSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.JobTemplateSpec"
+    "F3_39": {
+      "$ref": "#/definitions/os_security_v1_PodSecurityPolicySubjectReviewStatus",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.PodSecurityPolicySubjectReviewStatus"
     },
-    "F4_56": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_LabelSelector",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.LabelSelector"
+    "F3_42": {
+      "$ref": "#/definitions/os_security_v1_ServiceAccountPodSecurityPolicyReviewStatus",
+      "javaType": "io.fabric8.openshift.api.model.security.v1.ServiceAccountPodSecurityPolicyReviewStatus"
     },
-    "F4_62": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_LabelSelectorRequirement",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.LabelSelectorRequirement"
+    "F4_100": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentTriggerPolicy",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentTriggerPolicy"
     },
-    "F4_64": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJob",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJob"
+    "F4_105": {
+      "$ref": "#/definitions/os_deploy_v1_ExecNewPodHook",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.ExecNewPodHook"
+    },
+    "F4_107": {
+      "$ref": "#/definitions/os_deploy_v1_LifecycleHook",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.LifecycleHook"
+    },
+    "F4_112": {
+      "$ref": "#/definitions/os_deploy_v1_RecreateDeploymentStrategyParams",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.RecreateDeploymentStrategyParams"
+    },
+    "F4_113": {
+      "$ref": "#/definitions/os_deploy_v1_RollingDeploymentStrategyParams",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.RollingDeploymentStrategyParams"
+    },
+    "F4_120": {
+      "$ref": "#/definitions/os_deploy_v1_TagImageHook",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.TagImageHook"
+    },
+    "F4_41": {
+      "$ref": "#/definitions/os_deploy_v1_CustomDeploymentStrategyParams",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.CustomDeploymentStrategyParams"
     },
     "F4_65": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobList",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobList"
+      "$ref": "#/definitions/os_deploy_v1_DeploymentCause",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentCause"
     },
     "F4_66": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobSpec"
+      "$ref": "#/definitions/os_deploy_v1_DeploymentCauseImageTrigger",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentCauseImageTrigger"
     },
     "F4_67": {
-      "$ref": "#/definitions/kubernetes_batch_v2alpha1_ScheduledJobStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.batch.v2alpha1.ScheduledJobStatus"
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfig",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfig"
     },
-    "F5_17": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_CrossVersionObjectReference",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.CrossVersionObjectReference"
+    "F4_70": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigList",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigList"
     },
-    "F5_29": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscaler",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscaler"
+    "F4_71": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigRollback",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigRollback"
     },
-    "F5_30": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerList",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerList"
+    "F4_72": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigRollbackSpec",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigRollbackSpec"
     },
-    "F5_31": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerSpec"
+    "F4_73": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigSpec",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigSpec"
     },
-    "F5_32": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_HorizontalPodAutoscalerStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.HorizontalPodAutoscalerStatus"
+    "F4_74": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentConfigStatus",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentConfigStatus"
     },
-    "F5_33": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_Scale",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.Scale"
+    "F4_75": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentDetails",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentDetails"
     },
-    "F5_34": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_ScaleSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.ScaleSpec"
+    "F4_79": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentLog",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentLog"
     },
-    "F5_35": {
-      "$ref": "#/definitions/kubernetes_autoscaling_v1_ScaleStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.autoscaling.v1.ScaleStatus"
+    "F4_80": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentLogOptions",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentLogOptions"
     },
-    "F6_16": {
-      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudget",
-      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudget"
+    "F4_91": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentStrategy",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentStrategy"
     },
-    "F6_17": {
-      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetList",
-      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetList"
+    "F4_96": {
+      "$ref": "#/definitions/os_deploy_v1_DeploymentTriggerImageChangeParams",
+      "javaType": "io.fabric8.openshift.api.model.deploy.v1.DeploymentTriggerImageChangeParams"
     },
-    "F6_18": {
-      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetSpec",
-      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetSpec"
-    },
-    "F6_19": {
-      "$ref": "#/definitions/kubernetes_policy_v1alpha1_PodDisruptionBudgetStatus",
-      "javaType": "io.fabric8.kubernetes.api.model.policy.v1alpha1.PodDisruptionBudgetStatus"
-    },
-    "F7_24": {
-      "$ref": "#/definitions/os_user_v1_Group",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.Group"
-    },
-    "F7_25": {
-      "$ref": "#/definitions/os_user_v1_GroupList",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.GroupList"
-    },
-    "F7_27": {
-      "$ref": "#/definitions/os_user_v1_Identity",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.Identity"
-    },
-    "F7_28": {
-      "$ref": "#/definitions/os_user_v1_IdentityList",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.IdentityList"
-    },
-    "F7_31": {
-      "$ref": "#/definitions/os_user_v1_User",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.User"
-    },
-    "F7_32": {
-      "$ref": "#/definitions/os_user_v1_UserIdentityMapping",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.UserIdentityMapping"
-    },
-    "F7_33": {
-      "$ref": "#/definitions/os_user_v1_UserList",
-      "javaType": "io.fabric8.openshift.api.model.user.v1.UserList"
-    },
-    "F8_26": {
+    "F5_26": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_LocalSubjectAccessReview",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.LocalSubjectAccessReview"
     },
-    "F8_27": {
+    "F5_27": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_NonResourceAttributes",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.NonResourceAttributes"
     },
-    "F8_28": {
+    "F5_28": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_ResourceAttributes",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.ResourceAttributes"
     },
-    "F8_30": {
+    "F5_30": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_SelfSubjectAccessReview",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.SelfSubjectAccessReview"
     },
-    "F8_31": {
+    "F5_31": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_SelfSubjectAccessReviewSpec",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.SelfSubjectAccessReviewSpec"
     },
-    "F8_32": {
+    "F5_32": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_SubjectAccessReview",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.SubjectAccessReview"
     },
-    "F8_33": {
+    "F5_33": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_SubjectAccessReviewSpec",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.SubjectAccessReviewSpec"
     },
-    "F8_34": {
+    "F5_34": {
       "$ref": "#/definitions/kubernetes_authorization_v1beta1_SubjectAccessReviewStatus",
       "javaType": "io.fabric8.kubernetes.api.model.authorization.v1beta1.SubjectAccessReviewStatus"
     },
-    "F9_1": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRole",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRole"
+    "F6_100": {
+      "$ref": "#/definitions/os_image_v1_ImageStream",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStream"
+    },
+    "F6_101": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamImage",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImage"
+    },
+    "F6_102": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamImport",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImport"
+    },
+    "F6_103": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamImportSpec",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImportSpec"
+    },
+    "F6_104": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamImportStatus",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamImportStatus"
+    },
+    "F6_105": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamList",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamList"
+    },
+    "F6_106": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamMapping",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamMapping"
+    },
+    "F6_107": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamSpec",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamSpec"
+    },
+    "F6_108": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamStatus",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamStatus"
+    },
+    "F6_109": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamTag",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamTag"
+    },
+    "F6_110": {
+      "$ref": "#/definitions/os_image_v1_ImageStreamTagList",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageStreamTagList"
+    },
+    "F6_112": {
+      "$ref": "#/definitions/os_image_v1_NamedTagEventList",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.NamedTagEventList"
+    },
+    "F6_113": {
+      "$ref": "#/definitions/os_image_v1_RepositoryImportSpec",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.RepositoryImportSpec"
+    },
+    "F6_114": {
+      "$ref": "#/definitions/os_image_v1_RepositoryImportStatus",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.RepositoryImportStatus"
+    },
+    "F6_117": {
+      "$ref": "#/definitions/os_image_v1_SignatureCondition",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureCondition"
+    },
+    "F6_119": {
+      "$ref": "#/definitions/os_image_v1_SignatureGenericEntity",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureGenericEntity"
+    },
+    "F6_120": {
+      "$ref": "#/definitions/os_image_v1_SignatureIssuer",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureIssuer"
+    },
+    "F6_121": {
+      "$ref": "#/definitions/os_image_v1_SignatureSubject",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.SignatureSubject"
+    },
+    "F6_122": {
+      "$ref": "#/definitions/os_image_v1_TagEvent",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.TagEvent"
+    },
+    "F6_123": {
+      "$ref": "#/definitions/os_image_v1_TagEventCondition",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.TagEventCondition"
+    },
+    "F6_125": {
+      "$ref": "#/definitions/os_image_v1_TagImportPolicy",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.TagImportPolicy"
+    },
+    "F6_126": {
+      "$ref": "#/definitions/os_image_v1_TagReference",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.TagReference"
+    },
+    "F6_90": {
+      "$ref": "#/definitions/os_image_v1_DockerImageReference",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.DockerImageReference"
+    },
+    "F6_94": {
+      "$ref": "#/definitions/os_image_v1_Image",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.Image"
+    },
+    "F6_95": {
+      "$ref": "#/definitions/os_image_v1_ImageImportSpec",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageImportSpec"
+    },
+    "F6_96": {
+      "$ref": "#/definitions/os_image_v1_ImageImportStatus",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageImportStatus"
+    },
+    "F6_97": {
+      "$ref": "#/definitions/os_image_v1_ImageLayer",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageLayer"
+    },
+    "F6_98": {
+      "$ref": "#/definitions/os_image_v1_ImageList",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageList"
+    },
+    "F6_99": {
+      "$ref": "#/definitions/os_image_v1_ImageSignature",
+      "javaType": "io.fabric8.openshift.api.model.image.v1.ImageSignature"
+    },
+    "F7_0": {
+      "$ref": "#/definitions/kubernetes_api_v1_AWSElasticBlockStoreVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.AWSElasticBlockStoreVolumeSource"
+    },
+    "F7_14": {
+      "$ref": "#/definitions/kubernetes_api_v1_ComponentCondition",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentCondition"
+    },
+    "F7_17": {
+      "$ref": "#/definitions/kubernetes_api_v1_ComponentStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentStatus"
+    },
+    "F7_18": {
+      "$ref": "#/definitions/kubernetes_api_v1_ComponentStatusList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ComponentStatusList"
+    },
+    "F7_2": {
+      "$ref": "#/definitions/kubernetes_api_v1_Affinity",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Affinity"
+    },
+    "F7_23": {
+      "$ref": "#/definitions/kubernetes_api_v1_ConfigMap",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMap"
+    },
+    "F7_24": {
+      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapKeySelector",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapKeySelector"
+    },
+    "F7_25": {
+      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapList"
+    },
+    "F7_26": {
+      "$ref": "#/definitions/kubernetes_api_v1_ConfigMapVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ConfigMapVolumeSource"
+    },
+    "F7_27": {
+      "$ref": "#/definitions/kubernetes_api_v1_Container",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Container"
+    },
+    "F7_28": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerImage",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerImage"
+    },
+    "F7_29": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerPort",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerPort"
+    },
+    "F7_3": {
+      "$ref": "#/definitions/kubernetes_api_v1_AttachedVolume",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.AttachedVolume"
+    },
+    "F7_30": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerState",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerState"
+    },
+    "F7_31": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateRunning",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateRunning"
+    },
+    "F7_32": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateTerminated",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateTerminated"
+    },
+    "F7_33": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerStateWaiting",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStateWaiting"
+    },
+    "F7_34": {
+      "$ref": "#/definitions/kubernetes_api_v1_ContainerStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ContainerStatus"
+    },
+    "F7_351": {
+      "$ref": "#/definitions/kubernetes_api_v1_DaemonEndpoint",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DaemonEndpoint"
+    },
+    "F7_4": {
+      "$ref": "#/definitions/kubernetes_api_v1_AzureFileVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.AzureFileVolumeSource"
+    },
+    "F7_5": {
+      "$ref": "#/definitions/kubernetes_api_v1_Binding",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Binding"
+    },
+    "F7_512": {
+      "$ref": "#/definitions/kubernetes_api_v1_DeleteOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DeleteOptions"
+    },
+    "F7_513": {
+      "$ref": "#/definitions/kubernetes_api_v1_DeprecatedDownwardAPIVolumeFile",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DeprecatedDownwardAPIVolumeFile"
+    },
+    "F7_514": {
+      "$ref": "#/definitions/kubernetes_api_v1_DeprecatedDownwardAPIVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DeprecatedDownwardAPIVolumeSource"
+    },
+    "F7_516": {
+      "$ref": "#/definitions/kubernetes_api_v1_DownwardAPIVolumeFile",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DownwardAPIVolumeFile"
+    },
+    "F7_517": {
+      "$ref": "#/definitions/kubernetes_api_v1_DownwardAPIVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.DownwardAPIVolumeSource"
+    },
+    "F7_518": {
+      "$ref": "#/definitions/kubernetes_api_v1_EmptyDirVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EmptyDirVolumeSource"
+    },
+    "F7_519": {
+      "$ref": "#/definitions/kubernetes_api_v1_EndpointAddress",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointAddress"
+    },
+    "F7_520": {
+      "$ref": "#/definitions/kubernetes_api_v1_EndpointPort",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointPort"
+    },
+    "F7_521": {
+      "$ref": "#/definitions/kubernetes_api_v1_EndpointSubset",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointSubset"
+    },
+    "F7_522": {
+      "$ref": "#/definitions/kubernetes_api_v1_Endpoints",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Endpoints"
+    },
+    "F7_523": {
+      "$ref": "#/definitions/kubernetes_api_v1_EndpointsList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EndpointsList"
+    },
+    "F7_524": {
+      "$ref": "#/definitions/kubernetes_api_v1_EnvVar",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EnvVar"
+    },
+    "F7_525": {
+      "$ref": "#/definitions/kubernetes_api_v1_EnvVarSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EnvVarSource"
+    },
+    "F7_528": {
+      "$ref": "#/definitions/kubernetes_api_v1_Event",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Event"
+    },
+    "F7_529": {
+      "$ref": "#/definitions/kubernetes_api_v1_EventList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EventList"
+    },
+    "F7_530": {
+      "$ref": "#/definitions/kubernetes_api_v1_EventSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.EventSource"
+    },
+    "F7_533": {
+      "$ref": "#/definitions/kubernetes_api_v1_ExecAction",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ExecAction"
+    },
+    "F7_534": {
+      "$ref": "#/definitions/kubernetes_api_v1_ExportOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ExportOptions"
+    },
+    "F7_535": {
+      "$ref": "#/definitions/kubernetes_api_v1_FCVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.FCVolumeSource"
+    },
+    "F7_537": {
+      "$ref": "#/definitions/kubernetes_api_v1_FSGroupStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.FSGroupStrategyOptions"
+    },
+    "F7_563": {
+      "$ref": "#/definitions/kubernetes_api_v1_FlexVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.FlexVolumeSource"
+    },
+    "F7_564": {
+      "$ref": "#/definitions/kubernetes_api_v1_FlockerVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.FlockerVolumeSource"
+    },
+    "F7_565": {
+      "$ref": "#/definitions/kubernetes_api_v1_GCEPersistentDiskVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.GCEPersistentDiskVolumeSource"
+    },
+    "F7_566": {
+      "$ref": "#/definitions/kubernetes_api_v1_GitRepoVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.GitRepoVolumeSource"
+    },
+    "F7_567": {
+      "$ref": "#/definitions/kubernetes_api_v1_GlusterfsVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.GlusterfsVolumeSource"
+    },
+    "F7_569": {
+      "$ref": "#/definitions/kubernetes_api_v1_HTTPGetAction",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.HTTPGetAction"
+    },
+    "F7_570": {
+      "$ref": "#/definitions/kubernetes_api_v1_HTTPHeader",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.HTTPHeader"
+    },
+    "F7_571": {
+      "$ref": "#/definitions/kubernetes_api_v1_Handler",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Handler"
+    },
+    "F7_572": {
+      "$ref": "#/definitions/kubernetes_api_v1_HostPathVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.HostPathVolumeSource"
+    },
+    "F7_573": {
+      "$ref": "#/definitions/kubernetes_api_v1_IDRange",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.IDRange"
+    },
+    "F7_574": {
+      "$ref": "#/definitions/kubernetes_api_v1_ISCSIVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ISCSIVolumeSource"
+    },
+    "F7_575": {
+      "$ref": "#/definitions/kubernetes_api_v1_KeyToPath",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.KeyToPath"
+    },
+    "F7_576": {
+      "$ref": "#/definitions/kubernetes_api_v1_Lifecycle",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Lifecycle"
+    },
+    "F7_577": {
+      "$ref": "#/definitions/kubernetes_api_v1_LimitRange",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRange"
+    },
+    "F7_578": {
+      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeItem",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeItem"
+    },
+    "F7_579": {
+      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeList"
+    },
+    "F7_580": {
+      "$ref": "#/definitions/kubernetes_api_v1_LimitRangeSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LimitRangeSpec"
+    },
+    "F7_584": {
+      "$ref": "#/definitions/kubernetes_api_v1_List",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.BaseKubernetesList"
+    },
+    "F7_585": {
+      "$ref": "#/definitions/kubernetes_api_v1_ListOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ListOptions"
+    },
+    "F7_586": {
+      "$ref": "#/definitions/kubernetes_api_v1_LoadBalancerIngress",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LoadBalancerIngress"
+    },
+    "F7_587": {
+      "$ref": "#/definitions/kubernetes_api_v1_LoadBalancerStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LoadBalancerStatus"
+    },
+    "F7_588": {
+      "$ref": "#/definitions/kubernetes_api_v1_LocalObjectReference",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.LocalObjectReference"
+    },
+    "F7_590": {
+      "$ref": "#/definitions/kubernetes_api_v1_NFSVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NFSVolumeSource"
+    },
+    "F7_591": {
+      "$ref": "#/definitions/kubernetes_api_v1_Namespace",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Namespace"
+    },
+    "F7_595": {
+      "$ref": "#/definitions/kubernetes_api_v1_NamespaceList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceList"
+    },
+    "F7_597": {
+      "$ref": "#/definitions/kubernetes_api_v1_NamespaceSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceSpec"
+    },
+    "F7_598": {
+      "$ref": "#/definitions/kubernetes_api_v1_NamespaceStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NamespaceStatus"
+    },
+    "F7_6": {
+      "$ref": "#/definitions/kubernetes_api_v1_Capabilities",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Capabilities"
+    },
+    "F7_600": {
+      "$ref": "#/definitions/kubernetes_api_v1_Node",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Node"
+    },
+    "F7_601": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeAddress",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeAddress"
+    },
+    "F7_603": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeAffinity",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeAffinity"
+    },
+    "F7_604": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeCondition",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeCondition"
+    },
+    "F7_606": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeDaemonEndpoints",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeDaemonEndpoints"
+    },
+    "F7_610": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeList"
+    },
+    "F7_616": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeProxyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeProxyOptions"
+    },
+    "F7_619": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeSelector",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelector"
+    },
+    "F7_627": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeSelectorRequirement",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelectorRequirement"
+    },
+    "F7_628": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeSelectorTerm",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSelectorTerm"
+    },
+    "F7_629": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSpec"
+    },
+    "F7_630": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeStatus"
+    },
+    "F7_631": {
+      "$ref": "#/definitions/kubernetes_api_v1_NodeSystemInfo",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.NodeSystemInfo"
+    },
+    "F7_633": {
+      "$ref": "#/definitions/kubernetes_api_v1_ObjectFieldSelector",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectFieldSelector"
+    },
+    "F7_634": {
+      "$ref": "#/definitions/kubernetes_api_v1_ObjectMeta",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectMeta"
+    },
+    "F7_635": {
+      "$ref": "#/definitions/kubernetes_api_v1_ObjectReference",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ObjectReference"
+    },
+    "F7_636": {
+      "$ref": "#/definitions/kubernetes_api_v1_OwnerReference",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.OwnerReference"
+    },
+    "F7_637": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolume",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolume"
+    },
+    "F7_639": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaim",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaim"
+    },
+    "F7_640": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimList"
+    },
+    "F7_642": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimSpec"
+    },
+    "F7_643": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimStatus"
+    },
+    "F7_644": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeClaimVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeClaimVolumeSource"
+    },
+    "F7_645": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeList"
+    },
+    "F7_651": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeSource"
+    },
+    "F7_652": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeSpec"
+    },
+    "F7_653": {
+      "$ref": "#/definitions/kubernetes_api_v1_PersistentVolumeStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PersistentVolumeStatus"
+    },
+    "F7_654": {
+      "$ref": "#/definitions/kubernetes_api_v1_Pod",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Pod"
+    },
+    "F7_655": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodAffinity",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAffinity"
+    },
+    "F7_656": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodAffinityTerm",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAffinityTerm"
+    },
+    "F7_657": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodAntiAffinity",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAntiAffinity"
+    },
+    "F7_658": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodAttachOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodAttachOptions"
+    },
+    "F7_659": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodCondition",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodCondition"
+    },
+    "F7_661": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodExecOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodExecOptions"
+    },
+    "F7_665": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodList"
+    },
+    "F7_666": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodLogOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodLogOptions"
+    },
+    "F7_669": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodProxyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodProxyOptions"
+    },
+    "F7_673": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodSecurityContext",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodSecurityContext"
+    },
+    "F7_674": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodSpec"
+    },
+    "F7_675": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodStatus"
+    },
+    "F7_676": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodStatusResult",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodStatusResult"
+    },
+    "F7_678": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodTemplate",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplate"
+    },
+    "F7_679": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodTemplateList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplateList"
+    },
+    "F7_680": {
+      "$ref": "#/definitions/kubernetes_api_v1_PodTemplateSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PodTemplateSpec"
+    },
+    "F7_682": {
+      "$ref": "#/definitions/kubernetes_api_v1_Preconditions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Preconditions"
+    },
+    "F7_683": {
+      "$ref": "#/definitions/kubernetes_api_v1_PreferredSchedulingTerm",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.PreferredSchedulingTerm"
+    },
+    "F7_684": {
+      "$ref": "#/definitions/kubernetes_api_v1_Probe",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Probe"
+    },
+    "F7_692": {
+      "$ref": "#/definitions/kubernetes_api_v1_RBDVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.RBDVolumeSource"
+    },
+    "F7_693": {
+      "$ref": "#/definitions/kubernetes_api_v1_RangeAllocation",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.RangeAllocation"
+    },
+    "F7_697": {
+      "$ref": "#/definitions/kubernetes_api_v1_ReplicationController",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationController"
+    },
+    "F7_698": {
+      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerList"
+    },
+    "F7_699": {
+      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerSpec"
+    },
+    "F7_700": {
+      "$ref": "#/definitions/kubernetes_api_v1_ReplicationControllerStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ReplicationControllerStatus"
+    },
+    "F7_703": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceFieldSelector",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceFieldSelector"
+    },
+    "F7_712": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuota",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuota"
+    },
+    "F7_713": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaList"
+    },
+    "F7_719": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaSpec"
+    },
+    "F7_720": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceQuotaStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceQuotaStatus"
+    },
+    "F7_725": {
+      "$ref": "#/definitions/kubernetes_api_v1_ResourceRequirements",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ResourceRequirements"
+    },
+    "F7_738": {
+      "$ref": "#/definitions/kubernetes_api_v1_RunAsUserStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.RunAsUserStrategyOptions"
+    },
+    "F7_741": {
+      "$ref": "#/definitions/kubernetes_api_v1_SELinuxContextStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SELinuxContextStrategyOptions"
+    },
+    "F7_743": {
+      "$ref": "#/definitions/kubernetes_api_v1_SELinuxOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SELinuxOptions"
+    },
+    "F7_747": {
+      "$ref": "#/definitions/kubernetes_api_v1_Secret",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Secret"
+    },
+    "F7_748": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecretKeySelector",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretKeySelector"
+    },
+    "F7_749": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecretList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretList"
+    },
+    "F7_755": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecretVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecretVolumeSource"
+    },
+    "F7_756": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecurityContext",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContext"
+    },
+    "F7_757": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecurityContextConstraints",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContextConstraints"
+    },
+    "F7_758": {
+      "$ref": "#/definitions/kubernetes_api_v1_SecurityContextConstraintsList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SecurityContextConstraintsList"
+    },
+    "F7_759": {
+      "$ref": "#/definitions/kubernetes_api_v1_SerializedReference",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SerializedReference"
+    },
+    "F7_760": {
+      "$ref": "#/definitions/kubernetes_api_v1_Service",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Service"
+    },
+    "F7_761": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceAccount",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceAccount"
+    },
+    "F7_763": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceAccountList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceAccountList"
+    },
+    "F7_772": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceList",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceList"
+    },
+    "F7_773": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServicePort",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServicePort"
+    },
+    "F7_774": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceProxyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceProxyOptions"
+    },
+    "F7_775": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceSpec",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceSpec"
+    },
+    "F7_776": {
+      "$ref": "#/definitions/kubernetes_api_v1_ServiceStatus",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.ServiceStatus"
+    },
+    "F7_8": {
+      "$ref": "#/definitions/kubernetes_api_v1_CephFSVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.CephFSVolumeSource"
+    },
+    "F7_812": {
+      "$ref": "#/definitions/kubernetes_api_v1_SupplementalGroupsStrategyOptions",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.SupplementalGroupsStrategyOptions"
+    },
+    "F7_815": {
+      "$ref": "#/definitions/kubernetes_api_v1_TCPSocketAction",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.TCPSocketAction"
+    },
+    "F7_818": {
+      "$ref": "#/definitions/kubernetes_api_v1_Taint",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Taint"
+    },
+    "F7_823": {
+      "$ref": "#/definitions/kubernetes_api_v1_Toleration",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Toleration"
+    },
+    "F7_831": {
+      "$ref": "#/definitions/kubernetes_api_v1_Volume",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.Volume"
+    },
+    "F7_835": {
+      "$ref": "#/definitions/kubernetes_api_v1_VolumeMount",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.VolumeMount"
+    },
+    "F7_838": {
+      "$ref": "#/definitions/kubernetes_api_v1_VolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.VolumeSource"
+    },
+    "F7_839": {
+      "$ref": "#/definitions/kubernetes_api_v1_VsphereVirtualDiskVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.VsphereVirtualDiskVolumeSource"
+    },
+    "F7_840": {
+      "$ref": "#/definitions/kubernetes_api_v1_WeightedPodAffinityTerm",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.WeightedPodAffinityTerm"
+    },
+    "F7_9": {
+      "$ref": "#/definitions/kubernetes_api_v1_CinderVolumeSource",
+      "javaType": "io.fabric8.kubernetes.api.model.v1.CinderVolumeSource"
+    },
+    "F8_7": {
+      "$ref": "#/definitions/kubernetes_util_intstr_IntOrString",
+      "javaType": "io.fabric8.kubernetes.api.model.util.intstr.IntOrString"
+    },
+    "F9_0": {
+      "$ref": "#/definitions/os_authorization_v1_Action",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Action"
+    },
+    "F9_109": {
+      "$ref": "#/definitions/os_authorization_v1_IsPersonalSubjectAccessReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.IsPersonalSubjectAccessReview"
+    },
+    "F9_110": {
+      "$ref": "#/definitions/os_authorization_v1_LocalResourceAccessReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.LocalResourceAccessReview"
+    },
+    "F9_111": {
+      "$ref": "#/definitions/os_authorization_v1_LocalSubjectAccessReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.LocalSubjectAccessReview"
+    },
+    "F9_112": {
+      "$ref": "#/definitions/os_authorization_v1_NamedClusterRole",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedClusterRole"
+    },
+    "F9_113": {
+      "$ref": "#/definitions/os_authorization_v1_NamedClusterRoleBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedClusterRoleBinding"
+    },
+    "F9_116": {
+      "$ref": "#/definitions/os_authorization_v1_NamedRole",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedRole"
+    },
+    "F9_117": {
+      "$ref": "#/definitions/os_authorization_v1_NamedRoleBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.NamedRoleBinding"
+    },
+    "F9_122": {
+      "$ref": "#/definitions/os_authorization_v1_Policy",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Policy"
+    },
+    "F9_123": {
+      "$ref": "#/definitions/os_authorization_v1_PolicyBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyBinding"
+    },
+    "F9_124": {
+      "$ref": "#/definitions/os_authorization_v1_PolicyBindingList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyBindingList"
+    },
+    "F9_125": {
+      "$ref": "#/definitions/os_authorization_v1_PolicyList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyList"
+    },
+    "F9_126": {
+      "$ref": "#/definitions/os_authorization_v1_PolicyRule",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.PolicyRule"
+    },
+    "F9_127": {
+      "$ref": "#/definitions/os_authorization_v1_ResourceAccessReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ResourceAccessReview"
+    },
+    "F9_128": {
+      "$ref": "#/definitions/os_authorization_v1_ResourceAccessReviewResponse",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ResourceAccessReviewResponse"
+    },
+    "F9_129": {
+      "$ref": "#/definitions/os_authorization_v1_Role",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.Role"
+    },
+    "F9_130": {
+      "$ref": "#/definitions/os_authorization_v1_RoleBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleBinding"
+    },
+    "F9_131": {
+      "$ref": "#/definitions/os_authorization_v1_RoleBindingList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleBindingList"
+    },
+    "F9_132": {
+      "$ref": "#/definitions/os_authorization_v1_RoleList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.RoleList"
+    },
+    "F9_134": {
+      "$ref": "#/definitions/os_authorization_v1_SelfSubjectRulesReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SelfSubjectRulesReview"
+    },
+    "F9_135": {
+      "$ref": "#/definitions/os_authorization_v1_SelfSubjectRulesReviewSpec",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SelfSubjectRulesReviewSpec"
+    },
+    "F9_137": {
+      "$ref": "#/definitions/os_authorization_v1_SubjectAccessReview",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectAccessReview"
+    },
+    "F9_138": {
+      "$ref": "#/definitions/os_authorization_v1_SubjectAccessReviewResponse",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectAccessReviewResponse"
+    },
+    "F9_139": {
+      "$ref": "#/definitions/os_authorization_v1_SubjectRulesReviewStatus",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.SubjectRulesReviewStatus"
     },
     "F9_2": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleBinding",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleBinding"
+      "$ref": "#/definitions/os_authorization_v1_ClusterPolicy",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicy"
     },
     "F9_3": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleBindingList",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleBindingList"
-    },
-    "F9_37": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_PolicyRule",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.PolicyRule"
-    },
-    "F9_38": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_Role",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.Role"
-    },
-    "F9_39": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleBinding",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleBinding"
+      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyBinding"
     },
     "F9_4": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_ClusterRoleList",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.ClusterRoleList"
+      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyBindingList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyBindingList"
     },
-    "F9_40": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleBindingList",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleBindingList"
+    "F9_5": {
+      "$ref": "#/definitions/os_authorization_v1_ClusterPolicyList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterPolicyList"
     },
-    "F9_41": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_RoleList",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.RoleList"
+    "F9_6": {
+      "$ref": "#/definitions/os_authorization_v1_ClusterRole",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRole"
     },
-    "F9_43": {
-      "$ref": "#/definitions/kubernetes_rbac_v1alpha1_Subject",
-      "javaType": "io.fabric8.kubernetes.api.model.rbac.v1alpha1.Subject"
+    "F9_7": {
+      "$ref": "#/definitions/os_authorization_v1_ClusterRoleBinding",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleBinding"
+    },
+    "F9_8": {
+      "$ref": "#/definitions/os_authorization_v1_ClusterRoleBindingList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleBindingList"
+    },
+    "F9_9": {
+      "$ref": "#/definitions/os_authorization_v1_ClusterRoleList",
+      "javaType": "io.fabric8.openshift.api.model.authorization.v1.ClusterRoleList"
     }
   }
 }

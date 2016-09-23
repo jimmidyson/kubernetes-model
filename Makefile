@@ -48,4 +48,5 @@ cmd/generate/generated_schema.go: ./tools/generate-schema-struct/* $(shell find 
 
 .PHONY: clean
 clean:
-	rm -rf $(GOPATH)
+	rm -rf $(GOPATH) .tmp
+	rm -f cmd/generate/generated_schema.go
