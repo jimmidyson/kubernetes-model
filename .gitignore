@@ -5,3 +5,4 @@ target/
 *.iml
 _gopath/
 .tmp/
+cmd/generate/generated_schema.go
