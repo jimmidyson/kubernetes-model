@@ -15,6 +15,8 @@
  */
 package io.fabric8.kubernetes.api.model;
 
+import io.fabric8.kubernetes.api.model.v1.ObjectMeta;
+
 public interface HasMetadata extends KubernetesResource {
 
   ObjectMeta getMetadata();

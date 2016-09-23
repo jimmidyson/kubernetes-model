@@ -15,7 +15,7 @@
  */
 package io.fabric8.kubernetes.api.model.validators;
 
-import io.fabric8.kubernetes.api.model.ObjectMeta;
+import io.fabric8.kubernetes.api.model.v1.ObjectMeta;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"strconv"
 	"strings"
 	"text/template"
 
@@ -125,19 +124,20 @@ func main() {
 		os.Exit(1)
 	}
 	var params templateParams
-	for i, pkg := range prog.InitialPackages() {
+	for _, pkg := range prog.InitialPackages() {
 		params.PackageMappings = append(params.PackageMappings, mapPackage(pkg.Pkg))
 
 		scope := pkg.Pkg.Scope()
-		aliasedPkg := strings.Replace(strings.Replace(pkg.Pkg.Path(), "/", "_", -1), ".", "_", -1)
+		aliasedPkg := strings.ToTitle(strings.Replace(strings.Replace(pkg.Pkg.Path(), "/", "_", -1), ".", "_", -1))
 		params.Imports = append(params.Imports, aliasedPkg+` "`+pkg.Pkg.Path()+`"`)
-		for j, n := range scope.Names() {
+		for _, n := range scope.Names() {
 			if n != "SchemeGroupVersion" && n != "Zero" {
 				o := scope.Lookup(n)
 				if o != nil && o.Exported() {
 					if s, ok := o.Type().Underlying().(*types.Struct); ok {
 						if s.NumFields() > 0 {
-							params.Structs = append(params.Structs, "F"+strconv.Itoa(i)+"_"+strconv.Itoa(j)+" "+aliasedPkg+"."+n)
+							ref := strings.Replace(aliasedPkg+"."+n, ".", "_", -1)
+							params.Structs = append(params.Structs, ref+" "+aliasedPkg+"."+n)
 						}
 					}
 				}
