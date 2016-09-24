@@ -76,6 +76,7 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
                     .param("value", "done");
 
             annotateMetatadataValidator(clazz);
+            annotateIgnoreDescendants(clazz);
         } catch (JClassAlreadyExistsException e) {
             e.printStackTrace();
         }
@@ -117,6 +118,19 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
                             .param("regexp", "^" + getObjectNamePattern(clazz) + "$")
                             .param("max", getObjectNameMaxLength(clazz));
                     }
+                } catch (JClassAlreadyExistsException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
+        }
+    }
+
+    private void annotateIgnoreDescendants(JDefinedClass clazz) {
+        for (Map.Entry<String, JFieldVar> f : clazz.fields().entrySet()) {
+            if (f.getValue().type().name().equals("ObjectReference")) {
+                try {
+                    f.getValue().annotate(new JCodeModel()._class("io.sundr.builder.annotations.IgnoreDescendants"));
                 } catch (JClassAlreadyExistsException e) {
                     e.printStackTrace();
                 }
