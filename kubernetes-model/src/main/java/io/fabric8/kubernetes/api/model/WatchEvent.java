@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sundr.builder.annotations.Buildable;
 import io.sundr.builder.annotations.Inline;
+import io.sundr.builder.annotations.IgnoreDescendants;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -54,6 +55,7 @@ public class WatchEvent implements KubernetesResource
    */
   @JsonProperty("object")
   @Valid
+  @IgnoreDescendants
   private KubernetesResource object;
   /**
    * the type of watch event; may be ADDED
