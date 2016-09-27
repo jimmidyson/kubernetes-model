@@ -15,8 +15,10 @@
  */
 package io.fabric8.kubernetes.annotator;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,6 +28,7 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JMethod;
 import io.sundr.builder.annotations.Buildable;
 import io.sundr.builder.annotations.Inline;
 import lombok.EqualsAndHashCode;
@@ -33,7 +36,9 @@ import lombok.ToString;
 import org.jsonschema2pojo.Jackson2Annotator;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class KubernetesTypeAnnotator extends Jackson2Annotator {
 
@@ -82,6 +87,45 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
         }
     }
 
+    @Override
+    public void propertyField(JFieldVar field, JDefinedClass clazz, String propertyName, JsonNode propertyNode) {
+        if (propertyName.equals("shouldImport") || propertyName.equals("importedImageStream")) {
+          field.annotate(JsonProperty.class).param("value", "import");
+        } else {
+          field.annotate(JsonProperty.class).param("value", propertyName);
+        }
+        if (field.type().erasure().equals(field.type().owner().ref(Set.class))) {
+            field.annotate(JsonDeserialize.class).param("as", LinkedHashSet.class);
+        }
+
+        if (propertyNode.has("javaJsonView")) {
+            field.annotate(JsonView.class).param(
+                "value", field.type().owner().ref(propertyNode.get("javaJsonView").asText()));
+        }
+
+        if (propertyNode.has("description")) {
+            field.annotate(JsonPropertyDescription.class).param("value", propertyNode.asText());
+        }
+    }
+
+    @Override
+    public void propertyGetter(JMethod getter, String propertyName) {
+        if (propertyName.equals("shouldImport") || propertyName.equals("importedImageStream")) {
+            getter.annotate(JsonProperty.class).param("value", "import");
+        } else {
+            getter.annotate(JsonProperty.class).param("value", propertyName);
+        }
+    }
+
+    @Override
+    public void propertySetter(JMethod setter, String propertyName) {
+        if (propertyName.equals("shouldImport") || propertyName.equals("importedImageStream")) {
+            setter.annotate(JsonProperty.class).param("value", "import");
+        } else {
+            setter.annotate(JsonProperty.class).param("value", propertyName);
+        }
+    }
+
     private int getObjectNameMaxLength(JDefinedClass clazz) {
         String kind = clazz.name();
         if (kind.equals("Namespace") || kind.equals("Project") || kind.equals("Service")) {
@@ -102,7 +146,7 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
     }
 
     private void annotateMetatadataValidator(JDefinedClass clazz) {
-        if (clazz.name().equals("PodTemplateSpec")) {
+        if (clazz.name().equals("PodTemplateSpec") || clazz.name().equals("JobTemplateSpec")) {
             return;
         }
 
@@ -128,7 +172,7 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
 
     private void annotateIgnoreDescendants(JDefinedClass clazz) {
         for (Map.Entry<String, JFieldVar> f : clazz.fields().entrySet()) {
-            if (f.getValue().type().name().equals("ObjectReference")) {
+            if (f.getValue().type().name().equals("ObjectReference") || f.getValue().type().name().equals("HasMetadata")) {
                 try {
                     f.getValue().annotate(new JCodeModel()._class("io.sundr.builder.annotations.IgnoreDescendants"));
                 } catch (JClassAlreadyExistsException e) {

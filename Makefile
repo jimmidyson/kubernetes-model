@@ -34,15 +34,15 @@ build: kubernetes-model/src/main/resources/schema/kube-schema.json
 kubernetes-model/src/main/resources/schema/kube-schema.json: generate
 	./generate > kubernetes-model/src/main/resources/schema/kube-schema.json
 
-.tmp/generate-schema-struct: ./tools/generate-schema-struct/*
+.tmp/generate-schema-struct: $(shell find ./tools/generate-schema-struct/ -name *.go) $(shell find vendor -name *.go)
 	$(MKGOPATH)
 	go build -o .tmp/generate-schema-struct ./tools/generate-schema-struct
 
-generate: .tmp/generate-schema-struct cmd/generate/generated_schema.go $(find -name *.go)
+generate: cmd/generate/generated_schema.go $(find -name *.go)
 	$(MKGOPATH)
 	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build ./cmd/generate
 
-cmd/generate/generated_schema.go: ./tools/generate-schema-struct/* $(shell find vendor -name *.go)
+cmd/generate/generated_schema.go: .tmp/generate-schema-struct $(shell find vendor -name *.go)
 	$(MKGOPATH)
 	PATH=$(shell pwd)/.tmp/:$${PATH} go generate ./cmd/generate
 

@@ -163,7 +163,7 @@ func (g *schemaGenerator) javaType(t reflect.Type) string {
 }
 
 func (g *schemaGenerator) javaInterfaces(t reflect.Type) []string {
-	if _, ok := t.FieldByName("ObjectMeta"); t.Name() != "PodTemplateSpec" && ok {
+	if _, ok := t.FieldByName("ObjectMeta"); t.Name() != "PodTemplateSpec" && t.Name() != "JobTemplateSpec" && ok {
 		return []string{"io.fabric8.kubernetes.api.model.HasMetadata"}
 	}
 
@@ -368,6 +368,14 @@ func (g *schemaGenerator) getStructProperties(t reflect.Type) map[string]JSONPro
 				props[k] = v
 			}
 		} else {
+			if name == "import" {
+				switch field.Type.Kind() {
+				case reflect.Bool:
+					name = "shouldImport"
+				default:
+					name = "importedImageStream"
+				}
+			}
 			g.addConstraints(t.Name(), name, &prop)
 			props[name] = prop
 		}
