@@ -62,8 +62,13 @@ public class KubernetesList extends BaseKubernetesList implements KubernetesReso
 
     @Override
     public List<HasMetadata> getItems() {
-        List<HasMetadata> sortedItems = new ArrayList<>(super.getItems());
+        List<HasMetadata> items = super.getItems();
+        if (items == null) {
+            return null;
+        }
+        List<HasMetadata> sortedItems = new ArrayList<>(items);
         Collections.sort(sortedItems, new HasMetadataComparator());
         return sortedItems;
+
     }
 }

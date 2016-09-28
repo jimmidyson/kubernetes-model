@@ -13,21 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.fabric8.kubernetes.api.model;
+package io.fabric8.kubernetes.api.model.v1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.fabric8.kubernetes.api.builder.Visitor;
-import io.fabric8.kubernetes.api.model.v1.Container;
-import io.fabric8.kubernetes.api.model.v1.ContainerBuilder;
-import io.fabric8.kubernetes.api.model.v1.KubernetesList;
-import io.fabric8.kubernetes.api.model.v1.KubernetesListBuilder;
-import io.fabric8.kubernetes.api.model.v1.Pod;
-import io.fabric8.kubernetes.api.model.v1.PodBuilder;
-import io.fabric8.kubernetes.api.model.v1.PodSpecBuilder;
-import io.fabric8.kubernetes.api.model.v1.ReplicationController;
-import io.fabric8.kubernetes.api.model.v1.ReplicationControllerBuilder;
-import io.fabric8.kubernetes.api.model.v1.Service;
-import io.fabric8.kubernetes.api.model.v1.ServiceBuilder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
@@ -56,17 +45,21 @@ public class KubernetesListTest {
         assertNotNull(replicationController.getApiVersion());
         assertEquals(replicationController.getKind(), "ReplicationController");
 
-        KubernetesList kubernetesList = new KubernetesListBuilder()
-                .addNewServiceItem()
-                .withNewMetadata()
-                    .withName("test-service")
-                .endMetadata()
-                .and()
-                .addNewReplicationControllerItem()
-                .withNewMetadata()
-                    .withName("test-controller")
-                .endMetadata()
-                .and()
+        KubernetesList kubernetesList = new io.fabric8.kubernetes.api.model.v1.KubernetesListBuilder()
+                .addToItems(
+                    new ServiceBuilder()
+                        .withNewMetadata()
+                            .withName("test-service")
+                        .endMetadata()
+                        .build()
+                )
+                .addToItems(
+                    new ReplicationControllerBuilder()
+                    .withNewMetadata()
+                        .withName("test-controller")
+                    .endMetadata()
+                    .build()
+                )
                 .build();
 
         assertNotNull(kubernetesList.getApiVersion());
@@ -78,14 +71,16 @@ public class KubernetesListTest {
     @Test
     public void testVisitor() throws JsonProcessingException {
         KubernetesList list = new KubernetesListBuilder()
-                .addNewPodItem()
+                .addToItems(
+                    new PodBuilder()
                     .withNewSpec()
                         .addNewContainer()
                             .withName("my-container")
                             .withImage("my/image")
                         .endContainer()
                     .endSpec()
-                .and()
+                    .build()
+                )
                 .build();
 
         list = new KubernetesListBuilder(list).accept(new Visitor() {

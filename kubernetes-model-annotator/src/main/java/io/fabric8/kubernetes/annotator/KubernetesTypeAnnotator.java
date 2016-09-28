@@ -172,7 +172,11 @@ public class KubernetesTypeAnnotator extends Jackson2Annotator {
 
     private void annotateIgnoreDescendants(JDefinedClass clazz) {
         for (Map.Entry<String, JFieldVar> f : clazz.fields().entrySet()) {
-            if (f.getValue().type().name().equals("ObjectReference") || f.getValue().type().name().equals("HasMetadata")) {
+            if (
+                f.getValue().type().name().equals("ObjectReference")
+                || f.getValue().type().name().equals("HasMetadata")
+                || f.getValue().name().equals("items")
+                ) {
                 try {
                     f.getValue().annotate(new JCodeModel()._class("io.sundr.builder.annotations.IgnoreDescendants"));
                 } catch (JClassAlreadyExistsException e) {
