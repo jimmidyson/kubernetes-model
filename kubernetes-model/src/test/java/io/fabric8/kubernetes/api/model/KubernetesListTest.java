@@ -16,11 +16,25 @@
 package io.fabric8.kubernetes.api.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.fabric8.kubernetes.api.builder.Visitor;
+import io.fabric8.kubernetes.api.model.v1.Container;
+import io.fabric8.kubernetes.api.model.v1.ContainerBuilder;
+import io.fabric8.kubernetes.api.model.v1.KubernetesList;
+import io.fabric8.kubernetes.api.model.v1.KubernetesListBuilder;
+import io.fabric8.kubernetes.api.model.v1.Pod;
+import io.fabric8.kubernetes.api.model.v1.PodBuilder;
+import io.fabric8.kubernetes.api.model.v1.PodSpecBuilder;
+import io.fabric8.kubernetes.api.model.v1.ReplicationController;
+import io.fabric8.kubernetes.api.model.v1.ReplicationControllerBuilder;
+import io.fabric8.kubernetes.api.model.v1.Service;
+import io.fabric8.kubernetes.api.model.v1.ServiceBuilder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
-import io.fabric8.kubernetes.api.builder.Visitor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 public class KubernetesListTest {
 
@@ -33,7 +47,7 @@ public class KubernetesListTest {
                 .build();
         assertNotNull(service.getApiVersion());
         assertEquals(service.getKind(), "Service");
-        
+
         ReplicationController replicationController = new ReplicationControllerBuilder()
                 .withNewMetadata()
                 .withName("test-controller")
@@ -41,7 +55,7 @@ public class KubernetesListTest {
                 .build();
         assertNotNull(replicationController.getApiVersion());
         assertEquals(replicationController.getKind(), "ReplicationController");
-        
+
         KubernetesList kubernetesList = new KubernetesListBuilder()
                 .addNewServiceItem()
                 .withNewMetadata()
@@ -54,7 +68,7 @@ public class KubernetesListTest {
                 .endMetadata()
                 .and()
                 .build();
-        
+
         assertNotNull(kubernetesList.getApiVersion());
         assertEquals(kubernetesList.getKind(), "List");
         assertThat(kubernetesList.getItems(), CoreMatchers.hasItem(service));
@@ -76,8 +90,8 @@ public class KubernetesListTest {
 
         list = new KubernetesListBuilder(list).accept(new Visitor() {
             public void visit(Object item) {
-                if (item instanceof io.fabric8.kubernetes.api.model.PodSpecBuilder) {
-                    ((io.fabric8.kubernetes.api.model.PodSpecBuilder)item).addNewContainer()
+                if (item instanceof PodSpecBuilder) {
+                    ((PodSpecBuilder)item).addNewContainer()
                             .withName("other-container")
                             .withImage("other/image")
                             .and();

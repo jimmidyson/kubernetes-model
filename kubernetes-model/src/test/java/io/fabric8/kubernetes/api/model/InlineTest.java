@@ -16,6 +16,8 @@
 package io.fabric8.kubernetes.api.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.fabric8.kubernetes.api.model.v1.ServicePort;
+import io.fabric8.kubernetes.api.model.v1.ServicePortBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

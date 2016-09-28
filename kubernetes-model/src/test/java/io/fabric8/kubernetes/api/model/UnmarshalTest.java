@@ -16,9 +16,15 @@
 package io.fabric8.kubernetes.api.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.fabric8.kubernetes.api.model.resource.Quantity;
+import io.fabric8.kubernetes.api.model.v1.KubernetesList;
+import io.fabric8.kubernetes.api.model.v1.KubernetesListBuilder;
+import io.fabric8.kubernetes.api.model.v1.Pod;
+import io.fabric8.kubernetes.api.model.v1.ServiceList;
+import io.fabric8.kubernetes.api.model.v1.ServiceListBuilder;
+import io.fabric8.openshift.api.model.template.v1.Template;
+import io.fabric8.openshift.api.model.template.v1.TemplateBuilder;
 import io.fabric8.kubernetes.api.builder.Visitor;
-import io.fabric8.openshift.api.model.Template;
-import io.fabric8.openshift.api.model.TemplateBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.assertEquals;
 
-public class UnmarshallTest {
+public class UnmarshalTest {
 
     @Test
     public void testUnmarshallInt64ToLong() throws Exception {

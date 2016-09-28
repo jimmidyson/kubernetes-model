@@ -16,6 +16,7 @@
 package io.fabric8.kubernetes.api.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.fabric8.kubernetes.api.model.v1.NodeBuilder;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolationException;
