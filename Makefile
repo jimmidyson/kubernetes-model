@@ -28,8 +28,10 @@ MKGOPATH := if [ ! -e $(GOPATH)/src/$(ORG) ]; then \
 fi
 
 .PHONY: build
-build: kubernetes-model/src/main/resources/schema/kube-schema.json
-	mvn -e clean install
+build: kubernetes-model/target
+	
+kubernetes-model/target: $(shell find -name *.java) $(shell find -name pom.xml) kubernetes-model/src/main/resources/schema/kube-schema.json
+	mvn clean install
 
 kubernetes-model/src/main/resources/schema/kube-schema.json: generate
 	./generate > kubernetes-model/src/main/resources/schema/kube-schema.json
@@ -50,3 +52,4 @@ cmd/generate/generated_schema.go: .tmp/generate-schema-struct $(shell find vendo
 clean:
 	rm -rf $(GOPATH) .tmp
 	rm -f cmd/generate/generated_schema.go
+	mvn clean
