@@ -42,7 +42,7 @@ kubernetes-model/src/main/resources/schema/kube-schema.json: generate
 
 generate: cmd/generate/generated_schema.go $(find -name *.go)
 	$(MKGOPATH)
-	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build ./cmd/generate
+	CGO_ENABLED=0 go build ./cmd/generate
 
 cmd/generate/generated_schema.go: .tmp/generate-schema-struct $(shell find vendor -name *.go)
 	$(MKGOPATH)
