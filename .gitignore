@@ -1,5 +1,6 @@
-/generate
 /kube-schema.json
 target/
 .idea/
 *.iml
+.tmp
+_gopath/
