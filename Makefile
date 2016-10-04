@@ -15,9 +15,43 @@
 #
 
 SHELL := /bin/bash
-tag := $(shell cat .openshift-version)
+GOPATH := $(shell pwd)/_gopath
+ORG := github.com/fabric8io
+REPOPATH ?= $(ORG)/kubernetes-model
+PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
 
-build:
-	CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -a ./cmd/generate/generate.go
-	./generate > kubernetes-model/src/main/resources/schema/kube-schema.json
-	mvn clean install
+MKGOPATH := if [ ! -e $(GOPATH)/src/$(ORG) ]; then \
+	mkdir -p $(GOPATH)/src/$(ORG); \
+	ln -s -f $(shell pwd) $(GOPATH)/src/$(ORG); \
+	ln -s -f $(shell pwd)/vendor/{k8s.io,golang.org,gopkg.in,google.golang.org} $(GOPATH)/src; \
+	ln -s -f $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com/; \
+fi
+
+.PHONY: build
+build: test generate
+
+.PHONY: generate
+generate: .tmp/generate
+
+.tmp/generate: $(shell find -name *.go)
+	$(MKGOPATH)
+	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o .tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate
+
+.PHONY: test
+test:
+	$(MKGOPATH)
+	cd $(GOPATH)/src/$(REPOPATH) && go test -race -v $(PACKAGES)
+
+.PHONY: test-junit
+test-junit: .tmp/go-junit-report
+	$(MKGOPATH)
+	cd $(GOPATH)/src/$(REPOPATH) && go test -race -v $(PACKAGES) | .tmp/go-junit-report > junit-report.xml
+
+.tmp/go-junit-report: $(shell find vendor/github.com/jstemmer/go-junit-report -name *.go)
+	$(MKGOPATH)
+	CGO_ENABLED=0 go build -o .tmp/go-junit-report -ldflags="-s -w -extldflags '-static'" github.com/jstemmer/go-junit-report
+
+.PHONY: clean
+clean:
+	rm -rf $(GOPATH) .tmp
+	mvn clean
