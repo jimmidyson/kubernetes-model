@@ -8,9 +8,10 @@ package ast
 
 import (
 	"fmt"
+	"strconv"
+
 	"k8s.io/kubernetes/third_party/golang/go/scanner"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"strconv"
 )
 
 type pkgBuilder struct {

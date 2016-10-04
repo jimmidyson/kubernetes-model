@@ -19,11 +19,12 @@ package scheduler
 import (
 	"sync"
 
+	"time"
+
 	"github.com/stretchr/testify/mock"
 	"k8s.io/kubernetes/contrib/mesos/pkg/offers"
 	"k8s.io/kubernetes/contrib/mesos/pkg/runtime"
 	"k8s.io/kubernetes/contrib/mesos/pkg/scheduler/podtask"
-	"time"
 )
 
 // MockScheduler implements SchedulerApi

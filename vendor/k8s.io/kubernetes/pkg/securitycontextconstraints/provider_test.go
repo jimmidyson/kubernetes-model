@@ -658,7 +658,7 @@ func TestValidateContainerSecurityContextSuccess(t *testing.T) {
 	seccompNilWithNoProfilesSCC.SeccompProfiles = nil
 
 	seccompEmptyWithNoProfiles := defaultPod()
-	seccompEmptyWithNoProfiles.Annotations[api.SeccompContainerAnnotationKeyPrefix + seccompEmptyWithNoProfiles.Spec.Containers[0].Name] = ""
+	seccompEmptyWithNoProfiles.Annotations[api.SeccompContainerAnnotationKeyPrefix+seccompEmptyWithNoProfiles.Spec.Containers[0].Name] = ""
 
 	seccompAllowAnySCC := defaultSCC()
 	seccompAllowAnySCC.SeccompProfiles = []string{"*"}
@@ -667,7 +667,7 @@ func TestValidateContainerSecurityContextSuccess(t *testing.T) {
 	seccompAllowFooSCC.SeccompProfiles = []string{"foo"}
 
 	seccompFooPod := defaultPod()
-	seccompFooPod.Annotations[api.SeccompContainerAnnotationKeyPrefix + seccompFooPod.Spec.Containers[0].Name] = "foo"
+	seccompFooPod.Annotations[api.SeccompContainerAnnotationKeyPrefix+seccompFooPod.Spec.Containers[0].Name] = "foo"
 
 	errorCases := map[string]struct {
 		pod *api.Pod

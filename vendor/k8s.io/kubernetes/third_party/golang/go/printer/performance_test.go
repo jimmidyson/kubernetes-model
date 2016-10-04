@@ -12,10 +12,11 @@ import (
 	"io"
 	"io/ioutil"
 
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/parser"
 	"log"
 	"testing"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/parser"
 )
 
 var testfile *ast.File

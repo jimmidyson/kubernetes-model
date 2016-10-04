@@ -7,11 +7,12 @@ package parser
 import (
 	"bytes"
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"os"
 	"strings"
 	"testing"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 var validFiles = []string{

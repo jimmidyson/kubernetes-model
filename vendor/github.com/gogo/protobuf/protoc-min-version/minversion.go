@@ -1,7 +1,7 @@
-// Protocol Buffers for Go with Gadgets
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,10 +30,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/version"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/gogo/protobuf/version"
 )
 
 func filter(ss []string, flag string) ([]string, string) {

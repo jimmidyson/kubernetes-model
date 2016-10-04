@@ -19,14 +19,15 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/doc"
-	"k8s.io/kubernetes/third_party/golang/go/parser"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"os"
 	"path/filepath"
 	"regexp"
 	"runtime"
 	"strings"
+
+	"k8s.io/kubernetes/third_party/golang/go/doc"
+	"k8s.io/kubernetes/third_party/golang/go/parser"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 var (

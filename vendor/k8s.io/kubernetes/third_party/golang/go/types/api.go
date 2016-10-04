@@ -27,6 +27,7 @@ package types
 import (
 	"bytes"
 	"fmt"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/constant"
 	"k8s.io/kubernetes/third_party/golang/go/token"

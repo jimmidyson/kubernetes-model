@@ -4,8 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	kapi "k8s.io/kubernetes/pkg/api"
 	"strings"
+
+	kapi "k8s.io/kubernetes/pkg/api"
 )
 
 func TestFilterBuilds_withEmptyArray(t *testing.T) {

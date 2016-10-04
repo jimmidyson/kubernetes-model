@@ -5,8 +5,9 @@
 package ast
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"sort"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // ----------------------------------------------------------------------------

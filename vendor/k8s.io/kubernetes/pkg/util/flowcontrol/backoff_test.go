@@ -17,9 +17,10 @@ limitations under the License.
 package flowcontrol
 
 import (
-	"k8s.io/kubernetes/pkg/util"
 	"testing"
 	"time"
+
+	"k8s.io/kubernetes/pkg/util"
 )
 
 func TestSlowBackoff(t *testing.T) {

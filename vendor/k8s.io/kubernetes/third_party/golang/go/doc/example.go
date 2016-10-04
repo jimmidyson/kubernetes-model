@@ -7,8 +7,6 @@
 package doc
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"path"
 	"regexp"
 	"sort"
@@ -16,6 +14,9 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // An Example represents an example function found in a source files.

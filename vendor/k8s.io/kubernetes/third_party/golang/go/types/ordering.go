@@ -7,8 +7,9 @@
 package types
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"sort"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
 )
 
 // resolveOrder computes the order in which package-level objects

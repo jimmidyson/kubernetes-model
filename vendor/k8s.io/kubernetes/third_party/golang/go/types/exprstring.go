@@ -8,6 +8,7 @@ package types
 
 import (
 	"bytes"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 )
 

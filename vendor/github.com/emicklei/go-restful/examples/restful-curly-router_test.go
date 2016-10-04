@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"testing"
@@ -103,7 +103,7 @@ func waitForServerUp(serverURL string) error {
 			return nil
 		}
 	}
-	return errors.New("waiting for server timed out")
+	return fmt.Errorf("waiting for server timed out")
 }
 
 func TestServer(t *testing.T) {

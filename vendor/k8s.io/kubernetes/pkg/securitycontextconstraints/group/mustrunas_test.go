@@ -17,8 +17,9 @@ limitations under the License.
 package group
 
 import (
-	"k8s.io/kubernetes/pkg/api"
 	"testing"
+
+	"k8s.io/kubernetes/pkg/api"
 )
 
 func TestMustRunAsOptions(t *testing.T) {

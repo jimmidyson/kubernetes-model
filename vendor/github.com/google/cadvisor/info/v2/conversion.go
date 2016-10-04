@@ -30,12 +30,13 @@ func machineFsStatsFromV1(fsStats []v1.FsStats) []MachineFsStats {
 		writeDuration := time.Millisecond * time.Duration(stat.WriteTime)
 		ioDuration := time.Millisecond * time.Duration(stat.IoTime)
 		weightedDuration := time.Millisecond * time.Duration(stat.WeightedIoTime)
-		machineFsStat := MachineFsStats{
-			Device:    stat.Device,
-			Type:      stat.Type,
-			Capacity:  &stat.Limit,
-			Usage:     &stat.Usage,
-			Available: &stat.Available,
+		result = append(result, MachineFsStats{
+			Device:     stat.Device,
+			Type:       stat.Type,
+			Capacity:   &stat.Limit,
+			Usage:      &stat.Usage,
+			Available:  &stat.Available,
+			InodesFree: &stat.InodesFree,
 			DiskStats: DiskStats{
 				ReadsCompleted:     &stat.ReadsCompleted,
 				ReadsMerged:        &stat.ReadsMerged,
@@ -49,11 +50,7 @@ func machineFsStatsFromV1(fsStats []v1.FsStats) []MachineFsStats {
 				IoDuration:         &ioDuration,
 				WeightedIoDuration: &weightedDuration,
 			},
-		}
-		if stat.HasInodes {
-			machineFsStat.InodesFree = &stat.InodesFree
-		}
-		result = append(result, machineFsStat)
+		})
 	}
 	return result
 }
@@ -61,8 +58,7 @@ func machineFsStatsFromV1(fsStats []v1.FsStats) []MachineFsStats {
 func MachineStatsFromV1(cont *v1.ContainerInfo) []MachineStats {
 	var stats []MachineStats
 	var last *v1.ContainerStats
-	for i := range cont.Stats {
-		val := cont.Stats[i]
+	for _, val := range cont.Stats {
 		stat := MachineStats{
 			Timestamp: val.Timestamp,
 		}

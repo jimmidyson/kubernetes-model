@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"gopkg.in/yaml.v1"
+	"gopkg.in/v1/yaml"
 )
 
 // SetFlagsFromYaml goes through all registered flags in the given flagset,

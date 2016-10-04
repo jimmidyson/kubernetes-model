@@ -1,7 +1,7 @@
-// Protocol Buffers for Go with Gadgets
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,8 +30,9 @@ package io
 
 import (
 	"encoding/binary"
-	"github.com/gogo/protobuf/proto"
 	"io"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func NewUint32DelimitedWriter(w io.Writer, byteOrder binary.ByteOrder) WriteCloser {
@@ -73,7 +74,7 @@ func (this *uint32Writer) WriteMsg(msg proto.Message) (err error) {
 		}
 	}
 	length := uint32(len(data))
-	if err = binary.Write(this.w, this.byteOrder, &length); err != nil {
+	if err := binary.Write(this.w, this.byteOrder, &length); err != nil {
 		return err
 	}
 	_, err = this.w.Write(data)

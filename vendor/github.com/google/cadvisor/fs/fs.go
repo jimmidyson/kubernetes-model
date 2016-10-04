@@ -322,10 +322,7 @@ func (self *RealFsInfo) GetFsInfoForPath(mountSet map[string]struct{}) ([]Fs, er
 				fs.Capacity, fs.Free, fs.Available, err = getZfstats(device)
 				fs.Type = ZFS
 			default:
-				var inodes, inodesFree uint64
-				fs.Capacity, fs.Free, fs.Available, inodes, inodesFree, err = getVfsStats(partition.mountpoint)
-				fs.Inodes = &inodes
-				fs.InodesFree = &inodesFree
+				fs.Capacity, fs.Free, fs.Available, fs.Inodes, fs.InodesFree, err = getVfsStats(partition.mountpoint)
 				fs.Type = VFS
 			}
 			if err != nil {

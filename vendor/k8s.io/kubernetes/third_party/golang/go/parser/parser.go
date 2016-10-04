@@ -18,12 +18,13 @@ package parser
 
 import (
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/scanner"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"strconv"
 	"strings"
 	"unicode"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/scanner"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // The parser structure holds the parser's internal state.

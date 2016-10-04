@@ -1,8 +1,6 @@
-// +build windows
-
 package sysinfo
 
-// New returns an empty SysInfo for windows for now.
+// TODO Windows
 func New(quiet bool) *SysInfo {
 	sysInfo := &SysInfo{}
 	return sysInfo

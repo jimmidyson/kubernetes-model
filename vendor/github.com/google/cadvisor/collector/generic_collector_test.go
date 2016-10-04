@@ -24,7 +24,6 @@ import (
 
 	"github.com/google/cadvisor/info/v1"
 
-	containertest "github.com/google/cadvisor/container/testing"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -45,8 +44,7 @@ func TestEmptyConfig(t *testing.T) {
 	configFile, err := ioutil.ReadFile("temp.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	_, err = NewCollector("tempCollector", configFile, 100, containerHandler, http.DefaultClient)
+	_, err = NewCollector("tempCollector", configFile, 100)
 	assert.Error(err)
 
 	assert.NoError(os.Remove("temp.json"))
@@ -76,8 +74,7 @@ func TestConfigWithErrors(t *testing.T) {
 	configFile, err := ioutil.ReadFile("temp.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	_, err = NewCollector("tempCollector", configFile, 100, containerHandler, http.DefaultClient)
+	_, err = NewCollector("tempCollector", configFile, 100)
 	assert.Error(err)
 
 	assert.NoError(os.Remove("temp.json"))
@@ -115,8 +112,7 @@ func TestConfigWithRegexErrors(t *testing.T) {
 	configFile, err := ioutil.ReadFile("temp.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	_, err = NewCollector("tempCollector", configFile, 100, containerHandler, http.DefaultClient)
+	_, err = NewCollector("tempCollector", configFile, 100)
 	assert.Error(err)
 
 	assert.NoError(os.Remove("temp.json"))
@@ -129,28 +125,10 @@ func TestConfig(t *testing.T) {
 	configFile, err := ioutil.ReadFile("config/sample_config.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	collector, err := NewCollector("nginx", configFile, 100, containerHandler, http.DefaultClient)
+	collector, err := NewCollector("nginx", configFile, 100)
 	assert.NoError(err)
 	assert.Equal(collector.name, "nginx")
-	assert.Equal(collector.configFile.Endpoint.URL, "http://localhost:8000/nginx_status")
-	assert.Equal(collector.configFile.MetricsConfig[0].Name, "activeConnections")
-}
-
-func TestEndpointConfig(t *testing.T) {
-	assert := assert.New(t)
-	configFile, err := ioutil.ReadFile("config/sample_config_endpoint_config.json")
-	assert.NoError(err)
-
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	containerHandler.On("GetContainerIPAddress").Return(
-		"111.111.111.111",
-	)
-
-	collector, err := NewCollector("nginx", configFile, 100, containerHandler, http.DefaultClient)
-	assert.NoError(err)
-	assert.Equal(collector.name, "nginx")
-	assert.Equal(collector.configFile.Endpoint.URL, "https://111.111.111.111:8000/nginx_status")
+	assert.Equal(collector.configFile.Endpoint, "http://localhost:8000/nginx_status")
 	assert.Equal(collector.configFile.MetricsConfig[0].Name, "activeConnections")
 }
 
@@ -161,8 +139,7 @@ func TestMetricCollection(t *testing.T) {
 	configFile, err := ioutil.ReadFile("config/sample_config.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	fakeCollector, err := NewCollector("nginx", configFile, 100, containerHandler, http.DefaultClient)
+	fakeCollector, err := NewCollector("nginx", configFile, 100)
 	assert.NoError(err)
 
 	tempServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -170,7 +147,7 @@ func TestMetricCollection(t *testing.T) {
 		fmt.Fprintln(w, "5 5 32\nReading: 0 Writing: 1 Waiting: 2")
 	}))
 	defer tempServer.Close()
-	fakeCollector.configFile.Endpoint.URL = tempServer.URL
+	fakeCollector.configFile.Endpoint = tempServer.URL
 
 	metrics := map[string][]v1.MetricVal{}
 	_, metrics, errMetric := fakeCollector.Collect(metrics)
@@ -197,7 +174,6 @@ func TestMetricCollectionLimit(t *testing.T) {
 	configFile, err := ioutil.ReadFile("config/sample_config.json")
 	assert.NoError(err)
 
-	containerHandler := containertest.NewMockContainerHandler("mockContainer")
-	_, err = NewCollector("nginx", configFile, 1, containerHandler, http.DefaultClient)
+	_, err = NewCollector("nginx", configFile, 1)
 	assert.Error(err)
 }

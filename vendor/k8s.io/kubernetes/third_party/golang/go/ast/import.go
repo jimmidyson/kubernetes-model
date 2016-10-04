@@ -5,9 +5,10 @@
 package ast
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"sort"
 	"strconv"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // SortImports sorts runs of consecutive import lines in import blocks in f.

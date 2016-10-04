@@ -7,8 +7,9 @@ package ast
 import (
 	"bytes"
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"sort"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 type byPos []*CommentGroup

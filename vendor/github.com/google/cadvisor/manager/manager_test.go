@@ -27,13 +27,11 @@ import (
 	"github.com/google/cadvisor/collector"
 	"github.com/google/cadvisor/container"
 	"github.com/google/cadvisor/container/docker"
-	containertest "github.com/google/cadvisor/container/testing"
 	info "github.com/google/cadvisor/info/v1"
 	itest "github.com/google/cadvisor/info/v1/test"
 	"github.com/google/cadvisor/info/v2"
 	"github.com/google/cadvisor/utils/sysfs/fakesysfs"
 	"github.com/stretchr/testify/assert"
-	"net/http"
 )
 
 // TODO(vmarmol): Refactor these tests.
@@ -42,7 +40,7 @@ func createManagerAndAddContainers(
 	memoryCache *memory.InMemoryCache,
 	sysfs *fakesysfs.FakeSysFs,
 	containers []string,
-	f func(*containertest.MockContainerHandler),
+	f func(*container.MockContainerHandler),
 	t *testing.T,
 ) *manager {
 	container.ClearContainerHandlerFactories()
@@ -52,7 +50,7 @@ func createManagerAndAddContainers(
 		memoryCache:  memoryCache,
 	}
 	for _, name := range containers {
-		mockHandler := containertest.NewMockContainerHandler(name)
+		mockHandler := container.NewMockContainerHandler(name)
 		spec := itest.GenerateRandomContainerSpec(4)
 		mockHandler.On("GetSpec").Return(
 			spec,
@@ -79,9 +77,9 @@ func createManagerAndAddContainers(
 
 // Expect a manager with the specified containers and query. Returns the manager, map of ContainerInfo objects,
 // and map of MockContainerHandler objects.}
-func expectManagerWithContainers(containers []string, query *info.ContainerInfoRequest, t *testing.T) (*manager, map[string]*info.ContainerInfo, map[string]*containertest.MockContainerHandler) {
+func expectManagerWithContainers(containers []string, query *info.ContainerInfoRequest, t *testing.T) (*manager, map[string]*info.ContainerInfo, map[string]*container.MockContainerHandler) {
 	infosMap := make(map[string]*info.ContainerInfo, len(containers))
-	handlerMap := make(map[string]*containertest.MockContainerHandler, len(containers))
+	handlerMap := make(map[string]*container.MockContainerHandler, len(containers))
 
 	for _, container := range containers {
 		infosMap[container] = itest.GenerateRandomContainerInfo(container, 4, query, 1*time.Second)
@@ -93,7 +91,7 @@ func expectManagerWithContainers(containers []string, query *info.ContainerInfoR
 		memoryCache,
 		sysfs,
 		containers,
-		func(h *containertest.MockContainerHandler) {
+		func(h *container.MockContainerHandler) {
 			cinfo := infosMap[h.Name]
 			ref, err := h.ContainerReference()
 			if err != nil {
@@ -215,7 +213,7 @@ func TestGetContainerInfoV2Failure(t *testing.T) {
 
 	// Make GetSpec fail on /c2
 	mockErr := fmt.Errorf("intentional GetSpec failure")
-	failingHandler := containertest.NewMockContainerHandler(failing)
+	failingHandler := container.NewMockContainerHandler(failing)
 	failingHandler.On("GetSpec").Return(info.ContainerSpec{}, mockErr)
 	failingHandler.On("Exists").Return(true)
 	*handlerMap[failing] = *failingHandler
@@ -299,7 +297,7 @@ func TestDockerContainersInfo(t *testing.T) {
 }
 
 func TestNewNilManager(t *testing.T) {
-	_, err := New(nil, nil, 60*time.Second, true, container.MetricSet{}, http.DefaultClient)
+	_, err := New(nil, nil, 60*time.Second, true, container.MetricSet{})
 	if err == nil {
 		t.Fatalf("Expected nil manager to return error")
 	}

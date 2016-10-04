@@ -8,10 +8,11 @@
 package ast
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // ----------------------------------------------------------------------------

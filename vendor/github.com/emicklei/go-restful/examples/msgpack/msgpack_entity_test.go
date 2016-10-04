@@ -2,7 +2,7 @@ package restPack
 
 import (
 	"bytes"
-	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -10,9 +10,10 @@ import (
 	"testing"
 	"time"
 
-	restful "github.com/emicklei/go-restful"
-	"gopkg.in/vmihailenco/msgpack.v2"
 	"io/ioutil"
+
+	restful "github.com/emicklei/go-restful"
+	"github.com/vmihailenco/msgpack"
 )
 
 func TestMsgPack(t *testing.T) {
@@ -115,7 +116,7 @@ func waitForServerUp(serverURL string) error {
 			return nil
 		}
 	}
-	return errors.New("waiting for server timed out")
+	return fmt.Errorf("waiting for server timed out")
 }
 
 var (

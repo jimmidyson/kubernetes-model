@@ -15,7 +15,6 @@ import (
 	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/pkg/reexec"
 	"github.com/docker/docker/pkg/system"
-	rsystem "github.com/opencontainers/runc/libcontainer/system"
 )
 
 type applyLayerResponse struct {
@@ -28,14 +27,12 @@ type applyLayerResponse struct {
 func applyLayer() {
 
 	var (
-		tmpDir  = ""
-		err     error
-		options *archive.TarOptions
+		tmpDir = ""
+		err    error
 	)
 	runtime.LockOSThread()
 	flag.Parse()
 
-	inUserns := rsystem.RunningInUserNS()
 	if err := chroot(flag.Arg(0)); err != nil {
 		fatal(err)
 	}
@@ -47,20 +44,12 @@ func applyLayer() {
 		fatal(err)
 	}
 
-	if err := json.Unmarshal([]byte(os.Getenv("OPT")), &options); err != nil {
-		fatal(err)
-	}
-
-	if inUserns {
-		options.InUserNS = true
-	}
-
 	if tmpDir, err = ioutil.TempDir("/", "temp-docker-extract"); err != nil {
 		fatal(err)
 	}
 
 	os.Setenv("TMPDIR", tmpDir)
-	size, err := archive.UnpackLayer("/", os.Stdin, options)
+	size, err := archive.UnpackLayer("/", os.Stdin)
 	os.RemoveAll(tmpDir)
 	if err != nil {
 		fatal(err)
@@ -71,45 +60,25 @@ func applyLayer() {
 		fatal(fmt.Errorf("unable to encode layerSize JSON: %s", err))
 	}
 
-	if _, err := flush(os.Stdin); err != nil {
-		fatal(err)
-	}
-
+	flush(os.Stdout)
+	flush(os.Stdin)
 	os.Exit(0)
 }
 
-// applyLayerHandler parses a diff in the standard layer format from `layer`, and
+// ApplyLayer parses a diff in the standard layer format from `layer`, and
 // applies it to the directory `dest`. Returns the size in bytes of the
 // contents of the layer.
-func applyLayerHandler(dest string, layer archive.Reader, options *archive.TarOptions, decompress bool) (size int64, err error) {
+func ApplyLayer(dest string, layer archive.ArchiveReader) (size int64, err error) {
 	dest = filepath.Clean(dest)
-	if decompress {
-		decompressed, err := archive.DecompressStream(layer)
-		if err != nil {
-			return 0, err
-		}
-		defer decompressed.Close()
-
-		layer = decompressed
-	}
-	if options == nil {
-		options = &archive.TarOptions{}
-		if rsystem.RunningInUserNS() {
-			options.InUserNS = true
-		}
-	}
-	if options.ExcludePatterns == nil {
-		options.ExcludePatterns = []string{}
-	}
-
-	data, err := json.Marshal(options)
+	decompressed, err := archive.DecompressStream(layer)
 	if err != nil {
-		return 0, fmt.Errorf("ApplyLayer json encode: %v", err)
+		return 0, err
 	}
+
+	defer decompressed.Close()
 
 	cmd := reexec.Command("docker-applyLayer", dest)
-	cmd.Stdin = layer
-	cmd.Env = append(cmd.Env, fmt.Sprintf("OPT=%s", data))
+	cmd.Stdin = decompressed
 
 	outBuf, errBuf := new(bytes.Buffer), new(bytes.Buffer)
 	cmd.Stdout, cmd.Stderr = outBuf, errBuf

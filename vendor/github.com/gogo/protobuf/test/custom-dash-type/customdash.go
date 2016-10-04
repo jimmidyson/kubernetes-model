@@ -1,6 +1,4 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -84,10 +82,6 @@ func (b *Bytes) UnmarshalJSON(data []byte) error {
 
 func (this Bytes) Equal(that Bytes) bool {
 	return bytes.Equal(this, that)
-}
-
-func (this Bytes) Compare(that Bytes) int {
-	return bytes.Compare(this, that)
 }
 
 type randy interface {

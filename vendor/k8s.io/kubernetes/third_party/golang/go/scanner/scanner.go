@@ -11,11 +11,12 @@ package scanner
 import (
 	"bytes"
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"path/filepath"
 	"strconv"
 	"unicode"
 	"unicode/utf8"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // An ErrorHandler may be provided to Scanner.Init. If a syntax error is

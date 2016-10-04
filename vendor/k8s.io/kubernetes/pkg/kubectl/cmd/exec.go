@@ -55,7 +55,7 @@ func NewCmdExec(cmdFullName string, f *cmdutil.Factory, cmdIn io.Reader, cmdOut,
 		},
 
 		FullCmdName: cmdFullName,
-		
+
 		Executor: &DefaultRemoteExecutor{},
 	}
 

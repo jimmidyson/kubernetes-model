@@ -8,9 +8,10 @@ package types
 
 import (
 	"fmt"
+	"strings"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"strings"
 )
 
 func assert(p bool) {

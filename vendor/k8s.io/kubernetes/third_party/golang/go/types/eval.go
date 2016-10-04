@@ -6,6 +6,7 @@ package types
 
 import (
 	"fmt"
+
 	"k8s.io/kubernetes/third_party/golang/go/parser"
 	"k8s.io/kubernetes/third_party/golang/go/token"
 )

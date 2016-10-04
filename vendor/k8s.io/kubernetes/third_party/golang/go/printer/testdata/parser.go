@@ -11,6 +11,7 @@ package parser
 
 import (
 	"fmt"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/scanner"
 	"k8s.io/kubernetes/third_party/golang/go/token"

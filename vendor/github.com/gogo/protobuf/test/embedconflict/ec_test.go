@@ -1,7 +1,5 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -40,7 +38,7 @@ func TestEmbedConflict(t *testing.T) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err = os.Remove("ec.pb.go"); err != nil {
+		if err := os.Remove("ec.pb.go"); err != nil {
 			t.Error(err)
 		}
 	}
@@ -55,7 +53,7 @@ func TestEmbedMarshaler(t *testing.T) {
 	if !strings.Contains(dataStr, "WARNING: found non-") || !strings.Contains(dataStr, "unsafe_marshaler") {
 		t.Errorf("Expected WARNING: found non-[marshaler unsafe_marshaler] C with embedded marshaler D")
 	}
-	if err = os.Remove("em.pb.go"); err != nil {
+	if err := os.Remove("em.pb.go"); err != nil {
 		t.Error(err)
 	}
 }
@@ -65,7 +63,7 @@ func TestEmbedExtend(t *testing.T) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err = os.Remove("ee.pb.go"); err != nil {
+		if err := os.Remove("ee.pb.go"); err != nil {
 			t.Error(err)
 		}
 	}
@@ -77,7 +75,7 @@ func TestCustomName(t *testing.T) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err = os.Remove("en.pb.go"); err != nil {
+		if err := os.Remove("en.pb.go"); err != nil {
 			t.Error(err)
 		}
 	}
@@ -89,7 +87,7 @@ func TestRepeatedEmbed(t *testing.T) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err = os.Remove("er.pb.go"); err != nil {
+		if err := os.Remove("er.pb.go"); err != nil {
 			t.Error(err)
 		}
 	}
@@ -106,7 +104,7 @@ func TestTakesTooLongToDebug(t *testing.T) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err = os.Remove("eb.pb.go"); err != nil {
+		if err := os.Remove("eb.pb.go"); err != nil {
 			t.Error(err)
 		}
 	}

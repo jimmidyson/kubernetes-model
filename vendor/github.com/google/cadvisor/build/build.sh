@@ -17,11 +17,10 @@
 set -e
 
 RELEASE=${RELEASE:-false} # Whether to build for an official release.
-GO_FLAGS=${GO_FLAGS:-}    # Extra go flags to use in the build.
 
 repo_path="github.com/google/cadvisor"
 
-version=$( git describe --tags --dirty --abbrev=14 | sed -E 's/-([0-9]+)-g/.\1+/' )
+version=$( cat version/VERSION )
 revision=$( git rev-parse --short HEAD 2> /dev/null || echo 'unknown' )
 branch=$( git rev-parse --abbrev-ref HEAD 2> /dev/null || echo 'unknown' )
 build_user="${USER}@${HOSTNAME}"
@@ -31,14 +30,6 @@ go_version=$( go version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/' )
 GO_CMD="install"
 
 if [ "$RELEASE" == "true" ]; then
-  # Only allow releases of tagged versions.
-  TAGGED='^v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta)[0-9]*)?$'
-  if [[ ! "$version" =~ $TAGGED ]]; then
-    echo "Only tagged versions are allowed for releases" >&2
-    echo "Found: $version" >&2
-    exit 1
-  fi
-
   # Don't include hostname with release builds
   build_user="$(git config --get user.email)"
   build_date=$( date +%Y%m%d ) # Release date is only to day-granularity
@@ -54,7 +45,6 @@ if [ "${go_version:0:3}" = "1.4" ]; then
 fi
 
 ldflags="
-  -extldflags '-static'
   -X ${repo_path}/version.Version${ldseparator}${version}
   -X ${repo_path}/version.Revision${ldseparator}${revision}
   -X ${repo_path}/version.Branch${ldseparator}${branch}
@@ -62,12 +52,12 @@ ldflags="
   -X ${repo_path}/version.BuildDate${ldseparator}${build_date}
   -X ${repo_path}/version.GoVersion${ldseparator}${go_version}"
 
-echo ">> building cadvisor"
+echo " >   cadvisor"
 
 if [ "$RELEASE" == "true" ]; then
   echo "Building release candidate with -ldflags $ldflags"
 fi
 
-GOBIN=$PWD go "$GO_CMD" ${GO_FLAGS} -ldflags "${ldflags}" "${repo_path}"
+GOBIN=$PWD godep go "$GO_CMD" -ldflags "${ldflags}" "${repo_path}"
 
 exit 0

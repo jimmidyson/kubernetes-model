@@ -7,9 +7,10 @@
 package types
 
 import (
+	"strings"
+
 	"k8s.io/kubernetes/third_party/golang/go/constant"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"strings"
 )
 
 var (

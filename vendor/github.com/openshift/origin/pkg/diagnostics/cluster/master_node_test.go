@@ -2,8 +2,9 @@ package cluster
 
 import (
 	"errors"
-	"k8s.io/kubernetes/pkg/api"
 	"testing"
+
+	"k8s.io/kubernetes/pkg/api"
 )
 
 // Used as a stub for golang's net.LookupIP to avoid actual DNS lookups in tests.

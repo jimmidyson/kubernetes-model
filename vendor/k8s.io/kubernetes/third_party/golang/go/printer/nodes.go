@@ -10,12 +10,13 @@ package printer
 
 import (
 	"bytes"
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"strconv"
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // Formatting issues:

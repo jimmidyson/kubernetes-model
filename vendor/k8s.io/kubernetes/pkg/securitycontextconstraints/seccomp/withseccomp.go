@@ -18,6 +18,7 @@ package seccomp
 
 import (
 	"fmt"
+
 	"k8s.io/kubernetes/pkg/api"
 	"k8s.io/kubernetes/pkg/util/validation/field"
 )
@@ -120,7 +121,7 @@ func isProfileAllowed(profile string, allowedProfiles []string) bool {
 // If the container profile is set but empty then empty will be returned.  This mirrors the functionality in the
 // kubelet's docker tools.
 func profileForContainer(pod *api.Pod, container *api.Container) string {
-	containerProfile, hasContainerProfile :=  pod.Annotations[api.SeccompContainerAnnotationKeyPrefix+container.Name]
+	containerProfile, hasContainerProfile := pod.Annotations[api.SeccompContainerAnnotationKeyPrefix+container.Name]
 	if hasContainerProfile {
 		return containerProfile
 	}

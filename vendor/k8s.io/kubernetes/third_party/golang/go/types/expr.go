@@ -8,10 +8,11 @@ package types
 
 import (
 	"fmt"
+	"math"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/constant"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"math"
 )
 
 /*

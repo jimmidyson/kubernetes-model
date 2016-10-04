@@ -1,6 +1,4 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -93,9 +91,10 @@ not print their values, while the generated String method will always print all 
 package stringer
 
 import (
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"strings"
 )
 
 type stringer struct {
@@ -128,7 +127,6 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 	stringsPkg := p.NewImport("strings")
 	reflectPkg := p.NewImport("reflect")
 	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
-	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	for _, message := range file.Messages() {
 		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
@@ -149,7 +147,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		for _, field := range message.Field {
-			if !p.IsMap(field) {
+			if !generator.IsMap(file.FileDescriptorProto, field) {
 				continue
 			}
 			fieldname := p.GetFieldName(message, field)
@@ -200,7 +198,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 					oneofs[fieldname] = struct{}{}
 				}
 				p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
-			} else if p.IsMap(field) {
+			} else if generator.IsMap(file.FileDescriptorProto, field) {
 				mapName := `mapStringFor` + fieldname
 				p.P("`", fieldname, ":`", ` + `, mapName, " + `,", "`,")
 			} else if field.IsMessage() || p.IsGroup(field) {
@@ -225,9 +223,9 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		}
 		if message.DescriptorProto.HasExtension() {
 			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
-				p.P("`XXX_InternalExtensions:` + ", protoPkg.Use(), ".StringFromInternalExtension(this) + `,`,")
+				p.P("`XXX_extensions:` + proto.StringFromExtensionsMap(this.XXX_extensions) + `,`,")
 			} else {
-				p.P("`XXX_extensions:` + ", protoPkg.Use(), ".StringFromExtensionsBytes(this.XXX_extensions) + `,`,")
+				p.P("`XXX_extensions:` + proto.StringFromExtensionsBytes(this.XXX_extensions) + `,`,")
 			}
 		}
 		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {

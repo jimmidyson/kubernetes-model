@@ -11,16 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
-GO := go
-pkgs  = $(shell $(GO) list ./... | grep -v vendor)
+GO := godep go
+pkgs  = $(shell $(GO) list ./...)
 
-all: presubmit build test
+all: format build test
 
 test:
 	@echo ">> running tests"
-	@$(GO) test -short -race $(pkgs)
+	@$(GO) test -tags test -short -race $(pkgs)
 
-test-integration:
+test-integration: build test
 	@./build/integration.sh
 
 format:
@@ -36,17 +36,10 @@ build:
 	@./build/assets.sh
 	@./build/build.sh
 
-release:
-	@echo ">> building release binaries"
-	@RELEASE=true ./build/build.sh
+release: build
+	@./build/release.sh
 
 docker:
 	@docker build -t cadvisor:$(shell git rev-parse --short HEAD) -f deploy/Dockerfile .
 
-presubmit: vet
-	@echo ">> checking go formatting"
-	@./build/check_gofmt.sh .
-	@echo ">> checking file boilerplate"
-	@./build/check_boilerplate.sh
-
-.PHONY: all build docker format release test test-integration vet presubmit
+.PHONY: all format build test vet docker

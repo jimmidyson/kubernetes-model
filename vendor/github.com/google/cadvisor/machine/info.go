@@ -110,13 +110,8 @@ func Info(sysFs sysfs.SysFs, fsInfo fs.FsInfo, inHostNamespace bool) (*info.Mach
 		InstanceID:     instanceID,
 	}
 
-	for i := range filesystems {
-		fs := filesystems[i]
-		inodes := uint64(0)
-		if fs.Inodes != nil {
-			inodes = *fs.Inodes
-		}
-		machineInfo.Filesystems = append(machineInfo.Filesystems, info.FsInfo{Device: fs.Device, Type: fs.Type.String(), Capacity: fs.Capacity, Inodes: inodes, HasInodes: fs.Inodes != nil})
+	for _, fs := range filesystems {
+		machineInfo.Filesystems = append(machineInfo.Filesystems, info.FsInfo{Device: fs.Device, Type: fs.Type.String(), Capacity: fs.Capacity, Inodes: fs.Inodes})
 	}
 
 	return machineInfo, nil

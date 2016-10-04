@@ -1,7 +1,5 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -31,9 +29,7 @@ package test
 import (
 	"fmt"
 	"math"
-	"math/rand"
 	"testing"
-	"time"
 
 	"github.com/gogo/protobuf/proto"
 )
@@ -124,7 +120,7 @@ func TestInt32Int64Compatibility(t *testing.T) {
 	//change marshaled data1 to unmarshal into 4th field which is an int64
 	data1[0] = uint8(uint32(4 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
 	u1 := &NinOptNative{}
-	if err = proto.Unmarshal(data1, u1); err != nil {
+	if err := proto.Unmarshal(data1, u1); err != nil {
 		t.Error(err)
 	}
 	if !u1.Equal(&NinOptNative{
@@ -152,7 +148,7 @@ func TestInt32Int64Compatibility(t *testing.T) {
 		}
 	}
 	u2 := &NidOptNative{}
-	if err = proto.Unmarshal(data2, u2); err != nil {
+	if err := proto.Unmarshal(data2, u2); err != nil {
 		t.Error(err)
 	}
 	if !u2.Equal(&NidOptNative{
@@ -187,66 +183,4 @@ func TestInt32Int64Compatibility(t *testing.T) {
 	}
 
 	t.Logf("tested all")
-}
-
-func TestRepeatedExtensionsMsgsIssue161(t *testing.T) {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	rep := 10
-	nins := make([]*NinOptNative, rep)
-	for i := range nins {
-		nins[i] = NewPopulatedNinOptNative(r, true)
-	}
-	input := &MyExtendable{}
-	if err := proto.SetExtension(input, E_FieldE, nins); err != nil {
-		t.Fatal(err)
-	}
-	data, err := proto.Marshal(input)
-	if err != nil {
-		t.Fatal(err)
-	}
-	output := &MyExtendable{}
-	if err := proto.Unmarshal(data, output); err != nil {
-		t.Fatal(err)
-	}
-	if !input.Equal(output) {
-		t.Fatal("expected equal")
-	}
-	data2, err2 := proto.Marshal(output)
-	if err2 != nil {
-		t.Fatal(err2)
-	}
-	if len(data) != len(data2) {
-		t.Fatal("expected equal length buffers")
-	}
-}
-
-func TestRepeatedExtensionsFieldsIssue161(t *testing.T) {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	rep := 10
-	ints := make([]int64, rep)
-	for i := range ints {
-		ints[i] = r.Int63()
-	}
-	input := &MyExtendable{}
-	if err := proto.SetExtension(input, E_FieldD, ints); err != nil {
-		t.Fatal(err)
-	}
-	data, err := proto.Marshal(input)
-	if err != nil {
-		t.Fatal(err)
-	}
-	output := &MyExtendable{}
-	if err := proto.Unmarshal(data, output); err != nil {
-		t.Fatal(err)
-	}
-	if !input.Equal(output) {
-		t.Fatal("expected equal")
-	}
-	data2, err2 := proto.Marshal(output)
-	if err2 != nil {
-		t.Fatal(err2)
-	}
-	if len(data) != len(data2) {
-		t.Fatal("expected equal length buffers")
-	}
 }

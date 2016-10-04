@@ -1,6 +1,4 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -85,14 +83,15 @@ package populate
 
 import (
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
-	"math"
-	"strconv"
-	"strings"
 )
 
 type VarGen interface {
@@ -250,7 +249,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		}
 		if m.ValueField.IsMessage() || p.IsGroup(field) {
 			s := `this.` + fieldname + `[` + keyval + `] = `
-			goTypName = generator.GoTypeToName(valuegoTyp)
+			goTypName := generator.GoTypeToName(valuegoTyp)
 			funcCall := getFuncCall(goTypName)
 			if !nullable {
 				funcCall = `*` + funcCall

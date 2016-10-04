@@ -10,12 +10,13 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/parser"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/parser"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 const (

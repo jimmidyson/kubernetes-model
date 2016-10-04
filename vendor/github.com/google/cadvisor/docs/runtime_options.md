@@ -78,4 +78,4 @@ From [glog](https://github.com/golang/glog) here are some flags we find useful:
 
 ## Storage Drivers
 
-See [InfluxDB instructions](storage/influxdb.md).
+See [InfluxDB instructions](influxdb.md).

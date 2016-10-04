@@ -15,9 +15,10 @@ package constant
 
 import (
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"math/big"
 	"strconv"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // Kind specifies the kind of value represented by a Value.

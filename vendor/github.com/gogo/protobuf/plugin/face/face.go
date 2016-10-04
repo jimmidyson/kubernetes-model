@@ -1,6 +1,4 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -202,7 +200,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
-			if p.IsMap(field) {
+			if generator.IsMap(file.FileDescriptorProto, field) {
 				m := p.GoMapType(nil, field)
 				goTyp = m.GoType
 			}

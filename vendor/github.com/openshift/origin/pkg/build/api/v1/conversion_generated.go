@@ -5,11 +5,12 @@
 package v1
 
 import (
+	time "time"
+
 	build_api "github.com/openshift/origin/pkg/build/api"
 	api "k8s.io/kubernetes/pkg/api"
 	api_v1 "k8s.io/kubernetes/pkg/api/v1"
 	conversion "k8s.io/kubernetes/pkg/conversion"
-	time "time"
 )
 
 func init() {

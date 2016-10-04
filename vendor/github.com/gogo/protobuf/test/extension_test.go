@@ -1,7 +1,5 @@
-// Protocol Buffers for Go with Gadgets
-//
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -29,11 +27,12 @@
 package test
 
 import (
-	"github.com/gogo/protobuf/proto"
 	"math"
 	math_rand "math/rand"
 	"testing"
 	"time"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 //func SetRawExtension(base extendableProto, id int32, b []byte) {

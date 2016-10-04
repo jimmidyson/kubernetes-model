@@ -19,9 +19,10 @@ limitations under the License.
 package mount
 
 import (
+	"path/filepath"
+
 	"github.com/golang/glog"
 	"k8s.io/kubernetes/pkg/util/exec"
-	"path/filepath"
 )
 
 type Interface interface {

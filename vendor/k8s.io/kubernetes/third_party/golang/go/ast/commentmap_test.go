@@ -9,11 +9,12 @@ package ast_test
 import (
 	"bytes"
 	"fmt"
+	"sort"
+	"testing"
+
 	. "k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/parser"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"sort"
-	"testing"
 )
 
 const src = `

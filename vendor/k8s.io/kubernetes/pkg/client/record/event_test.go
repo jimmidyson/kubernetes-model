@@ -24,6 +24,8 @@ import (
 	"testing"
 	"time"
 
+	"net/http"
+
 	"k8s.io/kubernetes/pkg/api"
 	"k8s.io/kubernetes/pkg/api/errors"
 	_ "k8s.io/kubernetes/pkg/api/install" // To register api.Pod used in tests below
@@ -32,7 +34,6 @@ import (
 	k8sruntime "k8s.io/kubernetes/pkg/runtime"
 	"k8s.io/kubernetes/pkg/util"
 	"k8s.io/kubernetes/pkg/util/strategicpatch"
-	"net/http"
 )
 
 type testEventSink struct {

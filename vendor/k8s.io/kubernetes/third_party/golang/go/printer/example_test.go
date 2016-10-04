@@ -7,12 +7,13 @@ package printer_test
 import (
 	"bytes"
 	"fmt"
+	"strings"
+	"testing"
+
 	"k8s.io/kubernetes/third_party/golang/go/ast"
 	"k8s.io/kubernetes/third_party/golang/go/parser"
 	"k8s.io/kubernetes/third_party/golang/go/printer"
 	"k8s.io/kubernetes/third_party/golang/go/token"
-	"strings"
-	"testing"
 )
 
 // Dummy test function so that godoc does not use the entire file as example.

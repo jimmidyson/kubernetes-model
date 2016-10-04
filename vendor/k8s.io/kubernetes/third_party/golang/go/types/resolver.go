@@ -6,13 +6,14 @@ package types
 
 import (
 	"fmt"
-	"k8s.io/kubernetes/third_party/golang/go/ast"
-	"k8s.io/kubernetes/third_party/golang/go/constant"
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	pathLib "path"
 	"strconv"
 	"strings"
 	"unicode"
+
+	"k8s.io/kubernetes/third_party/golang/go/ast"
+	"k8s.io/kubernetes/third_party/golang/go/constant"
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // A declInfo describes a package-level const, type, var, or func declaration.

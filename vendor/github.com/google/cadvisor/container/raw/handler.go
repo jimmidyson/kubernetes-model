@@ -165,37 +165,6 @@ func (self *rawContainerHandler) GetSpec() (info.ContainerSpec, error) {
 	return spec, nil
 }
 
-func fsToFsStats(fs *fs.Fs) info.FsStats {
-	inodes := uint64(0)
-	inodesFree := uint64(0)
-	hasInodes := fs.InodesFree != nil
-	if hasInodes {
-		inodes = *fs.Inodes
-		inodesFree = *fs.InodesFree
-	}
-	return info.FsStats{
-		Device:          fs.Device,
-		Type:            fs.Type.String(),
-		Limit:           fs.Capacity,
-		Usage:           fs.Capacity - fs.Free,
-		HasInodes:       hasInodes,
-		Inodes:          inodes,
-		InodesFree:      inodesFree,
-		Available:       fs.Available,
-		ReadsCompleted:  fs.DiskStats.ReadsCompleted,
-		ReadsMerged:     fs.DiskStats.ReadsMerged,
-		SectorsRead:     fs.DiskStats.SectorsRead,
-		ReadTime:        fs.DiskStats.ReadTime,
-		WritesCompleted: fs.DiskStats.WritesCompleted,
-		WritesMerged:    fs.DiskStats.WritesMerged,
-		SectorsWritten:  fs.DiskStats.SectorsWritten,
-		WriteTime:       fs.DiskStats.WriteTime,
-		IoInProgress:    fs.DiskStats.IoInProgress,
-		IoTime:          fs.DiskStats.IoTime,
-		WeightedIoTime:  fs.DiskStats.WeightedIoTime,
-	}
-}
-
 func (self *rawContainerHandler) getFsStats(stats *info.ContainerStats) error {
 	// Get Filesystem information only for the root cgroup.
 	if isRootCgroup(self.name) {
@@ -203,9 +172,27 @@ func (self *rawContainerHandler) getFsStats(stats *info.ContainerStats) error {
 		if err != nil {
 			return err
 		}
-		for i := range filesystems {
-			fs := filesystems[i]
-			stats.Filesystem = append(stats.Filesystem, fsToFsStats(&fs))
+		for _, fs := range filesystems {
+			stats.Filesystem = append(stats.Filesystem,
+				info.FsStats{
+					Device:          fs.Device,
+					Type:            fs.Type.String(),
+					Limit:           fs.Capacity,
+					Usage:           fs.Capacity - fs.Free,
+					Available:       fs.Available,
+					InodesFree:      fs.InodesFree,
+					ReadsCompleted:  fs.DiskStats.ReadsCompleted,
+					ReadsMerged:     fs.DiskStats.ReadsMerged,
+					SectorsRead:     fs.DiskStats.SectorsRead,
+					ReadTime:        fs.DiskStats.ReadTime,
+					WritesCompleted: fs.DiskStats.WritesCompleted,
+					WritesMerged:    fs.DiskStats.WritesMerged,
+					SectorsWritten:  fs.DiskStats.SectorsWritten,
+					WriteTime:       fs.DiskStats.WriteTime,
+					IoInProgress:    fs.DiskStats.IoInProgress,
+					IoTime:          fs.DiskStats.IoTime,
+					WeightedIoTime:  fs.DiskStats.WeightedIoTime,
+				})
 		}
 	} else if len(self.externalMounts) > 0 {
 		var mountSet map[string]struct{}
@@ -217,9 +204,26 @@ func (self *rawContainerHandler) getFsStats(stats *info.ContainerStats) error {
 		if err != nil {
 			return err
 		}
-		for i := range filesystems {
-			fs := filesystems[i]
-			stats.Filesystem = append(stats.Filesystem, fsToFsStats(&fs))
+		for _, fs := range filesystems {
+			stats.Filesystem = append(stats.Filesystem,
+				info.FsStats{
+					Device:          fs.Device,
+					Type:            fs.Type.String(),
+					Limit:           fs.Capacity,
+					Usage:           fs.Capacity - fs.Free,
+					InodesFree:      fs.InodesFree,
+					ReadsCompleted:  fs.DiskStats.ReadsCompleted,
+					ReadsMerged:     fs.DiskStats.ReadsMerged,
+					SectorsRead:     fs.DiskStats.SectorsRead,
+					ReadTime:        fs.DiskStats.ReadTime,
+					WritesCompleted: fs.DiskStats.WritesCompleted,
+					WritesMerged:    fs.DiskStats.WritesMerged,
+					SectorsWritten:  fs.DiskStats.SectorsWritten,
+					WriteTime:       fs.DiskStats.WriteTime,
+					IoInProgress:    fs.DiskStats.IoInProgress,
+					IoTime:          fs.DiskStats.IoTime,
+					WeightedIoTime:  fs.DiskStats.WeightedIoTime,
+				})
 		}
 	}
 	return nil
@@ -250,11 +254,6 @@ func (self *rawContainerHandler) GetCgroupPath(resource string) (string, error) 
 
 func (self *rawContainerHandler) GetContainerLabels() map[string]string {
 	return map[string]string{}
-}
-
-func (self *rawContainerHandler) GetContainerIPAddress() string {
-	// the IP address for the raw container corresponds to the system ip address.
-	return "127.0.0.1"
 }
 
 func (self *rawContainerHandler) ListContainers(listType container.ListType) ([]info.ContainerReference, error) {

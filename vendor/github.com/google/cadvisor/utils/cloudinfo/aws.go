@@ -15,11 +15,12 @@
 package cloudinfo
 
 import (
+	"io/ioutil"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"io/ioutil"
-	"strings"
 
 	info "github.com/google/cadvisor/info/v1"
 )

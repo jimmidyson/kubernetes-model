@@ -5,9 +5,10 @@
 package constant
 
 import (
-	"k8s.io/kubernetes/third_party/golang/go/token"
 	"strings"
 	"testing"
+
+	"k8s.io/kubernetes/third_party/golang/go/token"
 )
 
 // TODO(gri) expand this test framework
