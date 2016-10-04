@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"os"
 
 	"github.com/inconshreveable/log15"
@@ -93,5 +95,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	logger.Info("loaded packages", "packages", loadedPackages)
+	b, _ := json.MarshalIndent(loadedPackages, "", "  ")
+	fmt.Println(string(b))
 }

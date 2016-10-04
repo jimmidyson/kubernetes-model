@@ -1,6 +1,7 @@
 package loader
 
 import (
+	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -10,7 +11,7 @@ import (
 	"github.com/inconshreveable/log15"
 	"github.com/pkg/errors"
 	"golang.org/x/tools/go/loader"
-	"k8s.io/kubernetes/third_party/golang/reflect"
+	reflectutils "k8s.io/kubernetes/third_party/golang/reflect"
 
 	"github.com/fabric8io/kubernetes-model/pkg/astutils"
 )
@@ -18,6 +19,7 @@ import (
 type ASTLoader struct {
 	requestedPackages []string
 	logger            log15.Logger
+	prog              *loader.Program
 }
 
 func New(packages []string, logger log15.Logger) *ASTLoader {
@@ -44,6 +46,7 @@ type Field struct {
 	Required     bool
 	JSONProperty string
 	JSONInline   bool
+	JSONType     string
 }
 
 func (l *ASTLoader) Load() (map[string]Package, error) {
@@ -59,6 +62,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot load requested packages")
 	}
+	l.prog = prog
 
 	loadedPackages := make(map[string]Package, len(l.requestedPackages))
 	for _, pkg := range prog.InitialPackages() {
@@ -126,7 +130,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 						required := true
 						jsonProperty := name
 						if fld.Tag != nil && len(fld.Tag.Value) > 0 {
-							tags, err := reflect.ParseStructTags(strings.Trim(fld.Tag.Value, "`"))
+							tags, err := reflectutils.ParseStructTags(strings.Trim(fld.Tag.Value, "`"))
 							if err != nil {
 								return nil, errors.Wrapf(err, "failed to parse struct tag `%s`", fld.Tag.Value)
 							}
@@ -153,12 +157,14 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 								Required:     required,
 								JSONProperty: jsonProperty,
 								JSONInline:   len(jsonProperty) == 0,
+								JSONType:     l.jsonTypeFromExpr(fld.Type),
 							}
 						}
 					}
 				}
 
 				if len(structFields) == 0 {
+					l.logger.Debug("skipping struct - no serialized fields", "package", pkgPath, "type", currentObj.Name)
 					continue
 				}
 
@@ -246,4 +252,62 @@ func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *toke
 	}
 
 	return genClient, namespaced
+}
+
+func (l *ASTLoader) jsonTypeFromExpr(t ast.Expr) string {
+	switch t := t.(type) {
+	case *ast.ArrayType:
+		return "array"
+	case *ast.MapType:
+		return "object"
+	case *ast.StructType:
+		return "object"
+	case *ast.Ident:
+		if t.Obj != nil {
+			if t.Obj.Decl != nil {
+				if typeSpec, ok := t.Obj.Decl.(*ast.TypeSpec); ok {
+					return l.jsonTypeFromIdent(typeSpec.Name)
+				}
+			}
+			return "object"
+		}
+		return l.jsonTypeFromIdent(t)
+	default:
+		switch t := t.(type) {
+		case *ast.StarExpr:
+			return l.jsonTypeFromExpr(t.X)
+		case *ast.SelectorExpr:
+			return l.jsonTypeFromIdent(t.Sel)
+		}
+		l.logger.Error("unknown JSON type", "type", fmt.Sprintf("%#v", t))
+		return ""
+	}
+}
+
+func (l *ASTLoader) jsonTypeFromIdent(id *ast.Ident) string {
+	switch strings.ToLower(id.Name) {
+	case "bool":
+		return "boolean"
+	case "int", "int8", "int16", "int32", "uint", "uint8", "uint16", "uint32":
+		return "integer"
+	case "int64", "uint64":
+		return "integer"
+	case "byte", "string":
+		return "string"
+	default:
+		if id.Obj != nil {
+			switch t := id.Obj.Decl.(type) {
+			case *ast.TypeSpec:
+				switch i := t.Type.(type) {
+				case *ast.Ident:
+					return l.jsonTypeFromExpr(i)
+				default:
+					return l.jsonTypeFromExpr(i)
+				}
+			case *ast.Ident:
+				return l.jsonTypeFromIdent(t)
+			}
+		}
+		return "object"
+	}
 }

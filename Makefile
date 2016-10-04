@@ -24,7 +24,11 @@ PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
 build: test generate
 
 .PHONY: generate
-generate: .tmp/generate
+generate: schema
+
+.PHONY: schema
+schema: .tmp/generate
+	.tmp/generate
 
 .tmp/generate: gopath $(shell find -name *.go)
 	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o .tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate
