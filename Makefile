@@ -20,36 +20,27 @@ ORG := github.com/fabric8io
 REPOPATH ?= $(ORG)/kubernetes-model
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
 
-MKGOPATH := if [ ! -e $(GOPATH)/src/$(ORG) ]; then \
-	mkdir -p $(GOPATH)/src/$(ORG); \
-	ln -s -f $(shell pwd) $(GOPATH)/src/$(ORG); \
-	ln -s -f $(shell pwd)/vendor/{k8s.io,golang.org,gopkg.in,google.golang.org} $(GOPATH)/src; \
-	ln -s -f $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com/; \
-fi
-
 .PHONY: build
 build: test generate
 
 .PHONY: generate
 generate: .tmp/generate
 
-.tmp/generate: $(shell find -name *.go)
-	$(MKGOPATH)
+.tmp/generate: gopath $(shell find -name *.go)
 	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o .tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate
 
 .PHONY: test
-test:
-	$(MKGOPATH)
+test: gopath
 	cd $(GOPATH)/src/$(REPOPATH) && go test -race -v $(PACKAGES)
 
-.PHONY: test-junit
-test-junit: .tmp/go-junit-report
-	$(MKGOPATH)
-	cd $(GOPATH)/src/$(REPOPATH) && go test -race -v $(PACKAGES) | .tmp/go-junit-report > junit-report.xml
+.PHONY: gopath
+gopath: $(GOPATH)/src/$(ORG)
 
-.tmp/go-junit-report: $(shell find vendor/github.com/jstemmer/go-junit-report -name *.go)
-	$(MKGOPATH)
-	CGO_ENABLED=0 go build -o .tmp/go-junit-report -ldflags="-s -w -extldflags '-static'" github.com/jstemmer/go-junit-report
+$(GOPATH)/src/$(ORG):
+	mkdir -p $(GOPATH)/src/$(ORG)
+	ln -s -f $(shell pwd) $(GOPATH)/src/$(ORG)
+	ln -s -f $(shell pwd)/vendor/{k8s.io,golang.org,gopkg.in,google.golang.org} $(GOPATH)/src
+	ln -s -f $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com/
 
 .PHONY: clean
 clean:
