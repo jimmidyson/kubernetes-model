@@ -13,7 +13,7 @@ import (
 	"golang.org/x/tools/go/loader"
 	reflectutils "k8s.io/kubernetes/third_party/golang/reflect"
 
-	"github.com/fabric8io/kubernetes-model/pkg/astutils"
+	"github.com/fabric8io/kubernetes-model/pkg/loader/astutils"
 )
 
 type ASTLoader struct {
