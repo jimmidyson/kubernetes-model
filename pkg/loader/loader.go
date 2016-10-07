@@ -1,7 +1,6 @@
 package loader
 
 import (
-	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -77,20 +76,11 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 		for _, file := range pkg.Files {
 			filePos := prog.Fset.Position(file.Pos())
 			l.logger.Debug("parsing file", "package", pkgPath, "file", filePos.Filename)
-			if !ast.FileExports(file) {
-				l.logger.Debug("skipping file - no exports", "package", pkgPath, "file", filePos.Filename)
-				continue
-			}
-
-			parsedFile, err := parser.ParseFile(prog.Fset, filePos.Filename, nil, parser.ParseComments)
-			if err != nil {
-				return nil, errors.Wrapf(err, "failed to parse file %s", filePos.Filename)
-			}
 
 			l.logger.Debug("sorting comments", "package", pkgPath, "file", filePos.Filename)
-			sortedComments := astutils.SortCommentsByPos(parsedFile.Comments)
+			sortedComments := astutils.SortCommentsByPos(file.Comments)
 			l.logger.Debug("sorting objects", "package", pkgPath, "file", filePos.Filename)
-			sortedObjects := astutils.SortObjectsByPos(parsedFile.Scope.Objects)
+			sortedObjects := astutils.SortObjectsByPos(file.Scope.Objects)
 
 			for i, currentObj := range sortedObjects {
 				t, ok := currentObj.Decl.(*ast.TypeSpec)
@@ -157,7 +147,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 								Required:     required,
 								JSONProperty: jsonProperty,
 								JSONInline:   len(jsonProperty) == 0,
-								JSONType:     l.jsonTypeFromExpr(fld.Type),
+								// JSONType:     l.jsonTypeFromExpr(fld.Type),
 							}
 						}
 					}
@@ -201,31 +191,24 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 }
 
 func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *token.FileSet, comments []*ast.CommentGroup) (bool, bool) {
-	previousLineNumber := 0
-	if previous != nil {
-		if n, ok := previous.Decl.(ast.Node); ok {
-			previousLineNumber = fset.Position(n.End()).Line
-		}
-	}
-
 	previousCommentIndex := sort.Search(len(comments), func(i int) bool {
-		commentLineNumber := fset.Position(comments[i].Pos()).Line
-		return previousLineNumber < commentLineNumber
+		previousPos := previous.Pos()
+		if n, ok := previous.Decl.(ast.Node); ok {
+			previousPos = n.End()
+		}
+		return previousPos < comments[i].Pos()
 	})
 
 	if previousCommentIndex >= len(comments) {
 		return false, false
 	}
 
-	currentPos := fset.Position(current.Pos())
-	currentLineNumber := currentPos.Line
 	i := previousCommentIndex
 	for {
-		if i == len(comments) {
+		if i >= len(comments) {
 			return false, false
 		}
-		commentLineNumber := fset.Position(comments[i].Pos()).Line
-		if commentLineNumber >= currentLineNumber {
+		if comments[i].Pos() >= current.Pos() {
 			return false, false
 		}
 		if strings.HasPrefix(strings.TrimSpace(comments[i].Text()), "+genclient") {
@@ -252,62 +235,4 @@ func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *toke
 	}
 
 	return genClient, namespaced
-}
-
-func (l *ASTLoader) jsonTypeFromExpr(t ast.Expr) string {
-	switch t := t.(type) {
-	case *ast.ArrayType:
-		return "array"
-	case *ast.MapType:
-		return "object"
-	case *ast.StructType:
-		return "object"
-	case *ast.Ident:
-		if t.Obj != nil {
-			if t.Obj.Decl != nil {
-				if typeSpec, ok := t.Obj.Decl.(*ast.TypeSpec); ok {
-					return l.jsonTypeFromIdent(typeSpec.Name)
-				}
-			}
-			return "object"
-		}
-		return l.jsonTypeFromIdent(t)
-	default:
-		switch t := t.(type) {
-		case *ast.StarExpr:
-			return l.jsonTypeFromExpr(t.X)
-		case *ast.SelectorExpr:
-			return l.jsonTypeFromIdent(t.Sel)
-		}
-		l.logger.Error("unknown JSON type", "type", fmt.Sprintf("%#v", t))
-		return ""
-	}
-}
-
-func (l *ASTLoader) jsonTypeFromIdent(id *ast.Ident) string {
-	switch strings.ToLower(id.Name) {
-	case "bool":
-		return "boolean"
-	case "int", "int8", "int16", "int32", "uint", "uint8", "uint16", "uint32":
-		return "integer"
-	case "int64", "uint64":
-		return "integer"
-	case "byte", "string":
-		return "string"
-	default:
-		if id.Obj != nil {
-			switch t := id.Obj.Decl.(type) {
-			case *ast.TypeSpec:
-				switch i := t.Type.(type) {
-				case *ast.Ident:
-					return l.jsonTypeFromExpr(i)
-				default:
-					return l.jsonTypeFromExpr(i)
-				}
-			case *ast.Ident:
-				return l.jsonTypeFromIdent(t)
-			}
-		}
-		return "object"
-	}
 }
