@@ -1,5 +1,7 @@
 package pkg1
 
+// +genclient=true
+
 // Type1 is a normal type
 // with a single field and a description.
 type Type1 struct {
@@ -33,6 +35,8 @@ type type3 struct {
 type type4 struct {
 	Field1 int
 }
+
+// +genclient=true,nonNamespaced=true
 
 type Type5 struct {
 	Type5Field uint64 `json:"t5"`

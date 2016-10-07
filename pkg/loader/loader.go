@@ -4,13 +4,13 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
+	"go/types"
 	"sort"
 	"strings"
 
 	"github.com/inconshreveable/log15"
 	"github.com/pkg/errors"
 	"golang.org/x/tools/go/loader"
-	reflectutils "k8s.io/kubernetes/third_party/golang/reflect"
 
 	"github.com/fabric8io/kubernetes-model/pkg/astutils"
 )
@@ -77,8 +77,12 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 			filePos := prog.Fset.Position(file.Pos())
 			l.logger.Debug("parsing file", "package", pkgPath, "file", filePos.Filename)
 
+			parsedFile, err := parser.ParseFile(prog.Fset, filePos.Filename, nil, parser.ParseComments)
+			if err != nil {
+				return nil, errors.Wrapf(err, "failed to parse file %s", filePos.Filename)
+			}
 			l.logger.Debug("sorting comments", "package", pkgPath, "file", filePos.Filename)
-			sortedComments := astutils.SortCommentsByPos(file.Comments)
+			sortedComments := astutils.SortCommentsByPos(parsedFile.Comments)
 			l.logger.Debug("sorting objects", "package", pkgPath, "file", filePos.Filename)
 			sortedObjects := astutils.SortObjectsByPos(file.Scope.Objects)
 
@@ -87,79 +91,38 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 				if !ok || !t.Name.IsExported() {
 					continue
 				}
-				structDef, ok := t.Type.(*ast.StructType)
-				if !ok || structDef.Fields.NumFields() == 0 {
+				if _, ok := t.Type.(*ast.StructType); !ok {
 					continue
 				}
 
-				structFields := make(map[string]Field, structDef.Fields.NumFields())
-				for _, fld := range structDef.Fields.List {
-					var ident *ast.Ident
-					anonymous := false
-					if len(fld.Names) > 0 {
-						ident = fld.Names[0]
-					} else {
-						anonymous = true
-						switch t := fld.Type.(type) {
-						case *ast.SelectorExpr:
-							if t.Sel != nil {
-								ident = t.Sel
-							}
-						case *ast.Ident:
-							ident = t
-						}
-					}
+				typ, ok := pkg.Types[t.Type]
+				if !ok {
+					l.logger.Crit("unable to load struct type", "name", t.Name.Name)
+				}
+				structType, ok := typ.Type.(*types.Struct)
+				if !ok {
+					continue
+				}
+				l.logger.Info("loaded struct type", "name", t.Name.Name)
 
-					if !ident.IsExported() {
+				structFields := make(map[string]Field, structType.NumFields())
+
+				for j := 0; j < structType.NumFields(); j++ {
+					fld := structType.Field(j)
+					if !fld.IsField() || !fld.Exported() || fld.Anonymous() {
 						continue
 					}
-
-					name := ident.Name
-
-					if len(name) > 0 {
-						required := true
-						jsonProperty := name
-						if fld.Tag != nil && len(fld.Tag.Value) > 0 {
-							tags, err := reflectutils.ParseStructTags(strings.Trim(fld.Tag.Value, "`"))
-							if err != nil {
-								return nil, errors.Wrapf(err, "failed to parse struct tag `%s`", fld.Tag.Value)
-							}
-
-							for _, t := range tags {
-								if t.Name == "json" {
-									split := strings.Split(t.Value, ",")
-									jsonProperty = split[0]
-									for _, tagValue := range split[1:] {
-										if tagValue == "omitempty" {
-											required = false
-										}
-									}
-									break
-								}
-							}
-						}
-
-						if jsonProperty != "-" {
-							structFields[name] = Field{
-								Name:         name,
-								Doc:          strings.TrimSpace(fld.Doc.Text()),
-								Anonymous:    anonymous,
-								Required:     required,
-								JSONProperty: jsonProperty,
-								JSONInline:   len(jsonProperty) == 0,
-								// JSONType:     l.jsonTypeFromExpr(fld.Type),
-							}
-						}
+					structFields[fld.Name()] = Field{
+						Name: fld.Name(),
 					}
 				}
 
 				if len(structFields) == 0 {
-					l.logger.Debug("skipping struct - no serialized fields", "package", pkgPath, "type", currentObj.Name)
 					continue
 				}
 
 				var previousObj *ast.Object
-				if i > 0 {
+				if 0 < i {
 					previousObj = sortedObjects[i-1]
 				}
 				shouldGenerateClient, namespacedType := extractGenerateClient(currentObj, previousObj, prog.Fset, sortedComments)
@@ -191,24 +154,31 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 }
 
 func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *token.FileSet, comments []*ast.CommentGroup) (bool, bool) {
-	previousCommentIndex := sort.Search(len(comments), func(i int) bool {
-		previousPos := previous.Pos()
+	previousLineNumber := 0
+	if previous != nil {
 		if n, ok := previous.Decl.(ast.Node); ok {
-			previousPos = n.End()
+			previousLineNumber = fset.Position(n.End()).Line
 		}
-		return previousPos < comments[i].Pos()
+	}
+
+	previousCommentIndex := sort.Search(len(comments), func(i int) bool {
+		commentLineNumber := fset.Position(comments[i].Pos()).Line
+		return previousLineNumber < commentLineNumber
 	})
 
 	if previousCommentIndex >= len(comments) {
 		return false, false
 	}
 
+	currentPos := fset.Position(current.Pos())
+	currentLineNumber := currentPos.Line
 	i := previousCommentIndex
 	for {
-		if i >= len(comments) {
+		if i == len(comments) {
 			return false, false
 		}
-		if comments[i].Pos() >= current.Pos() {
+		commentLineNumber := fset.Position(comments[i].Pos()).Line
+		if commentLineNumber >= currentLineNumber {
 			return false, false
 		}
 		if strings.HasPrefix(strings.TrimSpace(comments[i].Text()), "+genclient") {
