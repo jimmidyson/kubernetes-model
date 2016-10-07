@@ -43,9 +43,9 @@ type Field struct {
 	Name         string
 	Doc          string
 	Anonymous    bool
-	Type         types.Type
 	JSONRequired bool
 	JSONProperty string
+	Type         types.Type
 }
 
 func (l *ASTLoader) Load() (map[string]Package, error) {
@@ -232,12 +232,12 @@ func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *toke
 	)
 
 	if len(spl) > 0 {
-		spl := strings.Split(spl[0], "=")
-		genClient = len(spl) == 2 && spl[0] == "genclient" && spl[1] == "true"
+		genClientSpl := strings.Split(spl[0], "=")
+		genClient = len(genClientSpl) == 2 && genClientSpl[0] == "genclient" && genClientSpl[1] == "true"
 	}
 	if len(spl) > 1 {
-		spl := strings.Split(spl[1], "=")
-		namespaced = len(spl) != 2 || spl[0] != "nonNamespaced" || spl[1] != "true"
+		nonNamespacedSpl := strings.Split(spl[1], "=")
+		namespaced = len(nonNamespacedSpl) != 2 || nonNamespacedSpl[0] != "nonNamespaced" || nonNamespacedSpl[1] != "true"
 	}
 
 	return genClient, namespaced
