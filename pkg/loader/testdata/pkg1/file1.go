@@ -7,15 +7,16 @@ package pkg1
 type Type1 struct {
 	// Some doc.
 	Field1 int
-	Field2 uint64 `json:"f2"`
+	Field2 string `json:"f2"`
 	// Some more doc.
-	Field3 uint64 `json:"-"`
+	Field3 []string `json:"-"`
 	// Even more doc.
-	Field4 uint64 `json:",omitempty"`
+	Field4 []string `json:",omitempty"`
 	// And some
 	// more doc.
-	Field5 uint64 `json:"f5,omitempty"`
+	Field5 map[string]bool `json:"f5,omitempty"`
 	Type5  `json:",omitempty"`
+	Type5s []Type5 `json:"t5s,omitempty"`
 }
 
 // Type2 is a normal type
@@ -39,5 +40,9 @@ type type4 struct {
 // +genclient=true,nonNamespaced=true
 
 type Type5 struct {
-	Type5Field uint64 `json:"t5"`
+	// Something.
+	Type5Field uint32 `json:"t5"`
+
+	// Something else.
+	Type5Field2 []uint32 `json:"t6"`
 }

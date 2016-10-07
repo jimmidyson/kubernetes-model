@@ -1,6 +1,8 @@
 package loader_test
 
 import (
+	"go/types"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -34,11 +36,12 @@ var _ = Describe("Loader", func() {
 					"Type1": {
 						Name: "Type1",
 						Fields: map[string]Field{
-							"Field1": {Name: "Field1", Doc: "Some doc.", Anonymous: false, Required: true, JSONProperty: "Field1", JSONInline: false},
-							"Field2": {Name: "Field2", Doc: "", Anonymous: false, Required: true, JSONProperty: "f2", JSONInline: false},
-							"Field4": {Name: "Field4", Doc: "Even more doc.", Anonymous: false, Required: false, JSONProperty: "", JSONInline: true},
-							"Field5": {Name: "Field5", Doc: "And some\nmore doc.", Anonymous: false, Required: false, JSONProperty: "f5", JSONInline: false},
-							"Type5":  {Name: "Type5", Doc: "", Anonymous: true, Required: false, JSONProperty: "", JSONInline: true},
+							"Field1": {Name: "Field1", Doc: "Some doc.", Anonymous: false, JSONRequired: true, JSONProperty: "Field1", Type: types.Typ[types.Int]},
+							"Field2": {Name: "Field2", Doc: "", Anonymous: false, JSONRequired: true, JSONProperty: "f2", Type: types.Typ[types.String]},
+							"Field4": {Name: "Field4", Doc: "Even more doc.", Anonymous: false, JSONRequired: false, JSONProperty: "", Type: types.NewSlice(types.Typ[types.String])},
+							"Field5": {Name: "Field5", Doc: "And some\nmore doc.", Anonymous: false, JSONRequired: false, JSONProperty: "f5", Type: types.NewMap(types.Typ[types.String], types.Typ[types.Bool])},
+							"Type5":  {Name: "Type5", Doc: "", Anonymous: true, JSONRequired: false, JSONProperty: "", Type: pkgs["github.com/fabric8io/kubernetes-model/pkg/loader/testdata/pkg1"].Types["Type1"].Fields["Type5"].Type},
+							"Type5s": {Name: "Type5s", Doc: "", JSONRequired: false, JSONProperty: "t5s", Type: pkgs["github.com/fabric8io/kubernetes-model/pkg/loader/testdata/pkg1"].Types["Type1"].Fields["Type5s"].Type},
 						},
 						Doc:            "Type1 is a normal type\nwith a single field and a description.",
 						GenerateClient: true,
@@ -47,7 +50,8 @@ var _ = Describe("Loader", func() {
 					"Type5": {
 						Name: "Type5",
 						Fields: map[string]Field{
-							"Type5Field": {Name: "Type5Field", Doc: "", Anonymous: false, Required: true, JSONProperty: "t5", JSONInline: false},
+							"Type5Field":  {Name: "Type5Field", Doc: "Something.", Anonymous: false, JSONRequired: true, JSONProperty: "t5", Type: types.Typ[types.Uint32]},
+							"Type5Field2": {Name: "Type5Field2", Doc: "Something else.", Anonymous: false, JSONRequired: true, JSONProperty: "t6", Type: types.NewSlice(types.Typ[types.Uint32])},
 						},
 						Doc:            "",
 						GenerateClient: true,

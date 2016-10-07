@@ -11,6 +11,7 @@ import (
 	"github.com/inconshreveable/log15"
 	"github.com/pkg/errors"
 	"golang.org/x/tools/go/loader"
+	reflectutils "k8s.io/kubernetes/third_party/golang/reflect"
 
 	"github.com/fabric8io/kubernetes-model/pkg/astutils"
 )
@@ -42,10 +43,9 @@ type Field struct {
 	Name         string
 	Doc          string
 	Anonymous    bool
-	Required     bool
+	Type         types.Type
+	JSONRequired bool
 	JSONProperty string
-	JSONInline   bool
-	JSONType     string
 }
 
 func (l *ASTLoader) Load() (map[string]Package, error) {
@@ -91,30 +91,66 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 				if !ok || !t.Name.IsExported() {
 					continue
 				}
-				if _, ok := t.Type.(*ast.StructType); !ok {
+				astStructType, ok := t.Type.(*ast.StructType)
+				if !ok {
 					continue
 				}
 
 				typ, ok := pkg.Types[t.Type]
 				if !ok {
-					l.logger.Crit("unable to load struct type", "name", t.Name.Name)
+					return nil, errors.Errorf("unable to load struct type: %s", t.Name.Name)
 				}
 				structType, ok := typ.Type.(*types.Struct)
 				if !ok {
 					continue
 				}
-				l.logger.Info("loaded struct type", "name", t.Name.Name)
+				l.logger.Debug("loaded struct type", "name", t.Name.Name)
 
 				structFields := make(map[string]Field, structType.NumFields())
 
 				for j := 0; j < structType.NumFields(); j++ {
 					fld := structType.Field(j)
-					if !fld.IsField() || !fld.Exported() || fld.Anonymous() {
+					if !fld.IsField() || !fld.Exported() {
 						continue
 					}
-					structFields[fld.Name()] = Field{
-						Name: fld.Name(),
+
+					jsonProperty := fld.Name()
+					required := true
+					fldTag := structType.Tag(j)
+					tags, err := reflectutils.ParseStructTags(fldTag)
+					if err != nil {
+						return nil, errors.Wrapf(err, "failed to parse struct tag `%s`", fldTag)
 					}
+
+					for _, t := range tags {
+						if t.Name == "json" {
+							split := strings.Split(t.Value, ",")
+							jsonProperty = split[0]
+							for _, tagValue := range split[1:] {
+								if tagValue == "omitempty" {
+									required = false
+								}
+							}
+							break
+						}
+					}
+
+					if jsonProperty == "-" {
+						l.logger.Debug("ignoring struct field as not serialized", "struct", t.Name.Name, "field", fld.Name())
+						continue
+					}
+
+					l.logger.Debug("adding struct field", "struct", t.Name.Name, "field", fld.Name(), "type", fld.Type().String())
+					f := Field{
+						Name:         fld.Name(),
+						Doc:          strings.TrimSpace(astStructType.Fields.List[j].Doc.Text()),
+						Type:         fld.Type(),
+						Anonymous:    fld.Anonymous(),
+						JSONProperty: jsonProperty,
+						JSONRequired: required,
+					}
+					structFields[fld.Name()] = f
+					l.logger.Debug("added struct field defition", "struct", t.Name.Name, "field", f)
 				}
 
 				if len(structFields) == 0 {
