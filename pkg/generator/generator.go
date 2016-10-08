@@ -8,7 +8,7 @@ import (
 )
 
 type Generator interface {
-	Generate(map[string]loader.Package) error
+	Generate([]loader.Package) error
 }
 
 type Config struct {

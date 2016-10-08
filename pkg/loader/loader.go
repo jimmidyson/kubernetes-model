@@ -28,12 +28,12 @@ func New(packages []string, logger log15.Logger) *ASTLoader {
 
 type Package struct {
 	Path  string
-	Types map[string]Type
+	Types []Type
 }
 
 type Type struct {
 	Name           string
-	Fields         map[string]Field
+	Fields         []Field
 	Doc            string
 	GenerateClient bool
 	Namespaced     bool
@@ -46,9 +46,10 @@ type Field struct {
 	JSONRequired bool
 	JSONProperty string
 	Type         types.Type
+	TypeName     string
 }
 
-func (l *ASTLoader) Load() (map[string]Package, error) {
+func (l *ASTLoader) Load() ([]Package, error) {
 
 	var conf loader.Config
 	conf.ParserMode = parser.ParseComments
@@ -63,7 +64,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 	}
 	l.prog = prog
 
-	loadedPackages := make(map[string]Package, len(l.requestedPackages))
+	loadedPackages := make([]Package, 0, len(l.requestedPackages))
 	for _, pkg := range prog.InitialPackages() {
 		pkgPath := pkg.Pkg.Path()
 
@@ -72,7 +73,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 		l.logger.Debug("extracting package docs", "package", pkgPath)
 		pkgDoc := astutils.PackageDoc(pkgPath, pkg.Files, prog.Fset)
 
-		exportedTypes := make(map[string]Type)
+		exportedTypes := []Type{}
 		for _, file := range pkg.Files {
 			filePos := prog.Fset.Position(file.Pos())
 			l.logger.Debug("parsing file", "package", pkgPath, "file", filePos.Filename)
@@ -106,7 +107,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 				}
 				l.logger.Debug("loaded struct type", "name", t.Name.Name)
 
-				structFields := make(map[string]Field, structType.NumFields())
+				structFields := make([]Field, 0, structType.NumFields())
 
 				for j := 0; j < structType.NumFields(); j++ {
 					fld := structType.Field(j)
@@ -145,11 +146,12 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 						Name:         fld.Name(),
 						Doc:          strings.TrimSpace(astStructType.Fields.List[j].Doc.Text()),
 						Type:         fld.Type(),
+						TypeName:     fld.Type().String(),
 						Anonymous:    fld.Anonymous(),
 						JSONProperty: jsonProperty,
 						JSONRequired: required,
 					}
-					structFields[fld.Name()] = f
+					structFields = append(structFields, f)
 					l.logger.Debug("added struct field defition", "struct", t.Name.Name, "field", f)
 				}
 
@@ -170,7 +172,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 					Namespaced:     namespacedType,
 					Fields:         structFields,
 				}
-				exportedTypes[apiType.Name] = apiType
+				exportedTypes = append(exportedTypes, apiType)
 			}
 		}
 
@@ -183,7 +185,7 @@ func (l *ASTLoader) Load() (map[string]Package, error) {
 			Path:  pkg.Pkg.Path(),
 			Types: exportedTypes,
 		}
-		loadedPackages[pkg.Pkg.Path()] = loadedPackage
+		loadedPackages = append(loadedPackages, loadedPackage)
 	}
 
 	return loadedPackages, nil
