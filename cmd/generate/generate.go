@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/inconshreveable/log15"
@@ -31,13 +29,10 @@ import (
 	_ "k8s.io/kubernetes/pkg/apis/policy/v1alpha1"
 	_ "k8s.io/kubernetes/pkg/apis/rbac/v1alpha1"
 
+	"github.com/fabric8io/kubernetes-model/pkg/generator"
 	"github.com/fabric8io/kubernetes-model/pkg/loader"
 	"github.com/fabric8io/kubernetes-model/pkg/log"
 )
-
-type config struct {
-	Packages []string
-}
 
 var (
 	defaultAPIPackages = []string{
@@ -70,9 +65,27 @@ var (
 
 	defaultLogLevel = log15.LvlInfo
 
+	defaultOutputDirectory = "kubernetes-model/src/main/java"
+
+	defaultGenerator = "immutables"
+
+	defaultJavaPackage = "io.fabric8"
+
 	packages = flag.StringSliceP("package", "p", defaultAPIPackages, "packages to generate JSON schema for")
 
 	verbose = flag.BoolP("verbose", "v", false, "verbose output")
+
+	outputDirectory = flag.StringP("output-directory", "o", defaultOutputDirectory, "the directory to output generated files to")
+
+	gen = flag.StringP("generator", "g", defaultGenerator, "the generator to use")
+
+	javaPackage = flag.StringP("java-package", "j", defaultJavaPackage, "the root package to generate classes in")
+
+	force = flag.BoolP("force", "f", false, "force overwrite of existing files")
+
+	validGenerators = map[string]struct{}{
+		"immutables": struct{}{},
+	}
 )
 
 func main() {
@@ -88,6 +101,24 @@ func main() {
 	}
 	logger.SetHandler(log15.LvlFilterHandler(logLvl, log.Log.GetHandler()))
 
+	if _, ok := validGenerators[*gen]; !ok {
+		logger.Crit("unknown generator", "generator", *gen)
+		os.Exit(1)
+	}
+
+	cfg := generator.Config{
+		OutputDirectory: *outputDirectory,
+		JavaRootPackage: *javaPackage,
+		Logger:          logger,
+		Force:           *force,
+	}
+
+	g, err := generator.New(*gen, cfg)
+	if err != nil {
+		logger.Crit("failed to create generator", "error", err)
+		os.Exit(1)
+	}
+
 	ldr := loader.New(*packages, logger)
 	loadedPackages, err := ldr.Load()
 	if err != nil {
@@ -95,6 +126,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	b, _ := json.MarshalIndent(loadedPackages, "", "  ")
-	fmt.Println(string(b))
+	if err := g.Generate(loadedPackages); err != nil {
+		logger.Crit("failed to generate output", "error", err)
+		os.Exit(1)
+	}
 }
