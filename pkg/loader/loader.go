@@ -33,6 +33,7 @@ type Package struct {
 
 type Type struct {
 	Name           string
+	Package        string
 	Fields         []Field
 	Doc            string
 	GenerateClient bool
@@ -167,6 +168,7 @@ func (l *ASTLoader) Load() ([]Package, error) {
 
 				apiType := Type{
 					Name:           currentObj.Name,
+					Package:        pkgPath,
 					Doc:            strings.TrimSpace(astutils.TypeDoc(pkgDoc, currentObj.Name)),
 					GenerateClient: shouldGenerateClient,
 					Namespaced:     namespacedType,

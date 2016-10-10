@@ -1,30 +1,80 @@
 package generator
 
 import (
-	"go/types"
 	"os"
+	"path"
 	"path/filepath"
-	"reflect"
+	"regexp"
+	"strings"
 	"text/template"
+	"unicode"
+	"unicode/utf8"
 
 	"github.com/pkg/errors"
 
 	"github.com/fabric8io/kubernetes-model/pkg/loader"
 )
 
-const immutableTemplateText = `package {{.Package}};
-{{range $key, $type := .Imports}}
-import {{$key}};{{end}}
+const immutableTemplateText = `package {{.JavaPackage}};
 
 import org.immutables.value.Value;
 
-public interface {{.ClassName}} {{"{"}}{{range .Fields}}
-    {{.}}();
+{{if .Doc}}{{comment .Doc ""}}{{end}}
+@Value.Immutable
+public abstract class {{.ClassName}} {{"{"}}{{$className := .ClassName}}{{$goPackage := .GoPackage}}{{range .Fields}}
+{{if .Doc}}{{comment .Doc "  "}}{{end}}{{if eq .Name ""}}
+  @JsonUnwrapped{{end}}{{if typeName .Type | ne "TypeMeta"}}
+  public abstract {{.Type}} {{if .Name}}{{.Name}}{{else}}{{typeName .Type | lowerFirst}}{{end}}();{{else}}
+  @Value.Derived
+  public {{.Type}} {{typeName .Type | lowerFirst}}() {
+    return {{.Type}}.of("{{$className}}", "{{apiVersion $goPackage}}");
+  }{{end}}
 {{end}}
 }
 `
 
-var immutableTemplate = template.Must(template.New("immutable").Parse(immutableTemplateText))
+var startOfLineRegexp = regexp.MustCompile(`(?m:^)`)
+
+var immutableTemplate = template.Must(template.New("immutable").
+	Funcs(
+		template.FuncMap{
+			"comment": func(doc string, indent string) string {
+				return startOfLineRegexp.ReplaceAllString(doc, indent+"// ")
+			},
+			"typeName": func(s string) string {
+				lastDotIndex := strings.LastIndex(s, ".")
+				if lastDotIndex >= 0 {
+					return s[lastDotIndex+1:]
+				} else {
+					return s
+				}
+			},
+			"packageName": func(s string) string {
+				lastDotIndex := strings.LastIndex(s, ".")
+				if lastDotIndex >= 0 {
+					return s[:lastDotIndex]
+				} else {
+					return s
+				}
+			},
+			"lowerFirst": func(s string) string {
+				if s == "" {
+					return ""
+				}
+				r, n := utf8.DecodeRuneInString(s)
+				return string(unicode.ToLower(r)) + s[n:]
+			},
+			"apiVersion": func(s string) string {
+				apiVersion := path.Base(s)
+				apiGroup := path.Base(strings.TrimSuffix(s, apiVersion))
+				if apiGroup != "api" {
+					apiVersion = apiGroup + "/" + apiVersion
+				}
+				return apiVersion
+			},
+		},
+	).
+	Parse(immutableTemplateText))
 
 type immutablesGenerator struct {
 	config Config
@@ -75,47 +125,36 @@ func (g *immutablesGenerator) write(pkg string, typ loader.Type, f *os.File) err
 		_ = f.Close()
 	}()
 
-	type data struct {
-		Package   string
-		ClassName string
-		Imports   map[string]struct{}
-		Fields    []string
+	type field struct {
+		Type string
+		Name string
+		Doc  string
 	}
 
-	imports := map[string]struct{}{}
-	fields := make([]string, 0, len(typ.Fields))
+	type data struct {
+		JavaPackage string
+		GoPackage   string
+		ClassName   string
+		Doc         string
+		Fields      []field
+	}
+
+	fields := make([]field, 0, len(typ.Fields))
 
 	for _, fld := range typ.Fields {
-		switch fldT := fld.Type.Underlying().(type) {
-		case *types.Slice:
-			imports["java.util.List"] = struct{}{}
-			elemType := javaPackage(g.config.JavaRootPackage, fldT.Elem().String())
-			imports[elemType] = struct{}{}
-			fields = append(fields, "List<"+elemType+"> "+fld.JSONProperty)
-		case *types.Map:
-			imports["java.util.Map"] = struct{}{}
-			keyType := javaPackage(g.config.JavaRootPackage, fldT.Key().String())
-			imports[keyType] = struct{}{}
-			elemType := javaPackage(g.config.JavaRootPackage, fldT.Elem().String())
-			imports[elemType] = struct{}{}
-			fields = append(fields, "Map<"+keyType+", "+elemType+"> "+fld.JSONProperty)
-		case *types.Struct:
-			javaType := javaPackage(g.config.JavaRootPackage, fld.TypeName)
-			imports[javaType] = struct{}{}
-			fields = append(fields, javaType+" "+fld.JSONProperty)
-		case *types.Pointer:
-			javaType := javaPackage(g.config.JavaRootPackage, fldT.Elem().String())
-			imports[javaType] = struct{}{}
-			fields = append(fields, javaType+" "+fld.JSONProperty)
-		default:
-			g.config.Logger.Error("unhandled field type", "type", typ.Name, "field", fld.Name, "fieldType", reflect.TypeOf(fldT))
+		javaType, err := javaType(g.config.JavaRootPackage, fld.Type, fld.TypeName)
+		if err != nil {
+			return errors.Wrapf(err, "unhandled field type %s for field %s.%s.%s", pkg, typ.Name, fld.Type.String())
 		}
+
+		fields = append(fields, field{javaType, fld.JSONProperty, fld.Doc})
 	}
 
 	return immutableTemplate.Execute(f, data{
-		Package:   pkg,
-		ClassName: typ.Name,
-		Imports:   imports,
-		Fields:    fields,
+		JavaPackage: pkg,
+		GoPackage:   typ.Package,
+		ClassName:   typ.Name,
+		Doc:         typ.Doc,
+		Fields:      fields,
 	})
 }
