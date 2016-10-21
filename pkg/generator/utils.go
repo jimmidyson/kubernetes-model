@@ -9,6 +9,12 @@ import (
 )
 
 func javaPackage(rootPackage, pkgPath string) string {
+	// lastDotIndex := strings.LastIndex(pkgPath, ".")
+	// lastSlashIndex := strings.LastIndex(pkgPath, "/")
+	// if 0 < lastDotIndex && lastSlashIndex < lastDotIndex {
+	// 	pkgPath = pkgPath[:lastDotIndex+1] + "Abstract" + pkgPath[lastDotIndex+1:]
+	// }
+
 	var javaSubPackage string
 	if strings.HasPrefix(pkgPath, "github.com/openshift/origin/pkg/") {
 		goApiPackage := strings.TrimPrefix(pkgPath, "github.com/openshift/origin/pkg/")
@@ -47,9 +53,16 @@ func javaType(rootPackage string, typ types.Type, typeName string) (string, erro
 		}
 		return "java.util.Map<" + keyType + ", " + elemType + ">", nil
 	case *types.Struct:
-		return javaPackage(rootPackage, typeName), nil
+		switch typeName {
+		case "k8s.io/kubernetes/pkg/runtime.RawExtension":
+			return "io.fabric8.kubernetes.types.api.HasMetadata", nil
+		case "k8s.io/kubernetes/pkg/api/unversioned.Time":
+			return "java.util.Date", nil
+		default:
+			return javaPackage(rootPackage, typeName), nil
+		}
 	case *types.Pointer:
-		return javaPackage(rootPackage, fldT.Elem().String()), nil
+		return javaType(rootPackage, fldT.Elem(), fldT.Elem().String())
 	case *types.Basic:
 		return javaTypeBasic(fldT.Kind()), nil
 	default:

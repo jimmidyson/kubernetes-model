@@ -29,6 +29,7 @@ func New(packages []string, logger log15.Logger) *ASTLoader {
 type Package struct {
 	Path  string
 	Types []Type
+	Doc   string
 }
 
 type Type struct {
@@ -143,9 +144,14 @@ func (l *ASTLoader) Load() ([]Package, error) {
 					}
 
 					l.logger.Debug("adding struct field", "struct", t.Name.Name, "field", fld.Name(), "type", fld.Type().String())
+					fldDoc := ""
+					if j < astStructType.Fields.NumFields() {
+						fldDoc = strings.TrimSpace(astStructType.Fields.List[j].Doc.Text())
+					}
+
 					f := Field{
 						Name:         fld.Name(),
-						Doc:          strings.TrimSpace(astStructType.Fields.List[j].Doc.Text()),
+						Doc:          fldDoc,
 						Type:         fld.Type(),
 						TypeName:     fld.Type().String(),
 						Anonymous:    fld.Anonymous(),
@@ -186,6 +192,7 @@ func (l *ASTLoader) Load() ([]Package, error) {
 		loadedPackage := Package{
 			Path:  pkg.Pkg.Path(),
 			Types: exportedTypes,
+			Doc:   pkgDoc.Doc,
 		}
 		loadedPackages = append(loadedPackages, loadedPackage)
 	}

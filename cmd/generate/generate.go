@@ -18,6 +18,7 @@ import (
 	_ "github.com/openshift/origin/pkg/security/api/v1"
 	_ "github.com/openshift/origin/pkg/template/api/v1"
 	_ "github.com/openshift/origin/pkg/user/api/v1"
+	_ "k8s.io/kubernetes/pkg/api/resource"
 	_ "k8s.io/kubernetes/pkg/api/unversioned"
 	_ "k8s.io/kubernetes/pkg/api/v1"
 	_ "k8s.io/kubernetes/pkg/apis/apps/v1alpha1"
@@ -37,6 +38,7 @@ import (
 var (
 	defaultAPIPackages = []string{
 		"k8s.io/kubernetes/pkg/api/unversioned",
+		"k8s.io/kubernetes/pkg/api/resource",
 
 		"k8s.io/kubernetes/pkg/api/v1",
 
@@ -65,7 +67,7 @@ var (
 
 	defaultLogLevel = log15.LvlInfo
 
-	defaultOutputDirectory = "kubernetes-model/src/main/java"
+	defaultOutputDirectory = "kubernetes-model/src/main/generated"
 
 	defaultGenerator = "immutables"
 
