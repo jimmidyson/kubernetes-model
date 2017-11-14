@@ -69,4 +69,6 @@ vscode/*
 .vendor
 .test
 
-/kubernetes-model/src/main/java/io/fabric8/{kubernetes/types/{api/v1,apis},openshift/types/apis}
+kubernetes-model/src/main/java/io/fabric8/kubernetes/types/api/v1/
+kubernetes-model/src/main/java/io/fabric8/kubernetes/types/apis/
+kubernetes-model/src/main/java/io/fabric8/openshift/
