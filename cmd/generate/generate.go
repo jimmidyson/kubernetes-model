@@ -6,29 +6,43 @@ import (
 	"github.com/inconshreveable/log15"
 	flag "github.com/spf13/pflag"
 
-	_ "github.com/openshift/origin/pkg/authorization/api/v1"
-	_ "github.com/openshift/origin/pkg/build/api/v1"
-	_ "github.com/openshift/origin/pkg/deploy/api/v1"
-	_ "github.com/openshift/origin/pkg/image/api/v1"
-	_ "github.com/openshift/origin/pkg/oauth/api/v1"
-	_ "github.com/openshift/origin/pkg/project/api/v1"
-	_ "github.com/openshift/origin/pkg/quota/api/v1"
-	_ "github.com/openshift/origin/pkg/route/api/v1"
-	_ "github.com/openshift/origin/pkg/sdn/api/v1"
-	_ "github.com/openshift/origin/pkg/security/api/v1"
-	_ "github.com/openshift/origin/pkg/template/api/v1"
-	_ "github.com/openshift/origin/pkg/user/api/v1"
-	_ "k8s.io/kubernetes/pkg/api/resource"
-	_ "k8s.io/kubernetes/pkg/api/unversioned"
+	_ "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	_ "github.com/openshift/origin/pkg/apps/apis/apps/v1"
+	_ "github.com/openshift/origin/pkg/authorization/apis/authorization/v1"
+	_ "github.com/openshift/origin/pkg/build/apis/build/v1"
+	_ "github.com/openshift/origin/pkg/image/apis/image/v1"
+	_ "github.com/openshift/origin/pkg/network/apis/network/v1"
+	_ "github.com/openshift/origin/pkg/oauth/apis/oauth/v1"
+	_ "github.com/openshift/origin/pkg/project/apis/project/v1"
+	_ "github.com/openshift/origin/pkg/quota/apis/quota/v1"
+	_ "github.com/openshift/origin/pkg/route/apis/route/v1"
+	_ "github.com/openshift/origin/pkg/security/apis/security/v1"
+	_ "github.com/openshift/origin/pkg/template/apis/template/v1"
+	_ "github.com/openshift/origin/pkg/user/apis/user/v1"
+
 	_ "k8s.io/kubernetes/pkg/api/v1"
-	_ "k8s.io/kubernetes/pkg/apis/apps/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/admission/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/admissionregistration/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/apps/v1beta1"
+	_ "k8s.io/kubernetes/pkg/apis/authentication/v1"
 	_ "k8s.io/kubernetes/pkg/apis/authentication/v1beta1"
+	_ "k8s.io/kubernetes/pkg/apis/authorization/v1"
+	_ "k8s.io/kubernetes/pkg/apis/authorization/v1beta1"
 	_ "k8s.io/kubernetes/pkg/apis/autoscaling/v1"
+	_ "k8s.io/kubernetes/pkg/apis/autoscaling/v2alpha1"
 	_ "k8s.io/kubernetes/pkg/apis/batch/v1"
 	_ "k8s.io/kubernetes/pkg/apis/batch/v2alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/certificates/v1beta1"
 	_ "k8s.io/kubernetes/pkg/apis/extensions/v1beta1"
-	_ "k8s.io/kubernetes/pkg/apis/policy/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/imagepolicy/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/networking/v1"
+	_ "k8s.io/kubernetes/pkg/apis/policy/v1beta1"
 	_ "k8s.io/kubernetes/pkg/apis/rbac/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/rbac/v1beta1"
+	_ "k8s.io/kubernetes/pkg/apis/settings/v1alpha1"
+	_ "k8s.io/kubernetes/pkg/apis/storage/v1"
+	_ "k8s.io/kubernetes/pkg/apis/storage/v1beta1"
 
 	"github.com/fabric8io/kubernetes-model/pkg/generator"
 	"github.com/fabric8io/kubernetes-model/pkg/loader"
@@ -37,37 +51,49 @@ import (
 
 var (
 	defaultAPIPackages = []string{
-		"k8s.io/kubernetes/pkg/api/unversioned",
-		"k8s.io/kubernetes/pkg/api/resource",
+		"k8s.io/apimachinery/pkg/apis/meta/v1",
 
 		"k8s.io/kubernetes/pkg/api/v1",
-
-		"k8s.io/kubernetes/pkg/apis/apps/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/admission/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/admissionregistration/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/apps/v1beta1",
+		"k8s.io/kubernetes/pkg/apis/authentication/v1",
 		"k8s.io/kubernetes/pkg/apis/authentication/v1beta1",
+		"k8s.io/kubernetes/pkg/apis/authorization/v1",
+		"k8s.io/kubernetes/pkg/apis/authorization/v1beta1",
 		"k8s.io/kubernetes/pkg/apis/autoscaling/v1",
+		"k8s.io/kubernetes/pkg/apis/autoscaling/v2alpha1",
 		"k8s.io/kubernetes/pkg/apis/batch/v1",
 		"k8s.io/kubernetes/pkg/apis/batch/v2alpha1",
+		"k8s.io/kubernetes/pkg/apis/certificates/v1beta1",
 		"k8s.io/kubernetes/pkg/apis/extensions/v1beta1",
-		"k8s.io/kubernetes/pkg/apis/policy/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/imagepolicy/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/meta/v1",
+		"k8s.io/kubernetes/pkg/apis/networking/v1",
+		"k8s.io/kubernetes/pkg/apis/policy/v1beta1",
 		"k8s.io/kubernetes/pkg/apis/rbac/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/rbac/v1beta1",
+		"k8s.io/kubernetes/pkg/apis/settings/v1alpha1",
+		"k8s.io/kubernetes/pkg/apis/storage/v1",
+		"k8s.io/kubernetes/pkg/apis/storage/v1beta1",
 
-		"github.com/openshift/origin/pkg/authorization/api/v1",
-		"github.com/openshift/origin/pkg/build/api/v1",
-		"github.com/openshift/origin/pkg/deploy/api/v1",
-		"github.com/openshift/origin/pkg/image/api/v1",
-		"github.com/openshift/origin/pkg/oauth/api/v1",
-		"github.com/openshift/origin/pkg/project/api/v1",
-		"github.com/openshift/origin/pkg/quota/api/v1",
-		"github.com/openshift/origin/pkg/route/api/v1",
-		"github.com/openshift/origin/pkg/sdn/api/v1",
-		"github.com/openshift/origin/pkg/security/api/v1",
-		"github.com/openshift/origin/pkg/template/api/v1",
-		"github.com/openshift/origin/pkg/user/api/v1",
+		"github.com/openshift/origin/pkg/authorization/apis/authorization/v1",
+		"github.com/openshift/origin/pkg/build/apis/build/v1",
+		"github.com/openshift/origin/pkg/apps/apis/apps/v1",
+		"github.com/openshift/origin/pkg/image/apis/image/v1",
+		"github.com/openshift/origin/pkg/oauth/apis/oauth/v1",
+		"github.com/openshift/origin/pkg/project/apis/project/v1",
+		"github.com/openshift/origin/pkg/quota/apis/quota/v1",
+		"github.com/openshift/origin/pkg/route/apis/route/v1",
+		"github.com/openshift/origin/pkg/network/apis/network/v1",
+		"github.com/openshift/origin/pkg/security/apis/security/v1",
+		"github.com/openshift/origin/pkg/template/apis/template/v1",
+		"github.com/openshift/origin/pkg/user/apis/user/v1",
 	}
 
 	defaultLogLevel = log15.LvlInfo
 
-	defaultOutputDirectory = "kubernetes-model/src/main/generated"
+	defaultOutputDirectory = "kubernetes-model/src/main/java"
 
 	defaultGenerator = "immutables"
 

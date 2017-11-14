@@ -15,14 +15,17 @@
 #
 
 SHELL := /bin/bash
-GOPATH := $(shell pwd)/_gopath
+CURDIR := $(shell pwd)
+OLDGOPATH := $(shell go env GOPATH)
+GOPATH := $(CURDIR)/_gopath
 ORG := github.com/fabric8io
 REPOPATH ?= $(ORG)/kubernetes-model
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
+GO_FILES := $(shell find ! -path "*/_gopath/*" ! -path "*/vendor/*" -name *.go)
 
 .PHONY: build
-build: test generate
-	mvn clean install
+build: clean test generate
+	./mvnw install
 
 .PHONY: generate
 generate: schema
@@ -31,23 +34,39 @@ generate: schema
 schema: .tmp/generate
 	.tmp/generate -f
 
-.tmp/generate: gopath $(shell find -name *.go)
-	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o .tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate
+.tmp/generate: gopath
+	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o $(CURDIR)/.tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate
 
 .PHONY: test
-test: gopath
+test: .test
+
+.test: gopath $(GO_FILES)
 	cd $(GOPATH)/src/$(REPOPATH) && go test -race -v $(PACKAGES)
+	touch $@
 
 .PHONY: gopath
-gopath: $(GOPATH)/src/$(ORG)
+gopath: .gopath
 
-$(GOPATH)/src/$(ORG):
+.gopath: .vendor $(GO_FILES)
+	rm -rf $(GOPATH)
 	mkdir -p $(GOPATH)/src/$(ORG)
-	ln -s -f $(shell pwd) $(GOPATH)/src/$(ORG)
-	ln -s -f $(shell pwd)/vendor/{k8s.io,golang.org,gopkg.in,google.golang.org} $(GOPATH)/src
-	ln -s -f $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com/
+	rsync -a --exclude=.git --exclude=_gopath --exclude=vendor $(shell pwd) $(GOPATH)/src/$(ORG)
+	rsync -a $(shell pwd)/vendor/github.com/openshift/origin/vendor/{k8s.io,golang.org,gopkg.in,google.golang.org} $(GOPATH)/src
+	rsync -a $(shell pwd)/vendor/github.com/openshift/origin/vendor/github.com/* $(GOPATH)/src/github.com
+	rsync -a $(shell pwd)/vendor/github.com/openshift/origin/vendor/k8s.io/kubernetes/staging/src/k8s.io/* $(GOPATH)/src/k8s.io
+	rsync -a $(shell pwd)/vendor/github.com/* $(GOPATH)/src/github.com
+	rsync -a $(shell pwd)/vendor/golang.org/* $(GOPATH)/src/golang.org
+	rm -rf $(GOPATH)/src/github.com/openshift/origin/vendor
+	touch $@
 
 .PHONY: clean
 clean:
-	rm -rf $(GOPATH) .tmp
-	mvn clean
+	rm -rf .tmp kubernetes-model/src/main/java/io/fabric8/{kubernetes/types/{api/v1,apis},openshift/types/apis}
+	./mvnw clean
+
+.PHONY: vendor
+vendor: .vendor
+
+.vendor: glide.yaml
+	GOPATH=$(OLDGOPATH) glide update --no-recursive
+	touch $@

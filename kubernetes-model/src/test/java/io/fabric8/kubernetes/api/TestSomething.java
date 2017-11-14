@@ -13,5 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@io.fabric8.kubernetes.types.api.ImmutablesStyle
-package io.fabric8.kubernetes.types.util.intstr;
+package io.fabric8.kubernetes.api;
+
+import io.fabric8.kubernetes.types.api.v1.ImmutableService;
+import io.fabric8.kubernetes.types.api.v1.Service;
+
+public class TestSomething {
+
+  public void something() {
+  }
+
+}

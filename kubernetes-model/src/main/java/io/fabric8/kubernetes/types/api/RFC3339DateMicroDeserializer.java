@@ -16,28 +16,24 @@
 package io.fabric8.kubernetes.types.api;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-public class RFC3339DateDeserializer extends StdDeserializer<ZonedDateTime> {
+public class RFC3339DateMicroDeserializer extends StdDeserializer<ZonedDateTime> {
 
-  public static final String RFC3339_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
+  public static final String RFC3339_MICRO_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX";
 
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(RFC3339_FORMAT);
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(RFC3339_MICRO_FORMAT);
 
-  public RFC3339DateDeserializer() {
+  public RFC3339DateMicroDeserializer() {
     this(null);
   }
 
-  public RFC3339DateDeserializer(Class<?> vc) {
+  public RFC3339DateMicroDeserializer(Class<?> vc) {
     super(vc);
   }
 

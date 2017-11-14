@@ -3,24 +3,25 @@ package generator
 import (
 	"go/types"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/pkg/errors"
 )
 
-func javaPackage(rootPackage, pkgPath string) string {
-	// lastDotIndex := strings.LastIndex(pkgPath, ".")
-	// lastSlashIndex := strings.LastIndex(pkgPath, "/")
-	// if 0 < lastDotIndex && lastSlashIndex < lastDotIndex {
-	// 	pkgPath = pkgPath[:lastDotIndex+1] + "Abstract" + pkgPath[lastDotIndex+1:]
-	// }
+var (
+	kubernetesGoAPIPackagePrefix = regexp.MustCompile(`^k8s.io/(?:kubernetes|apimachinery)/pkg/`)
 
+	openshiftGoAPIPackagePrefix = regexp.MustCompile(`^github.com/openshift/origin/pkg/[^/]+/apis/(?P<apiGroupName>[^/]+)/(?P<apiGroupVersion>[^/]+)`)
+)
+
+func javaPackage(rootPackage, pkgPath string) string {
 	var javaSubPackage string
 	if strings.HasPrefix(pkgPath, "github.com/openshift/origin/pkg/") {
-		goApiPackage := strings.TrimPrefix(pkgPath, "github.com/openshift/origin/pkg/")
-		javaSubPackage = "openshift.types." + strings.Replace(strings.Replace(goApiPackage, "/api", "", -1), "/", ".", -1)
+		goApiPackage := openshiftGoAPIPackagePrefix.ReplaceAllString(pkgPath, "apis/${apiGroupName}/${apiGroupVersion}")
+		javaSubPackage = "openshift.types." + strings.Replace(goApiPackage, "/", ".", -1)
 	} else {
-		goApiPackage := strings.TrimPrefix(pkgPath, "k8s.io/kubernetes/pkg/")
+		goApiPackage := kubernetesGoAPIPackagePrefix.ReplaceAllString(pkgPath, "")
 		javaSubPackage = "kubernetes.types." + strings.Replace(goApiPackage, "/", ".", -1)
 	}
 
@@ -54,10 +55,14 @@ func javaType(rootPackage string, typ types.Type, typeName string) (string, erro
 		return "java.util.Map<" + keyType + ", " + elemType + ">", nil
 	case *types.Struct:
 		switch typeName {
-		case "k8s.io/kubernetes/pkg/runtime.RawExtension":
+		case "k8s.io/apimachinery/pkg/runtime.RawExtension":
 			return "io.fabric8.kubernetes.types.api.HasMetadata", nil
-		case "k8s.io/kubernetes/pkg/api/unversioned.Time":
-			return "java.util.Date", nil
+		case "k8s.io/apimachinery/pkg/apis/meta/v1.Time":
+			return "java.time.ZonedDateTime", nil
+		case "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":
+			return "java.time.ZonedDateTime", nil
+		case "k8s.io/apimachinery/pkg/api/resource.Quantity":
+			return "String", nil
 		default:
 			return javaPackage(rootPackage, typeName), nil
 		}

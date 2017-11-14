@@ -63,3 +63,10 @@ vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
+
+/vendor
+.gopath
+.vendor
+.test
+
+/kubernetes-model/src/main/java/io/fabric8/{kubernetes/types/{api/v1,apis},openshift/types/apis}

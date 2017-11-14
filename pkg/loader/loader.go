@@ -5,13 +5,15 @@ import (
 	"go/parser"
 	"go/token"
 	"go/types"
+	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/inconshreveable/log15"
 	"github.com/pkg/errors"
 	"golang.org/x/tools/go/loader"
-	reflectutils "k8s.io/kubernetes/third_party/golang/reflect"
+	codegenutils "k8s.io/code-generator/cmd/client-gen/generators/util"
+	reflectutils "k8s.io/kubernetes/third_party/forked/golang/reflect"
 
 	"github.com/fabric8io/kubernetes-model/pkg/loader/astutils"
 )
@@ -27,9 +29,10 @@ func New(packages []string, logger log15.Logger) *ASTLoader {
 }
 
 type Package struct {
-	Path  string
-	Types []Type
-	Doc   string
+	Path     string
+	Types    []Type
+	Doc      string
+	APIGroup string
 }
 
 type Type struct {
@@ -51,6 +54,8 @@ type Field struct {
 	TypeName     string
 }
 
+var packageAPIGroupRegexp = regexp.MustCompile(`.*\+groupName=([a-zA-Z0-9.]+.*)`)
+
 func (l *ASTLoader) Load() ([]Package, error) {
 
 	var conf loader.Config
@@ -69,6 +74,10 @@ func (l *ASTLoader) Load() ([]Package, error) {
 	loadedPackages := make([]Package, 0, len(l.requestedPackages))
 	for _, pkg := range prog.InitialPackages() {
 		pkgPath := pkg.Pkg.Path()
+
+		if !l.isRequestedPackage(pkgPath) {
+			continue
+		}
 
 		l.logger.Debug("parsing package", "package", pkgPath)
 
@@ -117,7 +126,7 @@ func (l *ASTLoader) Load() ([]Package, error) {
 						continue
 					}
 
-					jsonProperty := fld.Name()
+					fieldName := fld.Name()
 					required := true
 					fldTag := structType.Tag(j)
 					tags, err := reflectutils.ParseStructTags(fldTag)
@@ -126,19 +135,22 @@ func (l *ASTLoader) Load() ([]Package, error) {
 					}
 
 					for _, t := range tags {
-						if t.Name == "json" {
+						if t.Name == "protobuf" {
+							if t.Value == "-" {
+								fieldName = "-"
+								break
+							}
 							split := strings.Split(t.Value, ",")
-							jsonProperty = split[0]
-							for _, tagValue := range split[1:] {
-								if tagValue == "omitempty" {
-									required = false
+							for _, tagValue := range split {
+								if strings.HasPrefix(tagValue, "name=") {
+									fieldName = tagValue[5:]
 								}
 							}
 							break
 						}
 					}
 
-					if jsonProperty == "-" {
+					if fieldName == "-" {
 						l.logger.Debug("ignoring struct field as not serialized", "struct", t.Name.Name, "field", fld.Name())
 						continue
 					}
@@ -155,8 +167,8 @@ func (l *ASTLoader) Load() ([]Package, error) {
 						Type:         fld.Type(),
 						TypeName:     fld.Type().String(),
 						Anonymous:    fld.Anonymous(),
-						JSONProperty: jsonProperty,
-						JSONRequired: required,
+						JSONProperty: fieldName,
+						JSONRequired: required && !strings.Contains(fldDoc, "+optional"),
 					}
 					structFields = append(structFields, f)
 					l.logger.Debug("added struct field defition", "struct", t.Name.Name, "field", f)
@@ -170,14 +182,14 @@ func (l *ASTLoader) Load() ([]Package, error) {
 				if 0 < i {
 					previousObj = sortedObjects[i-1]
 				}
-				shouldGenerateClient, namespacedType := extractGenerateClient(currentObj, previousObj, prog.Fset, sortedComments)
+				clientTags := extractGenerateClient(currentObj, previousObj, prog.Fset, sortedComments)
 
 				apiType := Type{
 					Name:           currentObj.Name,
 					Package:        pkgPath,
 					Doc:            strings.TrimSpace(astutils.TypeDoc(pkgDoc, currentObj.Name)),
-					GenerateClient: shouldGenerateClient,
-					Namespaced:     namespacedType,
+					GenerateClient: clientTags.GenerateClient,
+					Namespaced:     !clientTags.NonNamespaced,
 					Fields:         structFields,
 				}
 				exportedTypes = append(exportedTypes, apiType)
@@ -189,18 +201,33 @@ func (l *ASTLoader) Load() ([]Package, error) {
 			continue
 		}
 
+		apiGroup := ""
+
+		if matchedAPIGroup := packageAPIGroupRegexp.FindStringSubmatch(pkgDoc.Doc); len(matchedAPIGroup) == 2 {
+			apiGroup = matchedAPIGroup[1]
+		}
+
 		loadedPackage := Package{
-			Path:  pkg.Pkg.Path(),
-			Types: exportedTypes,
-			Doc:   pkgDoc.Doc,
+			Path:     pkg.Pkg.Path(),
+			Types:    exportedTypes,
+			Doc:      pkgDoc.Doc,
+			APIGroup: apiGroup,
 		}
 		loadedPackages = append(loadedPackages, loadedPackage)
 	}
 
 	return loadedPackages, nil
 }
+func (l *ASTLoader) isRequestedPackage(pkgPath string) bool {
+	for _, pkg := range l.requestedPackages {
+		if pkg == pkgPath {
+			return true
+		}
+	}
+	return false
+}
 
-func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *token.FileSet, comments []*ast.CommentGroup) (bool, bool) {
+func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *token.FileSet, comments []*ast.CommentGroup) codegenutils.Tags {
 	previousLineNumber := 0
 	if previous != nil {
 		if n, ok := previous.Decl.(ast.Node); ok {
@@ -214,42 +241,24 @@ func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *toke
 	})
 
 	if previousCommentIndex >= len(comments) {
-		return false, false
+		return codegenutils.Tags{}
 	}
 
 	currentPos := fset.Position(current.Pos())
 	currentLineNumber := currentPos.Line
 	i := previousCommentIndex
+	var commentsStrings []string
 	for {
 		if i == len(comments) {
-			return false, false
+			break
 		}
 		commentLineNumber := fset.Position(comments[i].Pos()).Line
 		if commentLineNumber >= currentLineNumber {
-			return false, false
-		}
-		if strings.HasPrefix(strings.TrimSpace(comments[i].Text()), "+genclient") {
-			previousCommentIndex = i
 			break
 		}
+		commentsStrings = append(commentsStrings, comments[i].Text()[1:])
 		i++
 	}
 
-	spl := strings.Split(strings.TrimSpace(comments[previousCommentIndex].Text()[1:]), ",")
-
-	var (
-		genClient  = false
-		namespaced = true
-	)
-
-	if len(spl) > 0 {
-		genClientSpl := strings.Split(spl[0], "=")
-		genClient = len(genClientSpl) == 2 && genClientSpl[0] == "genclient" && genClientSpl[1] == "true"
-	}
-	if len(spl) > 1 {
-		nonNamespacedSpl := strings.Split(spl[1], "=")
-		namespaced = len(nonNamespacedSpl) != 2 || nonNamespacedSpl[0] != "nonNamespaced" || nonNamespacedSpl[1] != "true"
-	}
-
-	return genClient, namespaced
+	return codegenutils.MustParseClientGenTags(commentsStrings)
 }
