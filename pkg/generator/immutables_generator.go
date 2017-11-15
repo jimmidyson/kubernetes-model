@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 {{if .Doc}}{{comment .Doc ""}}{{end}}
 @Value.Immutable
-@JsonPropertyOrder({"apiVersion", "kind", "metadata"{{range .Fields}}{{if isSpecificProperty .Name}}, "{{.Name}}"{{end}}{{end}}})
+@JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}})
 public abstract class {{.ClassName}} implements With{{.ClassName}}{{if .HasMetadata}}, io.fabric8.kubernetes.types.api.HasMetadata{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}{{$fieldsLen := len .Fields}}{{range .Fields}}
 {{if .Doc}}
 {{comment .Doc "  "}}{{end}}{{if eq .Name ""}}
@@ -130,11 +130,21 @@ var immutableTemplate = template.Must(template.New("immutable").
 				}
 				return res
 			},
-			"isSpecificProperty": func(s string) bool {
-			    return s != "apiVersion" && s != "kind" && s != "metadata" && s != "TypeMeta"
-			},
 			"notCollectionType": func(s string) bool {
-			    return !strings.HasPrefix(s, "java.util.List") && !strings.HasPrefix(s, "java.util.Map") && !strings.HasPrefix(s, "java.util.Set")
+				return !strings.HasPrefix(s, "java.util.List") && !strings.HasPrefix(s, "java.util.Map") && !strings.HasPrefix(s, "java.util.Set")
+			},
+			"jsonPropertyOrder": func(fields []field) string {
+				var propertyOrder []string
+				for _, f := range fields {
+					if strings.HasSuffix(f.Type, ".TypeMeta") {
+						propertyOrder = append([]string{"\"apiVersion\"", "\"kind\""}, propertyOrder...)
+						continue
+					}
+					if f.Name != "" {
+						propertyOrder = append(propertyOrder, "\""+f.Name+"\"")
+					}
+				}
+				return strings.Join(propertyOrder, ", ")
 			},
 		},
 	).
@@ -203,27 +213,27 @@ func (g *immutablesGenerator) Generate(pkgs []loader.Package) error {
 	return nil
 }
 
+type field struct {
+	Type     string
+	Name     string
+	Doc      string
+	Optional bool
+}
+
+type data struct {
+	JavaPackage   string
+	GoPackage     string
+	ClassName     string
+	HasMetadata   bool
+	Doc           string
+	Fields        []field
+	LoaderPackage loader.Package
+}
+
 func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ loader.Type, f *os.File) error {
 	defer func() {
 		_ = f.Close()
 	}()
-
-	type field struct {
-		Type     string
-		Name     string
-		Doc      string
-		Optional bool
-	}
-
-	type data struct {
-		JavaPackage   string
-		GoPackage     string
-		ClassName     string
-		HasMetadata   bool
-		Doc           string
-		Fields        []field
-		LoaderPackage loader.Package
-	}
 
 	fields := make([]field, 0, len(typ.Fields))
 

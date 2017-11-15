@@ -145,6 +145,28 @@ func (l *ASTLoader) Load() ([]Package, error) {
 								if strings.HasPrefix(tagValue, "name=") {
 									fieldName = tagValue[5:]
 								}
+								if tagValue == "opt" {
+									required = false
+								}
+							}
+							break
+						}
+						if t.Name == "json" {
+							if t.Value == "-" {
+								fieldName = "-"
+								break
+							}
+							split := strings.Split(t.Value, ",")
+							if split[0] != "" {
+								fieldName = split[0]
+							}
+							for _, tagValue := range split[1:] {
+								switch tagValue {
+								case "omitempty":
+									required = false
+								case "inline":
+									fieldName = ""
+								}
 							}
 							break
 						}
