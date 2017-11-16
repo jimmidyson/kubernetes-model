@@ -13,6 +13,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/pkg/errors"
+	codegenutils "k8s.io/code-generator/cmd/client-gen/generators/util"
 
 	"github.com/fabric8io/kubernetes-model/pkg/loader"
 )
@@ -38,11 +39,15 @@ import org.immutables.value.Value;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;{{if .Tags.GenerateClient}}
+import io.fabric8.kubernetes.types.api.GenerateClient;{{if .Tags.Extensions}}
+import io.fabric8.kubernetes.types.api.GenerateClient.Extension;{{end}}
+{{end}}
 
 {{if .Doc}}{{comment .Doc ""}}{{end}}
 @Value.Immutable
-@JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}})
+@JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}}){{if .Tags.GenerateClient}}
+@GenerateClient{{generateClientTags .Tags .RootPackage .JavaPackage}}{{end}}
 public abstract class {{.ClassName}} implements With{{.ClassName}}{{if .HasMetadata}}, io.fabric8.kubernetes.types.api.HasMetadata{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}{{$fieldsLen := len .Fields}}{{range .Fields}}
 {{if .Doc}}
 {{comment .Doc "  "}}{{end}}{{if eq .Name ""}}
@@ -146,6 +151,62 @@ var immutableTemplate = template.Must(template.New("immutable").
 				}
 				return strings.Join(propertyOrder, ", ")
 			},
+			"generateClientTags": func(tags codegenutils.Tags, rootPackage, currentPackage string) string {
+				t := []string{}
+
+				if !tags.GenerateClient {
+					t = append(t, "generate=false")
+				}
+				if tags.NonNamespaced {
+					t = append(t, "nonNamespaced=true")
+				}
+				if tags.NoStatus {
+					t = append(t, "noStatus=true")
+				}
+				if tags.NoVerbs {
+					t = append(t, "noVerbs=true")
+				}
+				if len(tags.SkipVerbs) > 0 {
+					skipVerbs := []string{}
+					for _, v := range tags.SkipVerbs {
+						skipVerbs = append(skipVerbs, "\""+v+"\"")
+					}
+					t = append(t, "skipVerbs={"+strings.Join(skipVerbs, ", ")+"}")
+				}
+
+				if len(tags.Extensions) > 0 {
+					extensions := []string{}
+					for _, e := range tags.Extensions {
+						annotationValues := []string{"verbName = \"" + e.VerbName + "\"", "verbType = \"" + e.VerbType + "\""}
+						if e.SubResourcePath != "" {
+							annotationValues = append(annotationValues, "subresourcePath = \""+e.SubResourcePath+"\"")
+						}
+						if e.InputTypeOverride != "" {
+							if !strings.Contains(e.InputTypeOverride, ".") {
+								annotationValues = append(annotationValues, "inputType = "+currentPackage+"."+e.InputTypeOverride+".class")
+							} else {
+								annotationValues = append(annotationValues, "inputType = "+javaPackage(rootPackage, e.InputTypeOverride)+".class")
+							}
+						}
+						if e.ResultTypeOverride != "" {
+							if !strings.Contains(e.ResultTypeOverride, ".") {
+								annotationValues = append(annotationValues, "resultType = "+currentPackage+"."+e.ResultTypeOverride+".class")
+							} else {
+								annotationValues = append(annotationValues, "resultType = "+javaPackage(rootPackage, e.ResultTypeOverride)+".class")
+							}
+						}
+						extensions = append(extensions, "@Extension("+strings.Join(annotationValues, ", ")+")")
+					}
+
+					t = append(t, "extensions = {\n    "+strings.Join(extensions, ",\n    ")+"\n  }")
+				}
+
+				s := strings.Join(t, ",\n  ")
+				if s != "" {
+					s = "(\n  " + s + "\n)"
+				}
+				return s
+			},
 		},
 	).
 	Parse(immutableTemplateText))
@@ -228,6 +289,8 @@ type data struct {
 	Doc           string
 	Fields        []field
 	LoaderPackage loader.Package
+	Tags          codegenutils.Tags
+	RootPackage   string
 }
 
 func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ loader.Type, f *os.File) error {
@@ -273,6 +336,8 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 		Doc:           typ.Doc,
 		Fields:        fields,
 		LoaderPackage: pkg,
+		Tags:          typ.Tags,
+		RootPackage:   g.config.JavaRootPackage,
 	})
 }
 

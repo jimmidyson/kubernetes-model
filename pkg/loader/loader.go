@@ -36,12 +36,11 @@ type Package struct {
 }
 
 type Type struct {
-	Name           string
-	Package        string
-	Fields         []Field
-	Doc            string
-	GenerateClient bool
-	Namespaced     bool
+	Name    string
+	Package string
+	Fields  []Field
+	Doc     string
+	Tags    codegenutils.Tags
 }
 
 type Field struct {
@@ -207,12 +206,11 @@ func (l *ASTLoader) Load() ([]Package, error) {
 				clientTags := extractGenerateClient(currentObj, previousObj, prog.Fset, sortedComments)
 
 				apiType := Type{
-					Name:           currentObj.Name,
-					Package:        pkgPath,
-					Doc:            strings.TrimSpace(astutils.TypeDoc(pkgDoc, currentObj.Name)),
-					GenerateClient: clientTags.GenerateClient,
-					Namespaced:     !clientTags.NonNamespaced,
-					Fields:         structFields,
+					Name:    currentObj.Name,
+					Package: pkgPath,
+					Doc:     strings.TrimSpace(astutils.TypeDoc(pkgDoc, currentObj.Name)),
+					Fields:  structFields,
+					Tags:    clientTags,
 				}
 				exportedTypes = append(exportedTypes, apiType)
 			}
@@ -278,7 +276,9 @@ func extractGenerateClient(current *ast.Object, previous *ast.Object, fset *toke
 		if commentLineNumber >= currentLineNumber {
 			break
 		}
-		commentsStrings = append(commentsStrings, comments[i].Text()[1:])
+		for _, s := range strings.Split(comments[i].Text(), "\n") {
+			commentsStrings = append(commentsStrings, s)
+		}
 		i++
 	}
 
