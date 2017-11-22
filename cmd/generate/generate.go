@@ -113,6 +113,7 @@ var (
 
 	validGenerators = map[string]struct{}{
 		"immutables": struct{}{},
+		"sundrio":    struct{}{},
 	}
 )
 

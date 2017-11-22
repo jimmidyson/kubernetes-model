@@ -22,6 +22,7 @@ ORG := github.com/fabric8io
 REPOPATH ?= $(ORG)/kubernetes-model
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
 GO_FILES := $(shell find ! -path "*/_gopath/*" ! -path "*/vendor/*" -name *.go)
+GENERATOR ?= sundrio
 
 .PHONY: build
 build: clean test generate
@@ -32,7 +33,7 @@ generate: schema
 
 .PHONY: schema
 schema: .tmp/generate
-	.tmp/generate -f
+	.tmp/generate -f -g $(GENERATOR)
 
 .tmp/generate: gopath
 	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 go build -o $(CURDIR)/.tmp/generate -ldflags="-s -w -extldflags '-static'" ./cmd/generate

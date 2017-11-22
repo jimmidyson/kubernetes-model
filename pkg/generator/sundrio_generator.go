@@ -1,12 +1,9 @@
 package generator
 
 import (
-	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
-	"regexp"
 	"strings"
 	"text/template"
 	"unicode"
@@ -18,7 +15,7 @@ import (
 	"github.com/fabric8io/kubernetes-model/pkg/loader"
 )
 
-const immutableTemplateText = `/*
+const sundrioTemplateText = `/*
  * Copyright (C) 2017 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,73 +32,97 @@ const immutableTemplateText = `/*
  */
 package {{.JavaPackage}};
 
-import org.immutables.value.Value;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sundr.builder.annotations.Buildable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;{{if .Tags.GenerateClient}}
 import io.fabric8.kubernetes.types.api.GenerateClient;{{if .Tags.Extensions}}
 import io.fabric8.kubernetes.types.api.GenerateClient.Extension;{{end}}
 {{end}}
-
 {{if .Doc}}{{comment .Doc ""}}{{end}}
-@Value.Immutable
-@JsonSerialize(as = Immutable{{.ClassName}}.class)
-@JsonDeserialize(builder = {{.ClassName}}.Builder.class)
+@Buildable
 @JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}}){{if .Tags.GenerateClient}}
 @GenerateClient{{generateClientTags .Tags .RootPackage .JavaPackage}}{{end}}
-public abstract class {{.ClassName}} implements With{{.ClassName}}{{if .HasMetadata}}, io.fabric8.kubernetes.types.api.HasMetadata{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}{{$fieldsLen := len .Fields}}{{range .Fields}}
+public class {{.ClassName}}{{if .HasMetadata}} implements io.fabric8.kubernetes.types.api.HasMetadata{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}
+{{$fieldsLen := len .Fields}}{{range .Fields}}
+  private final {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} _{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}}{{if typeName .Type | eq "TypeMeta"}} = new {{.Type}}(java.util.Optional.of("{{$className}}"), java.util.Optional.of("{{apiVersion $loaderPackage $goPackage}}")){{end}};
+{{end}}
+  @JsonCreator
+  public {{$className}}({{constructorArgs .Fields}}) {{"{"}}{{range .Fields}}{{if typeName .Type | ne "TypeMeta"}}
+    this._{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}} = _{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}};{{end}}{{end}}
+  }{{range .Fields}}
 {{if .Doc}}
-{{comment .Doc "  "}}{{end}}{{if eq .Name ""}}{{if typeName .Type | ne "TypeMeta"}}
-  @JsonUnwrapped{{end}}{{else}}{{if typeName .Type | ne "TypeMeta"}}
-  @JsonProperty("{{.Name}}"){{end}}{{end}}{{if typeName .Type | ne "TypeMeta"}}{{if eq .Type "java.time.ZonedDateTime"}}
+{{comment .Doc "  "}}{{end}}{{if eq .Name ""}}
+  @JsonUnwrapped{{end}}
+  @JsonProperty("{{if .Name}}{{.Name}}{{else}}{{typeName .Type | lowerFirst}}{{end}}"){{if eq .Type "java.time.ZonedDateTime"}}
   @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = io.fabric8.kubernetes.types.api.RFC3339DateDeserializer.class)
   @com.fasterxml.jackson.annotation.JsonFormat(shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING, pattern = io.fabric8.kubernetes.types.api.RFC3339DateDeserializer.RFC3339_FORMAT, timezone="UTC"){{end}}
-  public abstract {{if .Optional}}{{if notCollectionType .Type}}java.util.Optional<{{end}}{{end}}{{.Type}}{{if .Optional}}{{if notCollectionType .Type}}>{{end}}{{end}} {{if eq .Type "Boolean"}}is{{else}}get{{end}}{{if .Name}}{{upperFirst .Name | sanitize}}{{else}}{{typeName .Type | upperFirst | sanitize}}{{end}}();{{else}}
-  @Value.Default
-  @JsonUnwrapped
-  public {{.Type}} get{{typeName .Type}}() {
-    return new {{.Type}}.Builder().kind("{{$className}}").apiVersion("{{apiVersion $loaderPackage $goPackage}}").build();
-  }
+  public {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} {{if eq .Type "Boolean"}}is{{else}}get{{end}}{{if .Name}}{{upperFirst .Name | sanitize}}{{else}}{{typeName .Type | upperFirst | sanitize}}{{end}}() {
+    return this._{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}};
+  }{{if typeName .Type | eq "TypeMeta"}}
 
-  @Value.Auxiliary
   @JsonIgnore
   public String getApiVersion() {
     return getTypeMeta().getApiVersion().orElse("{{apiVersion $loaderPackage $goPackage}}");
   }
 
-  @Value.Auxiliary
   @JsonIgnore
   public String getKind() {
     return getTypeMeta().getKind().orElse("{{$className}}");
   }{{end}}{{end}}
-
-  public static final class Builder extends Immutable{{.ClassName}}.Builder {}
 }
 `
 
-var (
-	startOfLineRegexp   = regexp.MustCompile(`(?m:^)`)
-	trailingSpaceRegexp = regexp.MustCompile(`(?m:[\t ]+$)`)
-)
+func lowerFirst(s string) string {
+	if s == "" {
+		return ""
+	}
+	r, n := utf8.DecodeRuneInString(s)
+	return string(unicode.ToLower(r)) + s[n:]
+}
 
-var immutableTemplate = template.Must(template.New("immutable").
+func notCollectionType(s string) bool {
+	return !strings.HasPrefix(s, "java.util.List") && !strings.HasPrefix(s, "java.util.Map") && !strings.HasPrefix(s, "java.util.Set")
+}
+
+func typeName(s string) string {
+	lastDotIndex := strings.LastIndex(s, ".")
+	if lastDotIndex >= 0 {
+		return s[lastDotIndex+1:]
+	} else {
+		return s
+	}
+}
+
+func sanitize(s string) string {
+	res := ""
+	splitRes := strings.Split(s, ".")
+	for i, spl := range splitRes {
+		if i > 0 {
+			if len(spl) > 0 {
+				r, n := utf8.DecodeRuneInString(spl)
+				spl = string(unicode.ToUpper(r)) + spl[n:]
+			}
+		}
+		res += spl
+	}
+	return res
+}
+
+func isOptionalField(f field) bool {
+	return (f.Optional && notCollectionType(f.Type)) || f.Name == "metadata"
+}
+
+var sundrioTemplate = template.Must(template.New("sundrio").
 	Funcs(
 		template.FuncMap{
 			"comment": func(doc string, indent string) string {
 				doc = strings.Replace(strings.Replace(doc, "/", "&#47;", -1), "\t", "  ", -1)
 				return trailingSpaceRegexp.ReplaceAllString(indent+"/*\n"+startOfLineRegexp.ReplaceAllString(doc, indent+" * ")+"\n"+indent+" */", "")
 			},
-			"typeName": func(s string) string {
-				lastDotIndex := strings.LastIndex(s, ".")
-				if lastDotIndex >= 0 {
-					return s[lastDotIndex+1:]
-				} else {
-					return s
-				}
-			},
+			"typeName": typeName,
 			"packageName": func(s string) string {
 				lastDotIndex := strings.LastIndex(s, ".")
 				if lastDotIndex >= 0 {
@@ -117,6 +138,7 @@ var immutableTemplate = template.Must(template.New("immutable").
 				r, n := utf8.DecodeRuneInString(s)
 				return string(unicode.ToUpper(r)) + s[n:]
 			},
+			"lowerFirst": lowerFirst,
 			"apiVersion": func(pkg loader.Package, s string) string {
 				apiVersion := path.Base(s)
 				apiGroup := pkg.APIGroup
@@ -125,23 +147,8 @@ var immutableTemplate = template.Must(template.New("immutable").
 				}
 				return apiVersion
 			},
-			"sanitize": func(s string) string {
-				res := ""
-				splitRes := strings.Split(s, ".")
-				for i, spl := range splitRes {
-					if i > 0 {
-						if len(spl) > 0 {
-							r, n := utf8.DecodeRuneInString(spl)
-							spl = string(unicode.ToUpper(r)) + spl[n:]
-						}
-					}
-					res += spl
-				}
-				return res
-			},
-			"notCollectionType": func(s string) bool {
-				return !strings.HasPrefix(s, "java.util.List") && !strings.HasPrefix(s, "java.util.Map") && !strings.HasPrefix(s, "java.util.Set")
-			},
+			"sanitize":          sanitize,
+			"notCollectionType": notCollectionType,
 			"jsonPropertyOrder": func(fields []field) string {
 				var propertyOrder []string
 				for _, f := range fields {
@@ -211,28 +218,37 @@ var immutableTemplate = template.Must(template.New("immutable").
 				}
 				return s
 			},
+			"constructorArgs": func(fields []field) string {
+				args := []string{}
+				for _, f := range fields {
+					if typeName(f.Type) != "TypeMeta" {
+						arg := f.Name
+						if arg == "" {
+							arg = lowerFirst(typeName(f.Type))
+						}
+						arg = sanitize(arg)
+						argType := f.Type
+						if isOptionalField(f) {
+							argType = "java.util.Optional<" + argType + ">"
+						}
+						args = append(args, "@JsonProperty(\""+arg+"\") "+argType+" _"+arg)
+					}
+				}
+				return strings.Join(args, ", ")
+			},
+			"optional": isOptionalField,
 		},
 	).
-	Parse(immutableTemplateText))
+	Parse(sundrioTemplateText))
 
-const styleClassName = "ImmutablesStyle"
-
-type immutablesGenerator struct {
+type sundrioGenerator struct {
 	config Config
 }
 
-var _ Generator = &immutablesGenerator{}
+var _ Generator = &sundrioGenerator{}
 
-func (g *immutablesGenerator) Generate(pkgs []loader.Package) error {
+func (g *sundrioGenerator) Generate(pkgs []loader.Package) error {
 	g.config.Logger.Debug("generating")
-
-	stylesPackage := g.config.JavaRootPackage + ".kubernetes.types.api"
-	pkgDir := javaPackageToDir(g.config.OutputDirectory, stylesPackage)
-	if err := os.MkdirAll(pkgDir, 0755); err != nil && os.IsExist(err) {
-		return errors.Wrapf(err, "failed to create directory %s", pkgDir)
-	}
-
-	stylesClass := stylesPackage + "." + styleClassName
 
 	for _, pkg := range pkgs {
 		javaPkg := javaPackage(g.config.JavaRootPackage, pkg.Path)
@@ -241,10 +257,6 @@ func (g *immutablesGenerator) Generate(pkgs []loader.Package) error {
 
 		if err := os.MkdirAll(pkgDir, 0755); err != nil && os.IsExist(err) {
 			return errors.Wrapf(err, "failed to create directory %s", pkgDir)
-		}
-
-		if err := g.writePackageJava(pkgDir, javaPkg, stylesClass, pkg.Doc); err != nil {
-			return errors.Wrap(err, "failed to write package-info.java file")
 		}
 
 		for _, typ := range pkg.Types {
@@ -278,26 +290,7 @@ func (g *immutablesGenerator) Generate(pkgs []loader.Package) error {
 	return nil
 }
 
-type field struct {
-	Type     string
-	Name     string
-	Doc      string
-	Optional bool
-}
-
-type data struct {
-	JavaPackage   string
-	GoPackage     string
-	ClassName     string
-	HasMetadata   bool
-	Doc           string
-	Fields        []field
-	LoaderPackage loader.Package
-	Tags          codegenutils.Tags
-	RootPackage   string
-}
-
-func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ loader.Type, f *os.File) error {
+func (g *sundrioGenerator) write(pkg loader.Package, javaPkg string, typ loader.Type, f *os.File) error {
 	defer func() {
 		_ = f.Close()
 	}()
@@ -332,7 +325,7 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 		})
 	}
 
-	return immutableTemplate.Execute(f, data{
+	return sundrioTemplate.Execute(f, data{
 		JavaPackage:   javaPkg,
 		GoPackage:     typ.Package,
 		ClassName:     typ.Name,
@@ -343,32 +336,4 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 		Tags:          typ.Tags,
 		RootPackage:   g.config.JavaRootPackage,
 	})
-}
-
-func (g *immutablesGenerator) writePackageJava(pkgDir, javaPackage, styleClass, doc string) error {
-	pkgDoc := doc
-	if len(pkgDoc) > 0 {
-		pkgDoc = startOfLineRegexp.ReplaceAllString(pkgDoc, "// ") + "\n"
-		pkgDoc = strings.Replace(pkgDoc, "\t", "  ", -1)
-		pkgDoc = trailingSpaceRegexp.ReplaceAllString(pkgDoc, "")
-	}
-	contents := []byte(fmt.Sprintf(`/*
- * Copyright (C) 2017 Red Hat, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-%s@%s
-package %s;
-`, pkgDoc, styleClass, javaPackage))
-	return ioutil.WriteFile(filepath.Join(pkgDir, "package-info.java"), contents, 0644)
 }

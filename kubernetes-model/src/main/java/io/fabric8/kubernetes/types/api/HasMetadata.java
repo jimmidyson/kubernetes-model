@@ -15,5 +15,12 @@
  */
 package io.fabric8.kubernetes.types.api;
 
+import io.fabric8.kubernetes.types.apis.meta.v1.ObjectMeta;
+
+import java.util.Optional;
+
 public interface HasMetadata {
+
+  Optional<ObjectMeta> getMetadata();
+
 }

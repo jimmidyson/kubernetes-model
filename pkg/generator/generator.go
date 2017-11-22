@@ -25,6 +25,10 @@ func New(k string, c Config) (Generator, error) {
 		return &immutablesGenerator{
 			config: c,
 		}, nil
+	case "sundrio":
+		return &sundrioGenerator{
+			config: c,
+		}, nil
 	default:
 		return nil, errors.Errorf("unknown generator type %s", k)
 	}

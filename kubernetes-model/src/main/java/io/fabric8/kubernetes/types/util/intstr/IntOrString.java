@@ -16,39 +16,75 @@
 package io.fabric8.kubernetes.types.util.intstr;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.immutables.value.Value;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.OptionalInt;
 
-@Value.Immutable
 @JsonSerialize(using = IntOrString.Serializer.class)
-public abstract class IntOrString {
+@JsonDeserialize(using = IntOrString.Deserializer.class)
+public class IntOrString {
 
-  public abstract Integer getIntVal();
+  private final OptionalInt intVal;
 
-  public abstract String getStrVal();
+  private final Optional<String> strVal;
+
+  public IntOrString(int intVal) {
+    this.intVal = OptionalInt.of(intVal);
+    this.strVal = Optional.empty();
+  }
+
+  public IntOrString(String strVal) {
+    this.intVal = OptionalInt.empty();
+    this.strVal = Optional.of(strVal);
+  }
+
+  public OptionalInt getIntVal() {
+    return intVal;
+  }
+
+  public Optional<String> getStrVal() {
+    return strVal;
+  }
 
   public static class Serializer extends JsonSerializer<IntOrString> {
 
     @Override
     public void serialize(IntOrString value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
       if (value != null) {
-        Integer intValue = value.getIntVal();
-        if (intValue != null) {
-          jgen.writeNumber(intValue);
-        } else {
-          String stringValue = value.getStrVal();
-          if (stringValue != null) {
-            jgen.writeString(stringValue);
-          } else {
-            jgen.writeNull();
-          }
+        if (value.getIntVal().isPresent()) {
+          jgen.writeNumber(value.getIntVal().getAsInt());
+          return;
         }
+        if (value.getStrVal().isPresent()) {
+          jgen.writeString(value.getStrVal().get());
+          return;
+        }
+      }
+      jgen.writeNull();
+    }
+
+  }
+
+  public static class Deserializer extends JsonDeserializer<IntOrString> {
+
+    @Override
+    public IntOrString deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+      ObjectCodec oc = jsonParser.getCodec();
+      JsonNode node = oc.readTree(jsonParser);
+      if (node.isInt()) {
+        return new IntOrString(node.asInt());
       } else {
-        jgen.writeNull();
+        return new IntOrString(node.asText());
       }
     }
 

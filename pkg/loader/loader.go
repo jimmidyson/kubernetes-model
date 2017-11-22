@@ -5,6 +5,7 @@ import (
 	"go/parser"
 	"go/token"
 	"go/types"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -86,6 +87,11 @@ func (l *ASTLoader) Load() ([]Package, error) {
 		exportedTypes := []Type{}
 		for _, file := range pkg.Files {
 			filePos := prog.Fset.Position(file.Pos())
+
+			if !strings.HasPrefix(pkgPath, "k8s.io/apimachinery/") && filepath.Base(filePos.Filename) != "types.go" {
+				continue
+			}
+
 			l.logger.Debug("parsing file", "package", pkgPath, "file", filePos.Filename)
 
 			parsedFile, err := parser.ParseFile(prog.Fset, filePos.Filename, nil, parser.ParseComments)

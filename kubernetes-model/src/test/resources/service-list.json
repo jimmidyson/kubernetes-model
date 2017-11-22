@@ -32,7 +32,7 @@
           "component": "AppLibrary",
           "provider": "fabric8"
         },
-        "portalIP": "172.30.17.111",
+        "clusterIP": "172.30.17.111",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -59,7 +59,7 @@
           "component": "AppLibrary",
           "provider": "fabric8"
         },
-        "portalIP": "172.30.17.8",
+        "clusterIP": "172.30.17.8",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -88,7 +88,7 @@
         "selector": {
           "docker-registry": "default"
         },
-        "portalIP": "172.30.17.117",
+        "clusterIP": "172.30.17.117",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -114,7 +114,7 @@
         "selector": {
           "component": "fabric8Console"
         },
-        "portalIP": "172.30.17.249",
+        "clusterIP": "172.30.17.249",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -145,7 +145,7 @@
           "component": "fabric8Forge",
           "provider": "fabric8"
         },
-        "portalIP": "172.30.17.159",
+        "clusterIP": "172.30.17.159",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -172,8 +172,7 @@
             "targetPort": 443
           }
         ],
-        "selector": null,
-        "portalIP": "172.30.17.2",
+        "clusterIP": "172.30.17.2",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -200,8 +199,7 @@
             "targetPort": 80
           }
         ],
-        "selector": null,
-        "portalIP": "172.30.17.1",
+        "clusterIP": "172.30.17.1",
         "sessionAffinity": "None"
       },
       "status": {}
@@ -230,7 +228,7 @@
         "selector": {
           "router": "router"
         },
-        "portalIP": "172.30.17.219",
+        "clusterIP": "172.30.17.219",
         "sessionAffinity": "None"
       },
       "status": {}

@@ -15,12 +15,17 @@
  */
 package io.fabric8.kubernetes.api;
 
-import io.fabric8.kubernetes.types.api.v1.ImmutableService;
-import io.fabric8.kubernetes.types.api.v1.Service;
+import io.fabric8.kubernetes.types.api.Serialization;
+import io.fabric8.kubernetes.types.api.v1.ServiceList;
+import org.junit.Test;
 
 public class TestSomething {
 
+  @Test
   public void something() {
+    ServiceList sl = Serialization.unmarshal(getClass().getResourceAsStream("/service-list.json"), ServiceList.class);
+    System.out.println(sl.toString());
+    System.out.println(Serialization.asYaml(sl));
   }
 
 }

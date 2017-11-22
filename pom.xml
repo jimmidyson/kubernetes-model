@@ -86,6 +86,9 @@
     <junit.version>4.12</junit.version>
     <validation-api.version>1.1.0.Final</validation-api.version>
     <immutables.version>2.5.6</immutables.version>
+    <fast-classpath-scanner.version>2.9.3</fast-classpath-scanner.version>
+    <sundr.version>0.5.1</sundr.version>
+    <lombok.version>1.16.18</lombok.version>
   </properties>
 
   <modules>
@@ -123,6 +126,19 @@
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>findbugs-annotations</artifactId>
         <version>${dep.findbugs.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.lukehutch</groupId>
+        <artifactId>fast-classpath-scanner</artifactId>
+        <version>${fast-classpath-scanner.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.sundr</groupId>
+        <artifactId>builder-annotations</artifactId>
+        <version>${sundr.version}</version>
+        <scope>provided</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
