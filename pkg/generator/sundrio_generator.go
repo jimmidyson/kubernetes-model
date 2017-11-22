@@ -45,7 +45,7 @@ import io.fabric8.kubernetes.types.api.GenerateClient.Extension;{{end}}
 @Buildable
 @JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}}){{if .Tags.GenerateClient}}
 @GenerateClient{{generateClientTags .Tags .RootPackage .JavaPackage}}{{end}}
-public class {{.ClassName}}{{if .HasMetadata}} implements io.fabric8.kubernetes.types.api.HasMetadata{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}
+public class {{.ClassName}}{{if .HasMetadata}} implements io.fabric8.kubernetes.types.api.HasMetadata{{if .HasTypeMeta}}, io.fabric8.kubernetes.types.api.KubernetesAPIResource{{end}}{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}
 {{$fieldsLen := len .Fields}}{{range .Fields}}
   private final {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} _{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}}{{if typeName .Type | eq "TypeMeta"}} = new {{.Type}}(java.util.Optional.of("{{$className}}"), java.util.Optional.of("{{apiVersion $loaderPackage $goPackage}}")){{end}};
 {{end}}
@@ -298,6 +298,7 @@ func (g *sundrioGenerator) write(pkg loader.Package, javaPkg string, typ loader.
 	fields := make([]field, 0, len(typ.Fields))
 
 	hasMetadata := false
+	hasTypeMeta := false
 	for _, fld := range typ.Fields {
 		javaType, err := javaType(g.config.JavaRootPackage, fld.Type, fld.TypeName)
 		if err != nil {
@@ -307,6 +308,9 @@ func (g *sundrioGenerator) write(pkg loader.Package, javaPkg string, typ loader.
 		fldTypeStr := fld.Type.String()
 		if fld.JSONProperty == "metadata" && fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta" {
 			hasMetadata = true
+		}
+		if fld.JSONProperty == "" && fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta" {
+			hasTypeMeta = true
 		}
 
 		if fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.Time" {
@@ -330,6 +334,7 @@ func (g *sundrioGenerator) write(pkg loader.Package, javaPkg string, typ loader.
 		GoPackage:     typ.Package,
 		ClassName:     typ.Name,
 		HasMetadata:   hasMetadata,
+		HasTypeMeta:   hasTypeMeta,
 		Doc:           typ.Doc,
 		Fields:        fields,
 		LoaderPackage: pkg,

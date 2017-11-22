@@ -6,7 +6,9 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/fabric8io/kubernetes-model/pkg/loader"
 	"github.com/pkg/errors"
+	codegenutils "k8s.io/code-generator/cmd/client-gen/generators/util"
 )
 
 var (
@@ -14,6 +16,26 @@ var (
 
 	openshiftGoAPIPackagePrefix = regexp.MustCompile(`^github.com/openshift/origin/pkg/[^/]+/apis/(?P<apiGroupName>[^/]+)/(?P<apiGroupVersion>[^/]+)`)
 )
+
+type field struct {
+	Type     string
+	Name     string
+	Doc      string
+	Optional bool
+}
+
+type data struct {
+	JavaPackage   string
+	GoPackage     string
+	ClassName     string
+	HasMetadata   bool
+	HasTypeMeta   bool
+	Doc           string
+	Fields        []field
+	LoaderPackage loader.Package
+	Tags          codegenutils.Tags
+	RootPackage   string
+}
 
 func javaPackage(rootPackage, pkgPath string) string {
 	var javaSubPackage string

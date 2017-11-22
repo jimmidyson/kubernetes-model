@@ -278,25 +278,6 @@ func (g *immutablesGenerator) Generate(pkgs []loader.Package) error {
 	return nil
 }
 
-type field struct {
-	Type     string
-	Name     string
-	Doc      string
-	Optional bool
-}
-
-type data struct {
-	JavaPackage   string
-	GoPackage     string
-	ClassName     string
-	HasMetadata   bool
-	Doc           string
-	Fields        []field
-	LoaderPackage loader.Package
-	Tags          codegenutils.Tags
-	RootPackage   string
-}
-
 func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ loader.Type, f *os.File) error {
 	defer func() {
 		_ = f.Close()
@@ -305,6 +286,7 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 	fields := make([]field, 0, len(typ.Fields))
 
 	hasMetadata := false
+	hasTypeMeta := false
 	for _, fld := range typ.Fields {
 		javaType, err := javaType(g.config.JavaRootPackage, fld.Type, fld.TypeName)
 		if err != nil {
@@ -314,6 +296,9 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 		fldTypeStr := fld.Type.String()
 		if fld.JSONProperty == "metadata" && fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta" {
 			hasMetadata = true
+		}
+		if fld.JSONProperty == "" && fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta" {
+			hasTypeMeta = true
 		}
 
 		if fldTypeStr == "k8s.io/apimachinery/pkg/apis/meta/v1.Time" {
@@ -337,6 +322,7 @@ func (g *immutablesGenerator) write(pkg loader.Package, javaPkg string, typ load
 		GoPackage:     typ.Package,
 		ClassName:     typ.Name,
 		HasMetadata:   hasMetadata,
+		HasTypeMeta:   hasTypeMeta,
 		Doc:           typ.Doc,
 		Fields:        fields,
 		LoaderPackage: pkg,
