@@ -33,16 +33,18 @@ const sundrioTemplateText = `/*
 package {{.JavaPackage}};
 
 import io.sundr.builder.annotations.Buildable;
+import io.sundr.builder.annotations.Inline;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;{{if .Tags.GenerateClient}}
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import io.fabric8.kubernetes.types.api.Doneable;{{if .Tags.GenerateClient}}
 import io.fabric8.kubernetes.types.api.GenerateClient;{{if .Tags.Extensions}}
 import io.fabric8.kubernetes.types.api.GenerateClient.Extension;{{end}}
 {{end}}
 {{if .Doc}}{{comment .Doc ""}}{{end}}
-@Buildable
+@Buildable(generateBuilderPackage = true, builderPackage = "io.fabric8.kubernetes.types.api.builder", inline = @Inline(type = Doneable.class, prefix = "Doneable", value = "done"))
 @JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}}){{if .Tags.GenerateClient}}
 @GenerateClient{{generateClientTags .Tags .RootPackage .JavaPackage}}{{end}}
 public class {{.ClassName}}{{if .HasMetadata}} implements io.fabric8.kubernetes.types.api.HasMetadata{{if .HasTypeMeta}}, io.fabric8.kubernetes.types.api.KubernetesAPIResource{{end}}{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}
