@@ -16,6 +16,8 @@
 package io.fabric8.kubernetes.api;
 
 import io.fabric8.kubernetes.types.api.Serialization;
+import io.fabric8.kubernetes.types.api.v1.EnvVar;
+import io.fabric8.kubernetes.types.api.v1.EnvVarBuilder;
 import io.fabric8.kubernetes.types.api.v1.ServiceList;
 import org.junit.Test;
 
@@ -26,6 +28,17 @@ public class TestSomething {
     ServiceList sl = Serialization.unmarshal(getClass().getResourceAsStream("/service-list.json"), ServiceList.class);
     System.out.println(sl.toString());
     System.out.println(Serialization.asYaml(sl));
+  }
+
+  @Test
+  public void somethingElse() {
+    EnvVar envVar = new EnvVarBuilder().withName("jimmi")
+        .withNewValueFrom()
+        .withNewConfigMapKeyRef().withNewLocalObjectReference().withName("test").and()
+        .and()
+        .and()
+        .build();
+    System.out.println(Serialization.asYaml(envVar));
   }
 
 }
