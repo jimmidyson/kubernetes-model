@@ -47,33 +47,16 @@ import io.fabric8.kubernetes.types.api.GenerateClient.Extension;{{end}}
 @Buildable(generateBuilderPackage = true, builderPackage = "io.fabric8.kubernetes.types.api.builder", inline = @Inline(type = Doneable.class, prefix = "Doneable", value = "done"))
 @JsonPropertyOrder({{"{"}}{{jsonPropertyOrder .Fields}}{{"}"}}){{if .Tags.GenerateClient}}
 @GenerateClient{{generateClientTags .Tags .RootPackage .JavaPackage}}{{end}}
-public class {{.ClassName}}{{if .HasMetadata}} implements io.fabric8.kubernetes.types.api.HasMetadata{{if .HasTypeMeta}}, io.fabric8.kubernetes.types.api.KubernetesAPIResource{{end}}{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}
-{{$fieldsLen := len .Fields}}{{range .Fields}}
-  private final {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} _{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}}{{if typeName .Type | eq "TypeMeta"}} = new {{.Type}}(java.util.Optional.of("{{$className}}"), java.util.Optional.of("{{apiVersion $loaderPackage $goPackage}}")){{end}};
-{{end}}
-  @JsonCreator
-  public {{$className}}({{constructorArgs .Fields}}) {{"{"}}{{range .Fields}}{{if typeName .Type | ne "TypeMeta"}}
-    this._{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}} = _{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}};{{end}}{{end}}
-  }{{range .Fields}}
+public interface {{.ClassName}}{{if .HasMetadata}} extends io.fabric8.kubernetes.types.api.HasMetadata{{if .HasTypeMeta}}, io.fabric8.kubernetes.types.api.KubernetesAPIResource{{end}}{{end}}{{" {"}}{{$className := .ClassName}}{{$loaderPackage := .LoaderPackage}}{{$goPackage := .GoPackage}}{{range .Fields}}
 {{if .Doc}}
 {{comment .Doc "  "}}{{end}}{{if eq .Name ""}}
   @JsonUnwrapped{{end}}
   @JsonProperty("{{if .Name}}{{.Name}}{{else}}{{typeName .Type | lowerFirst}}{{end}}"){{if eq .Type "java.time.ZonedDateTime"}}
   @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = io.fabric8.kubernetes.types.api.RFC3339DateDeserializer.class)
   @com.fasterxml.jackson.annotation.JsonFormat(shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING, pattern = io.fabric8.kubernetes.types.api.RFC3339DateDeserializer.RFC3339_FORMAT, timezone="UTC"){{end}}
-  public {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} {{if eq .Type "Boolean"}}is{{else}}get{{end}}{{if .Name}}{{upperFirst .Name | sanitize}}{{else}}{{typeName .Type | upperFirst | sanitize}}{{end}}() {
-    return this._{{if .Name}}{{sanitize .Name}}{{else}}{{typeName .Type | lowerFirst | sanitize}}{{end}};
-  }{{if typeName .Type | eq "TypeMeta"}}
+  {{if optional .}}java.util.Optional<{{end}}{{.Type}}{{if optional .}}>{{end}} {{if eq .Type "Boolean"}}is{{else}}get{{end}}{{if .Name}}{{upperFirst .Name | sanitize}}{{else}}{{typeName .Type | upperFirst | sanitize}}{{end}}();{{end}}
 
-  @JsonIgnore
-  public String getApiVersion() {
-    return getTypeMeta().getApiVersion().orElse("{{apiVersion $loaderPackage $goPackage}}");
-  }
-
-  @JsonIgnore
-  public String getKind() {
-    return getTypeMeta().getKind().orElse("{{$className}}");
-  }{{end}}{{end}}
+  class Builder extends Default{{.ClassName}}Builder {}
 }
 `
 
