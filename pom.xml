@@ -115,17 +115,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.immutables</groupId>
-        <artifactId>value</artifactId>
-        <version>${immutables.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.findbugs</groupId>
-        <artifactId>findbugs-annotations</artifactId>
-        <version>${dep.findbugs.version}</version>
+        <scope>test</scope>
       </dependency>
 
       <dependency>
